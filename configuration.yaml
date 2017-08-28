@@ -109,7 +109,7 @@ input_slider:
     # not used yet
     name: Climate Temp
     initial: 75
-    min: 60
-    max: 80
+    min: 55
+    max: 85
     step: 1
 
