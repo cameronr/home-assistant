@@ -1,0 +1,6 @@
+Climate:
+  entities:
+    - input_select.climate_mode
+    - input_slider.climate_temp
+    - climate.entryway
+    - climate.bedrooms_hallway

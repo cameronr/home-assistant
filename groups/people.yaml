@@ -1,0 +1,6 @@
+People:
+  entities:
+    - device_tracker.junxblah
+    - device_tracker.pandanaut
+    - input_select.occupants
+

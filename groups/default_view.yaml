@@ -1,0 +1,9 @@
+default_view:
+  view: yes
+  icon: mdi:home
+  entities:
+    - group.general
+    - group.people
+    - group.climate
+    - group.switches
+    - group.weather

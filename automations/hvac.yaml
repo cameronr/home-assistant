@@ -1,0 +1,112 @@
+# if it's more than 78 outside
+# and it's more than 76 inside, turn on ac
+
+# if house is unoccupied, set eco
+# if house is occupied and inside temp is above 72 and outside temp is above 72, set cool
+# if house is unoccupied and temp is below
+
+
+- alias: Set eco mode when house is empty
+  initial_state: True
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: group.people
+    from: 'home'
+    to: 'not_home'
+  condition:
+    condition: state
+    entity_id: input_select.occupants
+    state: 'none'
+  action:
+    - service: climate.set_operation_mode
+      data:
+        entity_id: climate.entryway
+        operation_mode: 'eco'
+    - service: climate.set_operation_mode
+      data:
+        entity_id: climate.bedrooms_hallway
+        operation_mode: 'eco'
+    - service: notify.gmail
+      data:
+        title: 'House empty, set to eco mode'
+        message: 'House empty, set to eco mode'
+
+
+# Set HVAC to cool when we get home and it's
+# hotter than 74 outside and 74 inside
+- alias: Set cool mode when we come home
+  initial_state: True
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: group.people
+    from: 'not_home'
+    to: 'home'
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.pws_temp_f
+      above: '74'
+    - condition: numeric_state
+      entity_id: sensor.bedrooms_thermostat_hallway_temperature
+      above: '74'
+  action:
+    - service: climate.set_operation_mode
+      data:
+        entity_id: climate.entryway
+        operation_mode: 'cool'
+    - service: climate.set_operation_mode
+      data:
+        entity_id: climate.bedrooms_hallway
+        operation_mode: 'cool'
+    - service: notify.gmail
+      data:
+        title: 'Home, set to cool'
+        message: 'Home and it is hot, set to cool mode'
+
+- alias: Set heat mode when we come home
+  initial_state: True
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: group.people
+    from: 'not_home'
+    to: 'home'
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.pws_temp_f
+      above: '60'
+    - condition: numeric_state
+      entity_id: sensor.bedrooms_thermostat_hallway_temperature
+      above: '67'
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.entryway
+        operation_mode: 'heat'
+        temperature: '70'
+    - service: climate.set_operation_mode
+      data:
+        entity_id: climate.bedrooms_hallway
+        operation_mode: 'heat'
+        temperature: '70'
+    - service: notify.gmail
+      data:
+        title: 'Home, set to heat'
+        message: 'Home and it is cold, set to heat mode'
+
+
+- alias: notif test
+  initial_state: True
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: input_select.climate_mode
+    from: 'cool'
+    to: 'heat'
+  action:
+    - service: notify.gmail
+      data:
+        title: 'Test notif'
+        message: 'Test notif'
+

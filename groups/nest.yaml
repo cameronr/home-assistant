@@ -1,0 +1,13 @@
+Nest:
+  entities:
+    - sensor.bedrooms_thermostat_hallway_temperature
+    - sensor.bedrooms_thermostat_hallway_operation_mode
+    - sensor.bedrooms_thermostat_hallway_hvac_state
+    - sensor.bedrooms_thermostat_hallway_target
+    - sensor.bedrooms_thermostat_hallway_humidity
+    - sensor.entryway_thermostat_temperature
+    - sensor.entryway_thermostat_operation_mode
+    - sensor.entryway_thermostat_hvac_state
+    - sensor.entryway_thermostat_target
+    - sensor.entryway_thermostat_humidity
+

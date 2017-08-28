@@ -1,0 +1,8 @@
+Sensors:
+  view: yes
+  entities:
+    - group.nest
+    - group.ring
+    - group.all_automations
+    - camera.garage
+    - camera.keplers_room

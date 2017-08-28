@@ -1,0 +1,115 @@
+homeassistant:
+  name: !secret name
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  unit_system: imperial
+  time_zone: America/Los_Angeles
+  customize: !include customize.yaml
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  api_password: !secret api_password
+  server_host: !secret server_host
+  server_port: !secret server_port
+  base_url: !secret base_url
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+  ignore:
+    - yamaha
+    - apple_tv
+    - harmony
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+# conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+  exclude:
+    entities:
+      - sensor.date__time
+
+# Track the sun
+sun:
+
+# Text to speech
+# tts:
+#   - platform: google
+
+notify: !include notifier.yaml
+automation: !include_dir_merge_list automations/
+script: !include_dir_merge_named scripts/
+sensor: !include_dir_merge_list sensors/
+binary_sensor: !include_dir_merge_list binary_sensors/
+group: !include_dir_merge_named groups/
+
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+  sensors:
+    monitored_conditions:
+      - 'humidity'
+      - 'temperature'
+      - 'operation_mode'
+      - 'target'
+      - 'hvac_state'
+  binary_sensors:
+    monitored_conditions:
+
+ring:
+  username: !secret ring_username
+  password: !secret ring_password
+
+
+device_tracker:
+  - platform: unifi
+    username: !secret unifi_username
+    password: !secret unifi_password
+    host: !secret unifi_host
+    track_new_devices: no
+
+input_select:
+  occupants:
+    name: Other Occupants
+    icon: mdi:account
+    initial: none
+    options:
+      - dogs
+      - guests
+      - none
+  climate_mode:
+    # not used yet
+    name: Climate Mode
+    initial: cool
+    options:
+      - cool
+      - heat
+      - eco
+
+input_slider:
+  climate_temp:
+    # not used yet
+    name: Climate Temp
+    initial: 75
+    min: 60
+    max: 80
+    step: 1
+

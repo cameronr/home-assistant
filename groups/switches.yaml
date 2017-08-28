@@ -1,0 +1,5 @@
+Switches:
+  control: hidden
+  entities:
+    - switch.dehumidifier
+    - switch.water_heater_recirc_pump

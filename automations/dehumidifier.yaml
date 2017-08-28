@@ -1,0 +1,26 @@
+- alias: Dehumidifier on if below 44 F
+  initial_state: True
+  hide_entity: False
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.pws_temp_f
+    below: '44'
+  condition:
+    condition: numeric_state
+    entity_id: sensor.bedrooms_thermostat_hallway_humidity
+    above: '45'
+  action:
+    entity_id: switch.dehumidifier
+    service: switch.turn_on
+
+- alias: Dehumidifier off if above 50 F
+  initial_state: True
+  hide_entity: False
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.pws_temp_f
+    above: '50'
+  action:
+    entity_id: switch.dehumidifier
+    service: switch.turn_off
+

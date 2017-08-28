@@ -1,0 +1,15 @@
+group.general:
+  order: 1
+group.people:
+  order: 2
+group.climate:
+  order: 3
+group.switches:
+  order: 4
+  hidden: false
+group.weather:
+  order: 5
+group.all_automations:
+  hidden: false
+climate.bedrooms_hallway:
+  friendly_name: Bedrooms
