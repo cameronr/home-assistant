@@ -1,0 +1,4 @@
+Alarm:
+  entities:
+    - alarm_control_panel.home_alarm
+    - sensor.home_alarm_keypad

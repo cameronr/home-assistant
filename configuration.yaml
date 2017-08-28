@@ -113,3 +113,14 @@ input_slider:
     max: 85
     step: 1
 
+wemo:
+ static:
+    # water heater recirc
+    - 10.0.1.188
+    # dehumidifier
+    - 10.0.1.191
+    # fauxmo gate
+    - 10.0.1.10
+
+envisalink: !include envisalink.yaml
+

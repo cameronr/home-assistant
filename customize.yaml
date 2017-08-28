@@ -4,11 +4,13 @@ group.people:
   order: 2
 group.climate:
   order: 3
-group.switches:
-  order: 4
-  hidden: false
 group.weather:
-  order: 5
+  order: 4
+group.alarm:
+  order: 9
+group.switches:
+  order: 10
+  hidden: false
 group.all_automations:
   hidden: false
 climate.bedrooms_hallway:

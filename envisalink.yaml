@@ -1,0 +1,52 @@
+host: !secret envisalink_host
+panel_type: HONEYWELL
+user_name: !secret envisalink_user_name
+password: !secret envisalink_password
+code: !secret envisalink_code
+evl_version: 3
+partitions:
+  1:
+    name: 'Home Alarm'
+zones:
+  1:
+    name: 'Fire Sprinklers'
+    type: 'safety'
+  3:
+    name: 'Front Windows'
+    type: 'opening'
+  4:
+    name: 'Front Door'
+    type: 'opening'
+  5:
+    name: 'Mudroom, Powder'
+    type: 'opening'
+  6:
+    name: 'Pantry'
+    type: 'opening'
+  7:
+    name: 'Kitchen'
+    type: 'opening'
+  8:
+    name: 'Other Bedroom'
+    type: 'opening'
+  10:
+    name: 'Hall Bath'
+    type: 'opening'
+  11:
+    name: 'Laundry'
+    type: 'opening'
+  12:
+    name: 'Master Bath'
+    type: 'opening'
+  13:
+    name: 'Master'
+    type: 'opening'
+  14:
+    name: 'Nursery'
+    type: 'opening'
+  15:
+    name: 'Guest Bedroom'
+    type: 'opening'
+  17:
+    name: 'Life & Slide'
+    type: 'opening'
