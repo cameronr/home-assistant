@@ -30,6 +30,15 @@
     entity_id: group.people
     from: 'home'
     to: 'not_home'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: input_select.occupants
+        state: 'none'
+      - condition: state
+        entity_id: input_select.occupants
+        state: 'dogs'
   action:
     entity_id: switch.water_heater_recirc_pump
     service: switch.turn_off

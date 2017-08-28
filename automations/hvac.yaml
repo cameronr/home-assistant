@@ -34,16 +34,21 @@
         message: 'House empty, set to eco mode'
 
 
-# Set HVAC to cool when we get home and it's
-# hotter than 74 outside and 74 inside
+# Set HVAC to cool when we get home
+# or at 5pm
+# and it's hotter than 74 outside and 74 inside
+# and the state is still eco
+# TODO? should this set the inputs instead of talking to the nests directly?
 - alias: Set cool mode when we come home
   initial_state: True
   hide_entity: False
   trigger:
-    platform: state
-    entity_id: group.people
-    from: 'not_home'
-    to: 'home'
+    - platform: state
+      entity_id: group.people
+      from: 'not_home'
+      to: 'home'
+    - platform: time
+      at: '17:00:00'
   condition:
     - condition: numeric_state
       entity_id: sensor.pws_temp_f
@@ -51,6 +56,9 @@
     - condition: numeric_state
       entity_id: sensor.bedrooms_thermostat_hallway_temperature
       above: '74'
+    - condition: state
+      entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
+      state: 'eco'
   action:
     - service: climate.set_operation_mode
       data:
@@ -65,21 +73,30 @@
         title: 'Home, set to cool'
         message: 'Home and it is hot, set to cool mode'
 
+# Set HVAC to heat when we get home
+# or at 6pm
+# and it's colder than 60 outside and 67 inside
+# and the state is still eco
 - alias: Set heat mode when we come home
   initial_state: True
   hide_entity: False
   trigger:
-    platform: state
-    entity_id: group.people
-    from: 'not_home'
-    to: 'home'
+    - platform: state
+      entity_id: group.people
+      from: 'not_home'
+      to: 'home'
+    - platform: time
+      at: '18:00:00'
   condition:
     - condition: numeric_state
       entity_id: sensor.pws_temp_f
-      above: '60'
+      below: '60'
     - condition: numeric_state
       entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      above: '67'
+      below: '67'
+    - condition: state
+      entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
+      state: 'eco'
   action:
     - service: climate.set_temperature
       data:
@@ -96,6 +113,8 @@
         title: 'Home, set to heat'
         message: 'Home and it is cold, set to heat mode'
 
+
+# These four automations bind the UI to the Nest and vice versa
 - alias: Set operation mode based on UI
   initial_state: True
   hide_entity: False
