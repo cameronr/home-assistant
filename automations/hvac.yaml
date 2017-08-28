@@ -113,7 +113,6 @@
         title: 'Home, set to heat'
         message: 'Home and it is cold, set to heat mode'
 
-
 # These four automations bind the UI to the Nest and vice versa
 - alias: Set operation mode based on UI
   initial_state: True
@@ -122,16 +121,14 @@
     platform: state
     entity_id: input_select.climate_mode
   action:
-    - service: climate.set_temperature
+    - service: climate.set_operation_mode
       data_template:
         entity_id: climate.entryway
         operation_mode: '{{ states.input_select.climate_mode.state }}'
-        temperature: '{{ states.input_slider.climate_temp.state }}'
-    - service: climate.set_temperature
+    - service: climate.set_operation_mode
       data_template:
         entity_id: climate.bedrooms_hallway
         operation_mode: '{{ states.input_select.climate_mode.state }}'
-        temperature: '{{ states.input_slider.climate_temp.state }}'
 
 - alias: Set temperature based on UI
   initial_state: True
