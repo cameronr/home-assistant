@@ -61,17 +61,28 @@
       state: 'eco'
   action:
     - service: climate.set_operation_mode
-      data:
+      data_template:
         entity_id: climate.entryway
         operation_mode: 'cool'
     - service: climate.set_operation_mode
+      data_template:
+        entity_id: climate.bedrooms_hallway
+        operation_mode: 'cool'
+    - delay: '00:00:10'
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.entryway
+        operation_mode: 'cool'
+        temperature: '74'
+    - service: climate.set_temperature
       data:
         entity_id: climate.bedrooms_hallway
         operation_mode: 'cool'
+        temperature: '74'
     - service: notify.gmail
       data:
-        title: 'Home, set to cool'
-        message: 'Home and it is hot, set to cool mode'
+        title: 'Set to cool'
+        message: 'It is hot, setting to cool mode'
 
 # Set HVAC to heat when we get home
 # or at 6pm
@@ -98,20 +109,29 @@
       entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
       state: 'eco'
   action:
+    - service: climate.set_operation_mode
+      data_template:
+        entity_id: climate.entryway
+        operation_mode: 'heat'
+    - service: climate.set_operation_mode
+      data_template:
+        entity_id: climate.bedrooms_hallway
+        operation_mode: 'heat'
+    - delay: '00:00:10'
     - service: climate.set_temperature
       data:
         entity_id: climate.entryway
         operation_mode: 'heat'
         temperature: '70'
-    - service: climate.set_operation_mode
+    - service: climate.set_temperature
       data:
         entity_id: climate.bedrooms_hallway
         operation_mode: 'heat'
         temperature: '70'
     - service: notify.gmail
       data:
-        title: 'Home, set to heat'
-        message: 'Home and it is cold, set to heat mode'
+        title: 'Set to heat'
+        message: 'It is cold, set to heat mode'
 
 # These four automations bind the UI to the Nest and vice versa
 - alias: Set operation mode based on UI
@@ -129,6 +149,27 @@
       data_template:
         entity_id: climate.bedrooms_hallway
         operation_mode: '{{ states.input_select.climate_mode.state }}'
+    # if we're not in eco, set temp (nest doesn't let you set temp in eco mode)
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: input_select.climate_mode
+        state: 'heat'
+      - condition: state
+        entity_id: input_select.climate_mode
+        state: 'cool'
+      - condition: state
+        entity_id: input_select.climate_mode
+        state: 'auto'
+    - delay: '00:00:10'
+    - service: climate.set_temperature
+      data_template:
+        entity_id: climate.entryway
+        temperature: '{{ states.input_slider.climate_temp.state | float }}'
+    - service: climate.set_temperature
+      data_template:
+        entity_id: climate.bedrooms_hallway
+        temperature: '{{ states.input_slider.climate_temp.state | float }}'
 
 - alias: Set temperature based on UI
   initial_state: True
@@ -136,6 +177,19 @@
   trigger:
     platform: state
     entity_id: input_slider.climate_temp
+  condition:
+    # can't set temperature when in eco mode
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
+        state: 'heat'
+      - condition: state
+        entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
+        state: 'cool'
+      - condition: state
+        entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
+        state: 'auto'
   action:
     - service: climate.set_temperature
       data_template:

@@ -40,12 +40,30 @@ discovery:
 
 # Enables support for tracking state changes over time
 history:
+  exclude:
+    domains:
+      - automation
+      - weblink
+      - updater
+    entities:
+      - sensor.last_boot
+      - sensor.date
+      - sensor.date__time
+      - sensor.pws_weather_1d
+      - sensor.home_alarm_keypad
+
+recorder:
+  purge_days: 14
 
 # View all events in a logbook
 logbook:
   exclude:
     entities:
+      - sensor.last_boot
+      - sensor.date
       - sensor.date__time
+      - sensor.pws_weather_1d
+      - sensor.home_alarm_keypad
 
 # Track the sun
 sun:
@@ -112,15 +130,6 @@ input_slider:
     min: 55
     max: 85
     step: 1
-
-wemo:
- static:
-    # water heater recirc
-    - 10.0.1.188
-    # dehumidifier
-    - 10.0.1.191
-    # fauxmo gate
-    - 10.0.1.10
 
 envisalink: !include envisalink.yaml
 

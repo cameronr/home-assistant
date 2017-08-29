@@ -5,9 +5,8 @@
   timeout: 15
   sender: !secret gmail_sender
   encryption: starttls
-  username: !secret gmail_sender
+  username: !secret gmail_username
   password: !secret gmail_password
   recipient:
     - !secret gmail_recipient1
-    - !secret gmail_recipient2
   sender_name: Home Assistant
