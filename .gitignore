@@ -17,6 +17,7 @@ secrets.yaml
 known_devices.yaml
 *.conf
 pyozw.sqlite
+__pycache__
 .*
 !/.gitignore
 !/.travis.yml
