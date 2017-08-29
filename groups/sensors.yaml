@@ -3,6 +3,6 @@ Sensors:
   entities:
     - group.nest
     - group.ring
-    - group.all_automations
+    - group.alarm_sensors
     - camera.garage
     - camera.keplers_room

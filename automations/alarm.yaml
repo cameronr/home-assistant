@@ -40,3 +40,14 @@
     service: alarm_control_panel.alarm_disarm
     entity_id: alarm_control_panel.home_alarm
 
+# unfinished: create a text string of zones that are on
+# - alias: Text alarm string
+#   initial_state: True
+#   hide_entity: False
+#   trigger:
+#     platform: state
+#     entity_id: group.alarm_sensors
+#   action:
+#     service: alarm_control_panel.alarm_disarm
+#     entity_id: alarm_control_panel.home_alarm
+#

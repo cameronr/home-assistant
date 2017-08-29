@@ -1,0 +1,17 @@
+alarm_sensors:
+  name: Alarm Sensors
+  entities:
+    - binary_sensor.fire_sprinklers
+    - binary_sensor.front_door
+    - binary_sensor.front_windows
+    - binary_sensor.guest_bedroom
+    - binary_sensor.kitchen
+    - binary_sensor.laundry
+    - binary_sensor.life__slide
+    - binary_sensor.master
+    - binary_sensor.master_bath
+    - binary_sensor.mudroom_powder
+    - binary_sensor.nursery
+    - binary_sensor.other_bedroom
+    - binary_sensor.pantry
+    - binary_sensor.hall_bath

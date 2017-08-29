@@ -55,11 +55,13 @@ history:
       - sensor.pws_alerts
       - group.all_automations
       - group.all_switches
+      - group.switches
       - group.alarm
       - group.climate
       - group.nest
       - group.ring
       - group.weather
+      - group.general
 
 recorder:
   purge_days: 14
@@ -78,11 +80,13 @@ logbook:
       - sensor.pws_alerts
       - group.all_automations
       - group.all_switches
+      - group.switches
       - group.alarm
       - group.climate
       - group.nest
       - group.ring
       - group.weather
+      - group.general
 
 # Track the sun
 sun:
