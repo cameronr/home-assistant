@@ -45,12 +45,21 @@ history:
       - automation
       - weblink
       - updater
+      - camera
     entities:
       - sensor.last_boot
       - sensor.date
       - sensor.date__time
       - sensor.pws_weather_1d
       - sensor.home_alarm_keypad
+      - sensor.pws_alerts
+      - group.all_automations
+      - group.all_switches
+      - group.alarm
+      - group.climate
+      - group.nest
+      - group.ring
+      - group.weather
 
 recorder:
   purge_days: 14
@@ -58,12 +67,22 @@ recorder:
 # View all events in a logbook
 logbook:
   exclude:
+    domains:
+      - weblink
     entities:
       - sensor.last_boot
       - sensor.date
       - sensor.date__time
       - sensor.pws_weather_1d
       - sensor.home_alarm_keypad
+      - sensor.pws_alerts
+      - group.all_automations
+      - group.all_switches
+      - group.alarm
+      - group.climate
+      - group.nest
+      - group.ring
+      - group.weather
 
 # Track the sun
 sun:
