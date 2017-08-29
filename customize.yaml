@@ -6,12 +6,21 @@ group.climate:
   order: 3
 group.weather:
   order: 4
-group.alarm:
-  order: 9
 group.switches:
-  order: 10
+  order: 9
   hidden: false
+group.alarm:
+  order: 10
 group.all_automations:
   hidden: false
 climate.bedrooms_hallway:
   friendly_name: Bedrooms
+switch.water_heater_recirc_pump:
+  icon: mdi:reload
+switch.dehumidifier:
+  icon: mdi:water-percent
+switch.gate:
+  friendly_name: Gate
+  icon: mdi:gate
+cover.garage_door_opener:
+  friendly_name: Garage Door

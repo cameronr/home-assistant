@@ -53,6 +53,7 @@ history:
       - sensor.pws_weather_1d
       - sensor.home_alarm_keypad
       - sensor.pws_alerts
+      - cover.myq
       - group.all_automations
       - group.all_switches
       - group.switches
@@ -78,6 +79,7 @@ logbook:
       - sensor.pws_weather_1d
       - sensor.home_alarm_keypad
       - sensor.pws_alerts
+      - cover.myq
       - group.all_automations
       - group.all_switches
       - group.switches
@@ -100,6 +102,8 @@ automation: !include_dir_merge_list automations/
 script: !include_dir_merge_named scripts/
 sensor: !include_dir_merge_list sensors/
 binary_sensor: !include_dir_merge_list binary_sensors/
+switch: !include_dir_merge_list switches/
+cover: !include_dir_merge_list covers/
 group: !include_dir_merge_named groups/
 
 nest:

@@ -1,5 +1,7 @@
 Switches:
   control: hidden
   entities:
+    - switch.gate
     - switch.dehumidifier
     - switch.water_heater_recirc_pump
+    - cover.garage_door_opener

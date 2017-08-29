@@ -1,5 +1,0 @@
-General:
-  entities:
-    - sensor.date__time
-    - sun.sun
-

@@ -1,5 +1,6 @@
 Weather:
   entities:
+    - sensor.date__time
     - sensor.pws_weather_1d
     - sensor.pws_temp_f
     - sensor.pws_temp_high_1d_f
