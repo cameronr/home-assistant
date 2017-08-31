@@ -28,6 +28,12 @@ updater:
   # Optional, allows Home Assistant developers to focus on popular components.
   # include_used_components: true
 
+logger:
+  default: info
+  logs:
+    homeassistant.core: warn
+    homeassistant.components.envisalink: warn
+
 # Discover some devices automatically
 discovery:
   ignore:
@@ -63,6 +69,7 @@ history:
       - group.ring
       - group.weather
       - group.general
+      - group.alarm_sensors
 
 recorder:
   purge_days: 14
@@ -89,6 +96,7 @@ logbook:
       - group.ring
       - group.weather
       - group.general
+      - group.alarm_sensors
 
 # Track the sun
 sun:

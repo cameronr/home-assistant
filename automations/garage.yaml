@@ -1,0 +1,21 @@
+# Presence detection can be a little slow so disarm alarm when the garage door is opened
+- alias: Disarm alarm when garage door is opened
+  initial_state: True
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: cover.garage_door_opener
+    from: 'closed'
+    to: 'open'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: alarm_control_panel.home_alarm
+        state: 'armed_away'
+      - condition: state
+        entity_id: alarm_control_panel.home_alarm
+        state: 'armed_home'
+  action:
+    service: alarm_control_panel.alarm_disarm
+    entity_id: alarm_control_panel.home_alarm
