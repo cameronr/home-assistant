@@ -2,6 +2,7 @@
   api_key: 99305ac55749cb24
   monitored_conditions:
     - weather_1d
+    - weather_2d
     - temp_f
     - temp_high_1d_f
     - temp_low_1d_f

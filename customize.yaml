@@ -2,13 +2,13 @@ group.general:
   order: 1
 group.people:
   order: 2
-group.climate:
-  order: 3
-group.weather:
-  order: 4
 group.switches:
-  order: 9
+  order: 3
   hidden: false
+group.climate:
+  order: 4
+group.weather:
+  order: 5
 group.alarm:
   order: 10
 group.all_automations:
