@@ -165,18 +165,18 @@
     - service: climate.set_temperature
       data_template:
         entity_id: climate.entryway
-        temperature: '{{ states.input_slider.climate_temp.state | float }}'
+        temperature: '{{ states.input_number.climate_temp.state | float }}'
     - service: climate.set_temperature
       data_template:
         entity_id: climate.bedrooms_hallway
-        temperature: '{{ states.input_slider.climate_temp.state | float }}'
+        temperature: '{{ states.input_number.climate_temp.state | float }}'
 
 - alias: Set temperature based on UI
   initial_state: True
   hide_entity: False
   trigger:
     platform: state
-    entity_id: input_slider.climate_temp
+    entity_id: input_number.climate_temp
   condition:
     # can't set temperature when in eco mode
     condition: or
@@ -195,12 +195,12 @@
       data_template:
         entity_id: climate.entryway
         operation_mode: '{{ states.input_select.climate_mode.state }}'
-        temperature: '{{ states.input_slider.climate_temp.state | float }}'
+        temperature: '{{ states.input_number.climate_temp.state | float }}'
     - service: climate.set_temperature
       data_template:
         entity_id: climate.bedrooms_hallway
         operation_mode: '{{ states.input_select.climate_mode.state }}'
-        temperature: '{{ states.input_slider.climate_temp.state | float }}'
+        temperature: '{{ states.input_number.climate_temp.state | float }}'
 
 - alias: Set operation mode from the Nest
   initial_state: True
@@ -221,8 +221,8 @@
     - platform: state
       entity_id: sensor.bedrooms_thermostat_hallway_target
   action:
-    - service: input_slider.select_value
+    - service: input_number.select_value
       data_template:
-        entity_id: input_slider.climate_temp
+        entity_id: input_number.climate_temp
         value: '{{ states.sensor.bedrooms_thermostat_hallway_target.state }}'
 
