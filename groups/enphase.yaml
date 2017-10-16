@@ -1,0 +1,4 @@
+Solar:
+  entities:
+    - sensor.enphase
+    - sensor.enphase_yesterday

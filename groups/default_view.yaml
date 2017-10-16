@@ -8,3 +8,4 @@ default_view:
     - group.weather
     - group.alarm
     - group.switches
+    - group.solar
