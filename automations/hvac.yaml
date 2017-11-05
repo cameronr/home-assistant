@@ -18,7 +18,7 @@
   condition:
     condition: state
     entity_id: input_select.occupants
-    state: 'none'
+    state: 'auto'
   action:
     - service: climate.set_operation_mode
       data:
@@ -33,6 +33,24 @@
         title: 'House empty, set to eco mode'
         message: 'House empty, set to eco mode'
 
+- alias: Set eco mode when vacation is selected
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: state
+      entity_id: input_select.occupants
+      to: 'vacation'
+  action:
+    - service: climate.set_operation_mode
+      data:
+        entity_id: climate.entryway
+        operation_mode: 'eco'
+    - service: climate.set_operation_mode
+      data:
+        entity_id: climate.bedrooms_hallway
+        operation_mode: 'eco'
+    - service: switch.turn_off
+      entity_id: switch.water_heater_recirc_pump
 
 # Set HVAC to cool when we get home
 # or at 5pm
@@ -59,6 +77,17 @@
     - condition: state
       entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
       state: 'eco'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'auto'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'dogs'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'guests'
   action:
     - service: climate.set_operation_mode
       data_template:
@@ -86,6 +115,7 @@
 
 # Set HVAC to heat when we get home
 # or at 6pm
+# or at 6am
 # and it's colder than 60 outside and 67 inside
 # and the state is still eco
 - alias: Set heat mode when we come home
@@ -97,17 +127,30 @@
       from: 'not_home'
       to: 'home'
     - platform: time
+      at: '06:00:00'
+    - platform: time
       at: '18:00:00'
   condition:
     - condition: numeric_state
       entity_id: sensor.pws_temp_f
-      below: '60'
+      below: '55'
     - condition: numeric_state
-      entity_id: sensor.bedrooms_thermostat_hallway_temperature
+      entity_id: sensor.entryway_thermostat_temperature
       below: '67'
     - condition: state
-      entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
+      entity_id: sensor.entryway_thermostat_operation_mode
       state: 'eco'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'auto'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'dogs'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'guests'
   action:
     - service: climate.set_operation_mode
       data_template:
@@ -122,16 +165,17 @@
       data:
         entity_id: climate.entryway
         operation_mode: 'heat'
-        temperature: '70'
+        temperature: '69'
     - service: climate.set_temperature
       data:
         entity_id: climate.bedrooms_hallway
         operation_mode: 'heat'
-        temperature: '70'
+        temperature: '69'
     - service: notify.gmail
       data:
         title: 'Set to heat'
         message: 'It is cold, set to heat mode'
+
 
 # These four automations bind the UI to the Nest and vice versa
 - alias: Set operation mode based on UI

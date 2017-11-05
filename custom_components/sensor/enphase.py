@@ -94,21 +94,27 @@ class EnphaseSensor(Entity):
         """
         # call to api and get power produced today
         # if current date has changed since last update, fetch power produced yesterday too
-        data = self._api.fetch_summary()
-        # _LOGGER.info('enphase data: %s' %(data))
-        if not data:
-            self._data = None
-            return
 
-        if data['summary_date'] != self._summary_date:
-            # fetch yesterday's power produced
-            _LOGGER.info('new day: %s' %(data['summary_date']))
-            self._summary_date = data['summary_date']
-            today = dt_util.as_local(dt_util.utcnow());
-            yesterday = today - datetime.timedelta(days=1)
-            data_yesterday = self._api.fetch_summary(yesterday.strftime('%Y-%m-%d'))
-            data['energy_yesterday'] = data_yesterday['energy_today']
-        else:
-            data['energy_yesterday'] = self._data['energy_yesterday']
+        try:
+            data = self._api.fetch_summary()
+            _LOGGER.info('enphase data: %s' %(data))
+            if not data:
+                self._data = None
+                return
 
-        self._data = data
+            if data['summary_date'] != self._summary_date:
+                # fetch yesterday's power produced
+                _LOGGER.info('new day: %s' %(data['summary_date']))
+                self._summary_date = data['summary_date']
+                today = dt_util.as_local(dt_util.utcnow());
+                yesterday = today - datetime.timedelta(days=1)
+                data_yesterday = self._api.fetch_summary(yesterday.strftime('%Y-%m-%d'))
+                data['energy_yesterday'] = data_yesterday['energy_today']
+            else:
+                data['energy_yesterday'] = self._data['energy_yesterday']
+
+            self._data = data
+        except:
+            exc = traceback.format_exc()
+            _LOGGER.info('enphase: %s' %(exc))
+

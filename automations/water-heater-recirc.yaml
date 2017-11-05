@@ -35,7 +35,7 @@
     conditions:
       - condition: state
         entity_id: input_select.occupants
-        state: 'none'
+        state: 'auto'
       - condition: state
         entity_id: input_select.occupants
         state: 'dogs'

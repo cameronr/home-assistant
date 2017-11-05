@@ -144,29 +144,30 @@ input_select:
   occupants:
     name: Other Occupants
     icon: mdi:account
-    initial: none
+    initial: auto
     options:
+      - auto
       - dogs
       - guests
-      - none
+      - vacation
   climate_mode:
     # not used yet
     name: Climate Mode
-    initial: cool
+    initial: eco
     options:
+      - eco
       - cool
       - heat
-      - eco
 
 input_number:
   climate_temp:
     # not used yet
     name: Climate Temp
-    initial: 75
+    initial: 72
     min: 55
     max: 85
     step: 1
-    mode: box
+    mode: slider
 
 envisalink: !include envisalink.yaml
 
