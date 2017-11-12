@@ -177,6 +177,70 @@
         message: 'It is cold, set to heat mode'
 
 
+# If in heat mode, set temp to 70 in the morning
+- alias: Turn on heat in the morning
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: time
+      at: '06:30:00'
+  condition:
+    - condition: state
+      entity_id: sensor.entryway_thermostat_operation_mode
+      state: 'heat'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'auto'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'dogs'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'guests'
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.entryway
+        operation_mode: 'heat'
+        temperature: '70'
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.bedrooms_hallway
+        operation_mode: 'heat'
+        temperature: '70'
+
+# If in heat mode, set temp front to 65 at 1am
+- alias: Turn off front heat at night
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: time
+      at: '01:00:00'
+  condition:
+    - condition: state
+      entity_id: sensor.entryway_thermostat_operation_mode
+      state: 'heat'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'auto'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'dogs'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'guests'
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.entryway
+        operation_mode: 'heat'
+        temperature: '65'
+
+
 # These four automations bind the UI to the Nest and vice versa
 - alias: Set operation mode based on UI
   initial_state: True
