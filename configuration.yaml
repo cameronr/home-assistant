@@ -142,14 +142,13 @@ device_tracker:
 
 input_select:
   occupants:
-    name: Other Occupants
+    name: Occupancy
     icon: mdi:account
     initial: auto
     options:
       - auto
       - dogs
       - guests
-      - vacation
   climate_mode:
     # not used yet
     name: Climate Mode

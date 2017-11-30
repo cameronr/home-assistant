@@ -1,13 +1,4 @@
-# random notes
-# if it's more than 78 outside
-# and it's more than 76 inside, turn on ac
-
-# if house is unoccupied, set eco
-# if house is occupied and inside temp is above 72 and outside temp is above 72, set cool
-# if house is unoccupied and temp is below
-
-
-- alias: Set eco mode when house is empty
+- alias: If in cool mode and left home, set temp to 80
   initial_state: True
   hide_entity: False
   trigger:
@@ -16,109 +7,62 @@
     from: 'home'
     to: 'not_home'
   condition:
-    condition: state
-    entity_id: input_select.occupants
-    state: 'auto'
+    - condition: state
+      entity_id: input_select.occupants
+      state: 'auto'
+    - condition: state
+      entity_id: input_select.climate_mode
+      state: 'cool'
   action:
-    - service: climate.set_operation_mode
+    - service: climate.set_temperature
       data:
         entity_id: climate.entryway
-        operation_mode: 'eco'
-    - service: climate.set_operation_mode
+        operation_mode: 'cool'
+        temperature: '80'
+    - service: climate.set_temperature
       data:
         entity_id: climate.bedrooms_hallway
-        operation_mode: 'eco'
+        operation_mode: 'cool'
+        temperature: '80'
     - service: notify.gmail
       data:
-        title: 'House empty, set to eco mode'
-        message: 'House empty, set to eco mode'
+        title: 'House empty, setting AC to 80'
+        message: 'House empty, setting AC to 80'
 
-- alias: Set eco mode when vacation is selected
+
+- alias: If in cool mode and 5pm and not home, set temp to 70
   initial_state: True
   hide_entity: False
   trigger:
-    - platform: state
-      entity_id: input_select.occupants
-      to: 'vacation'
-  action:
-    - service: climate.set_operation_mode
-      data:
-        entity_id: climate.entryway
-        operation_mode: 'eco'
-    - service: climate.set_operation_mode
-      data:
-        entity_id: climate.bedrooms_hallway
-        operation_mode: 'eco'
-    - service: switch.turn_off
-      entity_id: switch.water_heater_recirc_pump
-
-# Set HVAC to cool when we get home
-# or at 5pm
-# and it's hotter than 74 outside and 74 inside
-# and the state is still eco
-# TODO? should this set the inputs instead of talking to the nests directly?
-- alias: Set cool mode when we come home
-  initial_state: True
-  hide_entity: False
-  trigger:
-    - platform: state
-      entity_id: group.people
-      from: 'not_home'
-      to: 'home'
     - platform: time
       at: '17:00:00'
   condition:
-    - condition: numeric_state
-      entity_id: sensor.pws_temp_f
-      above: '74'
-    - condition: numeric_state
-      entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      above: '74'
     - condition: state
-      entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
-      state: 'eco'
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: input_select.occupants
-          state: 'auto'
-        - condition: state
-          entity_id: input_select.occupants
-          state: 'dogs'
-        - condition: state
-          entity_id: input_select.occupants
-          state: 'guests'
+      entity_id: input_select.occupants
+      state: 'auto'
+    - condition: state
+      entity_id: input_select.climate_mode
+      state: 'cool'
+    - condition: state
+      entity_id: group.people
+      state: 'not_home'
   action:
-    - service: climate.set_operation_mode
-      data_template:
-        entity_id: climate.entryway
-        operation_mode: 'cool'
-    - service: climate.set_operation_mode
-      data_template:
-        entity_id: climate.bedrooms_hallway
-        operation_mode: 'cool'
-    - delay: '00:00:10'
     - service: climate.set_temperature
       data:
         entity_id: climate.entryway
         operation_mode: 'cool'
-        temperature: '74'
+        temperature: '70'
     - service: climate.set_temperature
       data:
         entity_id: climate.bedrooms_hallway
         operation_mode: 'cool'
-        temperature: '74'
+        temperature: '70'
     - service: notify.gmail
       data:
-        title: 'Set to cool'
-        message: 'It is hot, setting to cool mode'
+        title: '5pm, precooling AC to 70'
+        message: '5pm, precooling AC to 70'
 
-# Set HVAC to heat when we get home
-# or at 6pm
-# or at 6am
-# and it's colder than 60 outside and 67 inside
-# and the state is still eco
-- alias: Set heat mode when we come home
+- alias: If in cool mode and arrived home, set temp to 70
   initial_state: True
   hide_entity: False
   trigger:
@@ -126,55 +70,90 @@
       entity_id: group.people
       from: 'not_home'
       to: 'home'
-    - platform: time
-      at: '06:00:00'
-    - platform: time
-      at: '18:00:00'
   condition:
-    - condition: numeric_state
-      entity_id: sensor.pws_temp_f
-      below: '55'
-    - condition: numeric_state
-      entity_id: sensor.entryway_thermostat_temperature
-      below: '67'
     - condition: state
-      entity_id: sensor.entryway_thermostat_operation_mode
-      state: 'eco'
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: input_select.occupants
-          state: 'auto'
-        - condition: state
-          entity_id: input_select.occupants
-          state: 'dogs'
-        - condition: state
-          entity_id: input_select.occupants
-          state: 'guests'
+      entity_id: input_select.occupants
+      state: 'auto'
+    - condition: state
+      entity_id: input_select.climate_mode
+      state: 'cool'
   action:
-    - service: climate.set_operation_mode
-      data_template:
-        entity_id: climate.entryway
-        operation_mode: 'heat'
-    - service: climate.set_operation_mode
-      data_template:
-        entity_id: climate.bedrooms_hallway
-        operation_mode: 'heat'
-    - delay: '00:00:10'
     - service: climate.set_temperature
       data:
         entity_id: climate.entryway
-        operation_mode: 'heat'
-        temperature: '69'
+        operation_mode: 'cool'
+        temperature: '70'
     - service: climate.set_temperature
       data:
         entity_id: climate.bedrooms_hallway
-        operation_mode: 'heat'
-        temperature: '69'
+        operation_mode: 'cool'
+        temperature: '70'
     - service: notify.gmail
       data:
-        title: 'Set to heat'
-        message: 'It is cold, set to heat mode'
+        title: 'Welcome home, setting AC to 70'
+        message: 'Welcome home, setting AC to 70'
+
+- alias: If in heat mode and left home, set temp to 60
+  initial_state: True
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: group.people
+    from: 'home'
+    to: 'not_home'
+  condition:
+    - condition: state
+      entity_id: input_select.occupants
+      state: 'auto'
+    - condition: state
+      entity_id: input_select.climate_mode
+      state: 'heat'
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.entryway
+        operation_mode: 'heat'
+        temperature: '60'
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.bedrooms_hallway
+        operation_mode: 'heat'
+        temperature: '60'
+    - service: notify.gmail
+      data:
+        title: 'House empty, setting heat to 60'
+        message: 'House empty, setting heat to 60'
+
+- alias: If in heat mode and arrived home, set temp to 70
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: state
+      entity_id: group.people
+      from: 'not_home'
+      to: 'home'
+  condition:
+    - condition: state
+      entity_id: input_select.occupants
+      state: 'auto'
+    - condition: state
+      entity_id: input_select.climate_mode
+      state: 'heat'
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.entryway
+        operation_mode: 'heat'
+        temperature: '70'
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.bedrooms_hallway
+        operation_mode: 'heat'
+        temperature: '70'
+    - service: notify.gmail
+      data:
+        title: 'Welcome home, setting heat to 70'
+        message: 'Welcome home, setting heat to 70'
 
 
 # If in heat mode, set temp to 70 in the morning
@@ -211,7 +190,7 @@
         operation_mode: 'heat'
         temperature: '70'
 
-# If in heat mode, set temp front to 65 at 1am
+# If in heat mode, set temp front to 60 at 1am
 - alias: Turn off front heat at night
   initial_state: True
   hide_entity: False
@@ -238,8 +217,7 @@
       data:
         entity_id: climate.entryway
         operation_mode: 'heat'
-        temperature: '65'
-
+        temperature: '60'
 
 # These four automations bind the UI to the Nest and vice versa
 - alias: Set operation mode based on UI
@@ -329,7 +307,7 @@
     - platform: state
       entity_id: sensor.bedrooms_thermostat_hallway_target
   action:
-    - service: input_number.select_value
+    - service: input_number.set_value
       data_template:
         entity_id: input_number.climate_temp
         value: '{{ states.sensor.bedrooms_thermostat_hallway_target.state }}'
