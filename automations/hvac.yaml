@@ -30,6 +30,21 @@
         message: 'House empty, setting AC to 80'
 
 
+- alias: Turn off guest/dog mode when we get back home
+  initial_state: True
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: group.people
+    from: 'not_home'
+    to: 'home'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.occupants
+        option: 'auto'
+
+
 - alias: If in cool mode and 5pm and not home, set temp to 70
   initial_state: True
   hide_entity: False
@@ -219,6 +234,35 @@
         operation_mode: 'heat'
         temperature: '60'
 
+# If in heat mode, set temp at back to 68 at midnight
+- alias: Set back heat to 68 at night
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: time
+      at: '00:00:00'
+  condition:
+    - condition: state
+      entity_id: sensor.entryway_thermostat_operation_mode
+      state: 'heat'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'auto'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'dogs'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'guests'
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.bedrooms_hallway
+        operation_mode: 'heat'
+        temperature: '68'
+
 # These four automations bind the UI to the Nest and vice versa
 - alias: Set operation mode based on UI
   initial_state: True
@@ -288,27 +332,27 @@
         operation_mode: '{{ states.input_select.climate_mode.state }}'
         temperature: '{{ states.input_number.climate_temp.state | float }}'
 
-- alias: Set operation mode from the Nest
-  initial_state: True
-  hide_entity: False
-  trigger:
-    - platform: state
-      entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
-  action:
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.climate_mode
-        option: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state }}'
-
-- alias: Set temperature from the Nest
-  initial_state: True
-  hide_entity: False
-  trigger:
-    - platform: state
-      entity_id: sensor.bedrooms_thermostat_hallway_target
-  action:
-    - service: input_number.set_value
-      data_template:
-        entity_id: input_number.climate_temp
-        value: '{{ states.sensor.bedrooms_thermostat_hallway_target.state }}'
-
+# - alias: Set operation mode from the Nest
+#   initial_state: True
+#   hide_entity: False
+#   trigger:
+#     - platform: state
+#       entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
+#   action:
+#     - service: input_select.select_option
+#       data_template:
+#         entity_id: input_select.climate_mode
+#         option: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state }}'
+#
+# - alias: Set temperature from the Nest
+#   initial_state: True
+#   hide_entity: False
+#   trigger:
+#     - platform: state
+#       entity_id: sensor.bedrooms_thermostat_hallway_target
+#   action:
+#     - service: input_number.set_value
+#       data_template:
+#         entity_id: input_number.climate_temp
+#         value: '{{ states.sensor.bedrooms_thermostat_hallway_target.state }}'
+#
