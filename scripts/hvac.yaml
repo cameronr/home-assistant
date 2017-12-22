@@ -1,0 +1,24 @@
+set_temperature:
+  sequence:
+    - service: climate.set_temperature
+      data_template:
+        entity_id: climate.entryway
+        temperature: "{{ temperature }}"
+    - service: climate.set_temperature
+      data_template:
+        entity_id: climate.bedrooms_hallway
+        temperature: "{{ temperature }}"
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.climate_temp
+        value: "{{ temperature | int }}"
+
+set_temperature_and_notify:
+  sequence:
+    - service: script.set_temperature
+      data_template:
+        temperature: "{{ temperature }}"
+    - service: notify.gmail
+      data_template:
+        title: "{{ message }}"
+        message: "{{ message }}"

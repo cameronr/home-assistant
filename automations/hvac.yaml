@@ -14,20 +14,10 @@
       entity_id: input_select.climate_mode
       state: 'cool'
   action:
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.entryway
-        operation_mode: 'cool'
-        temperature: '80'
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.bedrooms_hallway
-        operation_mode: 'cool'
-        temperature: '80'
-    - service: notify.gmail
-      data:
-        title: 'House empty, setting AC to 80'
-        message: 'House empty, setting AC to 80'
+    service: script.set_temperature_and_notify
+    data:
+      temperature: 80
+      message: 'House empty, setting AC to 80'
 
 
 - alias: Turn off guest/dog mode when we get back home
@@ -62,20 +52,11 @@
       entity_id: group.people
       state: 'not_home'
   action:
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.entryway
-        operation_mode: 'cool'
-        temperature: '70'
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.bedrooms_hallway
-        operation_mode: 'cool'
-        temperature: '70'
-    - service: notify.gmail
-      data:
-        title: '5pm, precooling AC to 70'
-        message: '5pm, precooling AC to 70'
+    service: script.set_temperature_and_notify
+    data:
+      temperature: 70
+      message: '5pm, precooling AC to 70'
+
 
 - alias: If in cool mode and arrived home, set temp to 70
   initial_state: True
@@ -93,20 +74,11 @@
       entity_id: input_select.climate_mode
       state: 'cool'
   action:
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.entryway
-        operation_mode: 'cool'
-        temperature: '70'
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.bedrooms_hallway
-        operation_mode: 'cool'
-        temperature: '70'
-    - service: notify.gmail
-      data:
-        title: 'Welcome home, setting AC to 70'
-        message: 'Welcome home, setting AC to 70'
+    service: script.set_temperature_and_notify
+    data:
+      temperature: 70
+      message: 'Welcome home, setting AC to 70'
+
 
 - alias: If in heat mode and left home, set temp to 60
   initial_state: True
@@ -124,20 +96,11 @@
       entity_id: input_select.climate_mode
       state: 'heat'
   action:
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.entryway
-        operation_mode: 'heat'
-        temperature: '60'
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.bedrooms_hallway
-        operation_mode: 'heat'
-        temperature: '60'
-    - service: notify.gmail
-      data:
-        title: 'House empty, setting heat to 60'
-        message: 'House empty, setting heat to 60'
+    service: script.set_temperature_and_notify
+    data:
+      temperature: 60
+      message: 'Goodbye, setting heat to 60'
+
 
 - alias: If in heat mode and arrived home, set temp to 70
   initial_state: True
@@ -155,20 +118,10 @@
       entity_id: input_select.climate_mode
       state: 'heat'
   action:
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.entryway
-        operation_mode: 'heat'
-        temperature: '70'
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.bedrooms_hallway
-        operation_mode: 'heat'
-        temperature: '70'
-    - service: notify.gmail
-      data:
-        title: 'Welcome home, setting heat to 70'
-        message: 'Welcome home, setting heat to 70'
+    service: script.set_temperature_and_notify
+    data:
+      temperature: 70
+      message: 'Welcome home, setting heat to 70'
 
 
 # If in heat mode, set temp to 70 in the morning
@@ -194,16 +147,10 @@
           entity_id: input_select.occupants
           state: 'guests'
   action:
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.entryway
-        operation_mode: 'heat'
-        temperature: '70'
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.bedrooms_hallway
-        operation_mode: 'heat'
-        temperature: '70'
+    service: script.set_temperature
+    data:
+      temperature: 70
+
 
 # If in heat mode, set temp front to 60 at 1am
 - alias: Turn off front heat at night
