@@ -28,3 +28,5 @@ cover.garage_door_opener:
   friendly_name: Garage Door
 sensor.enphase:
     friendly_name: Energy today
+input_boolean.front_door:
+  homebridge_visible: true

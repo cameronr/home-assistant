@@ -168,5 +168,11 @@ input_number:
     step: 1
     mode: slider
 
+input_boolean:
+  front_door:
+    name: Front door
+    initial: off
+    icon: mdi:door
+
 envisalink: !include envisalink.yaml
 
