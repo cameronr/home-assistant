@@ -124,17 +124,20 @@
       message: 'Welcome home, setting heat to 70'
 
 
-# If in heat mode, set temp to 70 in the morning
+# If in heat mode and we're home, set temp to 70 at 7:30am
 - alias: Turn on heat in the morning
   initial_state: True
   hide_entity: False
   trigger:
     - platform: time
-      at: '06:30:00'
+      at: '07:30:00'
   condition:
     - condition: state
       entity_id: sensor.entryway_thermostat_operation_mode
       state: 'heat'
+    - condition: state
+      entity_id: group.people
+      state: 'home'
     - condition: or
       conditions:
         - condition: state
@@ -151,6 +154,37 @@
     data:
       temperature: 70
 
+# If in heat mode and we're home, set LR temp to 70 at 6:30am
+- alias: Turn on heat in the morning
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: time
+      at: '06:30:00'
+  condition:
+    - condition: state
+      entity_id: sensor.entryway_thermostat_operation_mode
+      state: 'heat'
+    - condition: state
+      entity_id: group.people
+      state: 'home'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'auto'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'dogs'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'guests'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.entryway
+      operation_mode: 'heat'
+      temperature: '70'
 
 # If in heat mode, set temp front to 60 at 1am
 - alias: Turn off front heat at night
@@ -303,3 +337,15 @@
 #         entity_id: input_number.climate_temp
 #         value: '{{ states.sensor.bedrooms_thermostat_hallway_target.state }}'
 #
+
+- alias: Set operation mode on startup
+  initial_state: True
+  hide_entity: False
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    service: input_select.select_option
+    entity_id: input_select.climate_mode
+    data_template:
+      option: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state }}'

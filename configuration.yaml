@@ -152,7 +152,6 @@ input_select:
   climate_mode:
     # not used yet
     name: Climate Mode
-    initial: eco
     options:
       - eco
       - cool
