@@ -138,7 +138,8 @@ device_tracker:
     username: !secret unifi_username
     password: !secret unifi_password
     host: !secret unifi_host
-    track_new_devices: no
+    new_device_defaults:
+      track_new_devices: False
 
 input_select:
   occupants:
