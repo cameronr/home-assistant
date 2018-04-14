@@ -3,9 +3,9 @@ default_view:
   icon: mdi:home
   entities:
     - group.general
-    - group.people
-    - group.climate
-    - group.weather
-    - group.alarm
     - group.switches
+    - group.people
+    - group.alarm
+    - group.weather
+    - group.climate
     - group.solar

@@ -1,18 +1,5 @@
-group.general:
-  order: 12
-group.people:
-  order: 2
 group.switches:
-  order: 3
   hidden: false
-group.climate:
-  order: 4
-group.weather:
-  order: 5
-group.alarm:
-  order: 10
-group.solar:
-  order: 11
 group.all_automations:
   hidden: false
 climate.bedrooms_hallway:

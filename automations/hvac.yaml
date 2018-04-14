@@ -273,14 +273,10 @@
         entity_id: input_select.climate_mode
         state: 'auto'
     - delay: '00:00:10'
-    - service: climate.set_temperature
+    - service: script.set_temperature_and_notify
       data_template:
-        entity_id: climate.entryway
         temperature: '{{ states.input_number.climate_temp.state | float }}'
-    - service: climate.set_temperature
-      data_template:
-        entity_id: climate.bedrooms_hallway
-        temperature: '{{ states.input_number.climate_temp.state | float }}'
+        message: 'Setting HVAC to {{ states.input_number.climate_temp.state }} (mode: {{ states.input_select.climate_mode.state }})'
 
 - alias: Set temperature based on UI
   initial_state: True
@@ -289,29 +285,29 @@
     platform: state
     entity_id: input_number.climate_temp
   condition:
-    # can't set temperature when in eco mode
     condition: or
     conditions:
-      - condition: state
-        entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
-        state: 'heat'
-      - condition: state
-        entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
-        state: 'cool'
-      - condition: state
-        entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
-        state: 'auto'
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
+          state: 'heat'
+        - condition: numeric_state
+          entity_id: input_number.climate_temp
+          below: '72'
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
+          state: 'cool'
+        - condition: numeric_state
+          entity_id: input_number.climate_temp
+          above: '68'
   action:
-    - service: climate.set_temperature
+    - service: script.set_temperature_and_notify
       data_template:
-        entity_id: climate.entryway
-        operation_mode: '{{ states.input_select.climate_mode.state }}'
         temperature: '{{ states.input_number.climate_temp.state | float }}'
-    - service: climate.set_temperature
-      data_template:
-        entity_id: climate.bedrooms_hallway
-        operation_mode: '{{ states.input_select.climate_mode.state }}'
-        temperature: '{{ states.input_number.climate_temp.state | float }}'
+        message: 'Setting HVAC to {{ states.input_number.climate_temp.state }} (mode: {{ states.input_select.climate_mode.state }})'
 
 # - alias: Set operation mode from the Nest
 #   initial_state: True
