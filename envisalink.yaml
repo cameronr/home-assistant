@@ -3,6 +3,7 @@ panel_type: HONEYWELL
 user_name: !secret envisalink_user_name
 password: !secret envisalink_password
 code: !secret envisalink_code
+zonedump_interval: 180
 evl_version: 3
 partitions:
   1:
@@ -48,5 +49,5 @@ zones:
     name: 'Guest Bedroom'
     type: 'opening'
   17:
-    name: 'Life & Slide'
+    name: 'Lift & Slide'
     type: 'opening'

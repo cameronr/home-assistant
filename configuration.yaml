@@ -46,58 +46,35 @@ discovery:
 
 # Enables support for tracking state changes over time
 history:
+
+recorder:
+  purge_keep_days: 7
+  purge_interval: 1
   exclude:
     domains:
       - automation
       - weblink
       - updater
       - camera
+      - group
+      - media_player
     entities:
       - sensor.last_boot
       - sensor.date
       - sensor.date__time
       - sensor.pws_weather_1d
-      - sensor.home_alarm_keypad
+      - sensor.pws_weather_1d_2
+      - sensor.pws_weather_2d
+      - sensor.pws_weather_2d_2
+      - sensor.pws_temp_f_2
+      - sensor.pws_temp_f
       - sensor.pws_alerts
+      - sensor.home_alarm_keypad
+      - sun.sun
       - cover.myq
-      - group.all_automations
-      - group.all_switches
-      - group.switches
-      - group.alarm
-      - group.climate
-      - group.nest
-      - group.ring
-      - group.weather
-      - group.general
-      - group.alarm_sensors
-
-recorder:
-  purge_keep_days: 14
-  purge_interval: 1
 
 # View all events in a logbook
 logbook:
-  exclude:
-    domains:
-      - weblink
-    entities:
-      - sensor.last_boot
-      - sensor.date
-      - sensor.date__time
-      - sensor.pws_weather_1d
-      - sensor.home_alarm_keypad
-      - sensor.pws_alerts
-      - cover.myq
-      - group.all_automations
-      - group.all_switches
-      - group.switches
-      - group.alarm
-      - group.climate
-      - group.nest
-      - group.ring
-      - group.weather
-      - group.general
-      - group.alarm_sensors
 
 # Track the sun
 sun:
