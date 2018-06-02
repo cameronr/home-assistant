@@ -1,0 +1,3 @@
+host: !secret lutron_ip
+username: !secret lutron_username
+password: !secret lutron_password

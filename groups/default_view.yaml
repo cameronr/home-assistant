@@ -4,6 +4,7 @@ default_view:
   entities:
     - group.general
     - group.switches
+    - group.lights
     - group.people
     - group.alarm
     - group.weather

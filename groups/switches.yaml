@@ -1,7 +1,7 @@
 Switches:
   control: hidden
   entities:
-    - input_boolean.front_door
+    # - input_boolean.front_door
     - switch.gate
     - switch.dehumidifier
     - switch.water_heater_recirc_pump
