@@ -140,7 +140,7 @@ input_number:
   climate_temp:
     # not used yet
     name: Climate Temp
-    initial: 72
+    initial: 73
     min: 55
     max: 85
     step: 1
