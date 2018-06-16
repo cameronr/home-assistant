@@ -1,4 +1,4 @@
-- alias: Arm alarm when we leave
+- alias: Alarm - Arm when we leave
   initial_state: True
   hide_entity: False
   trigger:
@@ -19,7 +19,7 @@
     service: alarm_control_panel.alarm_arm_away
     entity_id: alarm_control_panel.home_alarm
 
-- alias: Disarm alarm when we come home
+- alias: Alarm - Disarm when we come home
   initial_state: True
   hide_entity: False
   trigger:

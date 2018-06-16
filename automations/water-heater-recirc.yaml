@@ -1,4 +1,4 @@
-- alias: Water heater recirc off at 1am
+- alias: Water heater - Recirc off at 1am
   initial_state: True
   hide_entity: False
   trigger:
@@ -8,7 +8,7 @@
     entity_id: switch.water_heater_recirc_pump
     service: switch.turn_off
 
-- alias: Water heater recirc on at 5:45am
+- alias: Water heater - Recirc on at 5:45am
   initial_state: True
   hide_entity: False
   trigger:
@@ -22,7 +22,7 @@
     entity_id: switch.water_heater_recirc_pump
     service: switch.turn_on
 
-- alias: Water heater recirc off when we leave
+- alias: Water heater - Recirc off when we leave
   initial_state: True
   hide_entity: False
   trigger:
@@ -43,7 +43,7 @@
     entity_id: switch.water_heater_recirc_pump
     service: switch.turn_off
 
-- alias: Water heater recirc on when we get home
+- alias: Water heater - Recirc on when we get home
   initial_state: True
   hide_entity: False
   trigger:

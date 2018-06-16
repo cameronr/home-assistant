@@ -155,3 +155,8 @@ input_number:
 envisalink: !include envisalink.yaml
 
 lutron: !include lutron.yaml
+
+nuheat:
+  username: !secret nuheat_username
+  password: !secret nuheat_password
+  devices: !secret nuheat_device

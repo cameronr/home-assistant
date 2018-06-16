@@ -1,4 +1,4 @@
-- alias: If in cool mode and left home, set temp to 80
+- alias: HVAC - If in cool mode and left home, set temp to 80
   initial_state: True
   hide_entity: False
   trigger:
@@ -20,7 +20,7 @@
       message: 'House empty, setting AC to 80'
 
 
-- alias: Turn off guest/dog mode when we get back home
+- alias: HVAC - Turn off guest/dog mode when we get back home
   initial_state: True
   hide_entity: False
   trigger:
@@ -35,7 +35,7 @@
         option: 'auto'
 
 
-- alias: If in cool mode and 5pm and not home, set temp to 70
+- alias: HVAC - If in cool mode and 5pm and not home, set temp to 70
   initial_state: True
   hide_entity: False
   trigger:
@@ -58,7 +58,7 @@
       message: '5pm, precooling AC to 70'
 
 
-- alias: If in cool mode and arrived home, set temp to 70
+- alias: HVAC - If in cool mode and arrived home, set temp to 70
   initial_state: True
   hide_entity: False
   trigger:
@@ -80,7 +80,7 @@
       message: 'Welcome home, setting AC to 70'
 
 
-- alias: If in heat mode and left home, set temp to 60
+- alias: HVAC - If in heat mode and left home, set temp to 60
   initial_state: True
   hide_entity: False
   trigger:
@@ -102,7 +102,7 @@
       message: 'Goodbye, setting heat to 60'
 
 
-- alias: If in heat mode and arrived home, set temp to 70
+- alias: HVAC - If in heat mode and arrived home, set temp to 70
   initial_state: True
   hide_entity: False
   trigger:
@@ -125,7 +125,7 @@
 
 
 # If in heat mode and we're home, set temp to 70 at 7:30am
-- alias: Turn on heat in the morning
+- alias: HVAC - Turn on heat in the morning
   initial_state: True
   hide_entity: False
   trigger:
@@ -155,7 +155,7 @@
       temperature: 70
 
 # If in heat mode and we're home, set LR temp to 70 at 6:30am
-- alias: Turn on heat in the morning
+- alias: HVAC - Turn on heat in the morning
   initial_state: True
   hide_entity: False
   trigger:
@@ -187,7 +187,7 @@
       temperature: '70'
 
 # If in heat mode, set temp front to 60 at 1am
-- alias: Turn off front heat at night
+- alias: HVAC - Turn off front heat at night
   initial_state: True
   hide_entity: False
   trigger:
@@ -216,7 +216,7 @@
         temperature: '60'
 
 # If in heat mode, set temp at back to 68 at midnight
-- alias: Set back heat to 68 at night
+- alias: HVAC - Set back heat to 68 at night
   initial_state: True
   hide_entity: False
   trigger:
@@ -245,7 +245,7 @@
         temperature: '68'
 
 # These four automations bind the UI to the Nest and vice versa
-- alias: Set operation mode based on UI
+- alias: HVAC - Set operation mode based on UI
   initial_state: True
   hide_entity: False
   trigger:
@@ -278,7 +278,7 @@
         temperature: '{{ states.input_number.climate_temp.state | float }}'
         message: 'Setting HVAC to {{ states.input_number.climate_temp.state }} (mode: {{ states.input_select.climate_mode.state }})'
 
-- alias: Set temperature based on UI
+- alias: HVAC - Set temperature based on UI
   initial_state: True
   hide_entity: False
   trigger:
@@ -309,7 +309,7 @@
         temperature: '{{ states.input_number.climate_temp.state | float }}'
         message: 'Setting HVAC to {{ states.input_number.climate_temp.state }} (mode: {{ states.input_select.climate_mode.state }})'
 
-# - alias: Set operation mode from the Nest
+# - alias: HVAC - Set operation mode from the Nest
 #   initial_state: True
 #   hide_entity: False
 #   trigger:
@@ -334,7 +334,7 @@
 #         value: '{{ states.sensor.bedrooms_thermostat_hallway_target.state }}'
 #
 
-- alias: Set operation mode on startup
+- alias: HVAC - Set operation mode on startup
   initial_state: True
   hide_entity: False
   trigger:

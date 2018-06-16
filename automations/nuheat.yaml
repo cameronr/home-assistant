@@ -1,0 +1,132 @@
+- alias: Heated Floor - Turn off when we leave
+  initial_state: True
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: group.people
+    from: 'home'
+    to: 'not_home'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.master_nuheat
+      temperature: 60
+
+- alias: Heated Floor - Turn on at 6:15am if we're home
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: time
+      at: '06:15:00'
+  condition:
+    - condition: state
+      entity_id: group.people
+      state: 'home'
+    - condition: numeric_state
+      entity_id: sensor.bedrooms_thermostat_hallway_temperature
+      below: '76'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.master_nuheat
+      temperature: 90
+
+# if m-f, turn off at 7:30am
+- alias: Heated Floor - Turn off at 7:30 on M-F
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: time
+      at: '07:30:00'
+  condition:
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.master_nuheat
+      temperature: 60
+
+# if ss, turn off at 10am
+- alias: Heated Floor - Turn off at 10am on SS
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: time
+      at: '10:00:00'
+  condition:
+    - condition: time
+      weekday:
+        - sat
+        - sun
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.master_nuheat
+      temperature: 60
+
+
+# FIXME: don't turn on if inside temp is >= 75 or ac is on
+# if we're home and time is 6:30pm, turn on
+- alias: Heated Floor - Turn on at 6:30pm if we're home
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: time
+      at: '18:30:00'
+  condition:
+    - condition: state
+      entity_id: group.people
+      state: 'home'
+    - condition: numeric_state
+      entity_id: sensor.bedrooms_thermostat_hallway_temperature
+      below: '75'
+    - condition: template
+      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.master_nuheat
+      temperature: 90
+
+# if we come home and time is > 6:30pm and < 11:30pm and ac is not on
+- alias: Heated Floor - Turn on when we come home if 6:30pm < now < 11:30pm
+  initial_state: True
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: group.people
+    from: 'not_home'
+    to: 'home'
+  condition:
+    - condition: time
+      after: '18:30:00'
+      before: '23:30:00'
+    - condition: numeric_state
+      entity_id: sensor.bedrooms_thermostat_hallway_temperature
+      below: '75'
+    - condition: template
+      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.master_nuheat
+      temperature: 90
+
+# turn off at 11:30pm
+- alias: Heated Floor - Turn off at 11:30pm
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: time
+      at: '23:30:00'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.master_nuheat
+      temperature: 60

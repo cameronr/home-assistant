@@ -4,6 +4,8 @@ group.all_automations:
   hidden: false
 climate.bedrooms_hallway:
   friendly_name: Bedrooms
+climate.master_nuheat:
+  friendly_name: Master bath floor
 switch.water_heater_recirc_pump:
   icon: mdi:reload
 switch.dehumidifier:
@@ -14,6 +16,19 @@ switch.gate:
 cover.garage_door_opener:
   friendly_name: Garage Door
 sensor.enphase:
-    friendly_name: Energy today
+  friendly_name: Energy today
+light.front_door_lights:
+  friendly_name: Front door
+light.front_hallway_great_room:
+  friendly_name: Great room
+light.front_hallway_hallway:
+  friendly_name: Front hallway
+light.front_hallway_kitchen:
+  friendly_name: Kitchen
+light.great_room_fan:
+  friendly_name: Great room fan
+light.great_room_patio_lights:
+  friendly_name: Patio
+
 # input_boolean.front_door:
 #   homebridge_visible: true

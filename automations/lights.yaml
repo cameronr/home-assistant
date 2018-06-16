@@ -1,4 +1,4 @@
-- alias: Turn on patio lights when sliding door is opened
+- alias: Lights - Turn on patio when sliding door is opened
   initial_state: True
   hide_entity: False
   trigger:
