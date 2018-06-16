@@ -341,7 +341,14 @@
     platform: homeassistant
     event: start
   action:
-    service: input_select.select_option
-    entity_id: input_select.climate_mode
-    data_template:
-      option: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state }}'
+    - service: input_number.set_value
+      entity_id: input_number.climate_temp
+      data_template:
+        value: '{{ states.sensor.bedrooms_thermostat_hallway_target.state }}'
+    - delay: '00:00:10'
+    - service: input_select.select_option
+      entity_id: input_select.climate_mode
+      data_template:
+        option: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state }}'
+
+
