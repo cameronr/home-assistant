@@ -35,7 +35,7 @@
         option: 'auto'
 
 
-- alias: HVAC - If in cool mode and 5pm and not home, set temp to 70
+- alias: HVAC - If in cool mode and 5pm and not home, set temp to 74
   initial_state: True
   hide_entity: False
   trigger:
@@ -54,11 +54,11 @@
   action:
     service: script.set_temperature_and_notify
     data:
-      temperature: 70
-      message: '5pm, precooling AC to 70'
+      temperature: 74
+      message: '5pm, precooling AC to 74'
 
 
-- alias: HVAC - If in cool mode and arrived home, set temp to 70
+- alias: HVAC - If in cool mode and arrived home, set temp to 74
   initial_state: True
   hide_entity: False
   trigger:
@@ -76,7 +76,7 @@
   action:
     service: script.set_temperature_and_notify
     data:
-      temperature: 70
+      temperature: 74
       message: 'Welcome home, setting AC to 70'
 
 
