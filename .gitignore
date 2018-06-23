@@ -15,6 +15,7 @@ deps
 tts
 secrets.yaml
 known_devices.yaml
+entity_registry.yaml
 *.conf
 pyozw.sqlite
 __pycache__
