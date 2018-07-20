@@ -20,3 +20,21 @@
     - service: light.turn_off
       entity_id: light.great_room_patio_lights
 
+
+- alias: Lights - If we arrived home, turn on garage / front door lights
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: state
+      entity_id: group.people
+      from: 'not_home'
+      to: 'home'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    - service: light.turn_on
+      entity_id: light.front_door_lights
+    - service: light.turn_on
+      entity_id: light.front_door_garage

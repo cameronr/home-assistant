@@ -4,6 +4,6 @@ Lights:
     - light.front_hallway_hallway
     - light.front_hallway_kitchen
     - light.front_hallway_great_room
-    - light.great_room_fan
     - light.great_room_patio_lights
-
+    - light.front_door_garage
+    - light.great_room_fan

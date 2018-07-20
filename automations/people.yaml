@@ -1,0 +1,56 @@
+- alias: People - Turn off guest/dog mode when we get back home
+  trigger:
+    platform: state
+    entity_id: group.people
+    from: 'not_home'
+    to: 'home'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.occupants
+        option: 'auto'
+
+- alias: People - Set guests mode from notification
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: SET_GUEST
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.occupants
+        option: 'guests'
+
+- alias: People - Set dog mode from notification
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: SET_DOG
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.occupants
+        option: 'dogs'
+
+- alias: People - Notify on away
+  trigger:
+    platform: state
+    entity_id: group.people
+    from: 'home'
+    to: 'not_home'
+  condition:
+    - condition: state
+      entity_id: input_select.occupants
+      state: 'auto'
+  action:
+    - service: notify.push_family
+      data:
+        message: "Setting away mode"
+        data:
+          push:
+            # actions only work when on the vpn, so disable for now
+            # category: 'away'
+            badge: 1
+

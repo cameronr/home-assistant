@@ -2,6 +2,7 @@ People:
   entities:
     - device_tracker.junxblah
     - device_tracker.astropanda
+    - device_tracker.ephone
     # - device_tracker.jerryjesiphone7
     # - device_tracker.juliajesiphone3
     - input_select.occupants

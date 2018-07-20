@@ -10,3 +10,8 @@
   recipient:
     - !secret gmail_recipient1
   sender_name: Home Assistant
+- name: push_family
+  platform: group
+  services:
+    - service: ios_junxblah
+    - service: ios_astropanda

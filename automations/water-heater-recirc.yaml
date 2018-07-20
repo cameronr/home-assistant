@@ -48,11 +48,15 @@
   hide_entity: False
   trigger:
     # maybe use zone: https://community.home-assistant.io/t/notify-when-someone-is-home-or-not-home/347/11
-    platform: state
     # using a group https://community.home-assistant.io/t/lights-on-when-home/16158
-    entity_id: group.people
-    from: 'not_home'
-    to: 'home'
+    - platform: state
+      entity_id: group.people
+      from: 'not_home'
+      to: 'home'
+    - platform: state
+      entity_id: input_select.occupants
+      from: 'auto'
+      to: 'guests'
   action:
     entity_id: switch.water_heater_recirc_pump
     service: switch.turn_on

@@ -1,0 +1,10 @@
+push:
+  categories:
+    - name: Away
+      identifier: 'away'
+      actions:
+        - identifier: 'SET_GUEST'
+          title: 'Set guest mode'
+        - identifier: 'SET_DOG'
+          title: 'Set dog mode'
+

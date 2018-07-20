@@ -14,25 +14,10 @@
       entity_id: input_select.climate_mode
       state: 'cool'
   action:
-    service: script.set_temperature_and_notify
+    service: script.set_temperature
     data:
       temperature: 80
       message: 'House empty, setting AC to 80'
-
-
-- alias: HVAC - Turn off guest/dog mode when we get back home
-  initial_state: True
-  hide_entity: False
-  trigger:
-    platform: state
-    entity_id: group.people
-    from: 'not_home'
-    to: 'home'
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.occupants
-        option: 'auto'
 
 
 - alias: HVAC - If in cool mode and 5pm and not home, set temp to 74
@@ -52,10 +37,12 @@
       entity_id: group.people
       state: 'not_home'
   action:
-    service: script.set_temperature_and_notify
-    data:
-      temperature: 74
-      message: '5pm, precooling AC to 74'
+    - service: script.set_temperature
+      data:
+        temperature: 74
+        message: '5pm, precooling AC to 74'
+    - service: light.turn_on
+      entity_id: light.great_room_fan
 
 
 - alias: HVAC - If in cool mode and arrived home, set temp to 74
@@ -66,18 +53,25 @@
       entity_id: group.people
       from: 'not_home'
       to: 'home'
-  condition:
-    - condition: state
+    - platform: state
       entity_id: input_select.occupants
-      state: 'auto'
+      from: 'auto'
+      to: 'guests'
+    - platform: state
+      entity_id: input_select.occupants
+      from: 'auto'
+      to: 'dogs'
+  condition:
     - condition: state
       entity_id: input_select.climate_mode
       state: 'cool'
   action:
-    service: script.set_temperature_and_notify
-    data:
-      temperature: 74
-      message: 'Welcome home, setting AC to 70'
+    - service: script.set_temperature
+      data:
+        temperature: 74
+        message: 'Welcome home, setting AC to 70'
+    - service: light.turn_on
+      entity_id: light.great_room_fan
 
 
 - alias: HVAC - If in heat mode and left home, set temp to 60
@@ -96,7 +90,7 @@
       entity_id: input_select.climate_mode
       state: 'heat'
   action:
-    service: script.set_temperature_and_notify
+    service: script.set_temperature
     data:
       temperature: 60
       message: 'Goodbye, setting heat to 60'
@@ -110,19 +104,25 @@
       entity_id: group.people
       from: 'not_home'
       to: 'home'
-  condition:
-    - condition: state
+    - platform: state
       entity_id: input_select.occupants
-      state: 'auto'
+      from: 'auto'
+      to: 'guests'
+    - platform: state
+      entity_id: input_select.occupants
+      from: 'auto'
+      to: 'dogs'
+  condition:
     - condition: state
       entity_id: input_select.climate_mode
       state: 'heat'
   action:
-    service: script.set_temperature_and_notify
-    data:
-      temperature: 70
-      message: 'Welcome home, setting heat to 70'
-
+    - service: script.set_temperature
+      data:
+        temperature: 70
+        message: 'Welcome home, setting heat to 70'
+    - service: light.turn_on
+      entity_id: light.great_room_fan
 
 # If in heat mode and we're home, set temp to 70 at 7:30am
 - alias: HVAC - Turn on heat in the morning
@@ -273,7 +273,7 @@
         entity_id: input_select.climate_mode
         state: 'auto'
     - delay: '00:00:10'
-    - service: script.set_temperature_and_notify
+    - service: script.set_temperature
       data_template:
         temperature: '{{ states.input_number.climate_temp.state | float }}'
         message: 'Setting HVAC to {{ states.input_number.climate_temp.state }} (mode: {{ states.input_select.climate_mode.state }})'

@@ -7,14 +7,30 @@
     from: 'home'
     to: 'not_home'
   condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: input_select.occupants
-        state: 'auto'
-      - condition: state
-        entity_id: input_select.occupants
-        state: 'dogs'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'auto'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'dogs'
+    - condition: or
+      conditions:
+        - condition: time
+          after: '00:00:00'
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - sat
+            - sun
+        - condition: time
+          before: '07:00:00'
+          after: '11:00:00'
+          weekday:
+            - fri
   action:
     service: alarm_control_panel.alarm_arm_away
     entity_id: alarm_control_panel.home_alarm
@@ -23,10 +39,14 @@
   initial_state: True
   hide_entity: False
   trigger:
-    platform: state
-    entity_id: group.people
-    from: 'not_home'
-    to: 'home'
+    - platform: state
+      entity_id: group.people
+      from: 'not_home'
+      to: 'home'
+    - platform: state
+      entity_id: input_select.occupants
+      from: 'auto'
+      to: 'guests'
   condition:
     condition: or
     conditions:

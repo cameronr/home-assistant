@@ -129,7 +129,6 @@ input_select:
       - dogs
       - guests
   climate_mode:
-    # not used yet
     name: Climate Mode
     options:
       - eco
@@ -138,7 +137,6 @@ input_select:
 
 input_number:
   climate_temp:
-    # not used yet
     name: Climate Temp
     initial: 73
     min: 55
@@ -160,3 +158,5 @@ nuheat:
   username: !secret nuheat_username
   password: !secret nuheat_password
   devices: !secret nuheat_device
+
+ios: !include ios.yaml

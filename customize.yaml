@@ -29,6 +29,8 @@ light.great_room_fan:
   friendly_name: Great room fan
 light.great_room_patio_lights:
   friendly_name: Patio
+light.front_door_garage:
+  friendly_name: Garage
 
 # input_boolean.front_door:
 #   homebridge_visible: true
