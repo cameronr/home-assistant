@@ -4,5 +4,4 @@ Sensors:
     - group.nest
     - group.ring
     - group.alarm_sensors
-    - camera.garage
-    - camera.keplers_room
+    - group.zwave

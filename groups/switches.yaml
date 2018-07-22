@@ -1,8 +1,8 @@
 Switches:
   control: hidden
   entities:
-    # - input_boolean.front_door
     - switch.gate
+    - lock.schlage_be469_touchscreen_deadbolt_locked
     - switch.dehumidifier
     - switch.water_heater_recirc_pump
     - cover.garage_door_opener

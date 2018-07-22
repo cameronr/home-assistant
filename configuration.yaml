@@ -33,6 +33,8 @@ logger:
   logs:
     homeassistant.core: warn
     homeassistant.components.envisalink: warn
+    pyenvisalink.envisalink_base_client: warn
+
 
 # Discover some devices automatically
 discovery:
@@ -144,12 +146,6 @@ input_number:
     step: 1
     mode: slider
 
-# input_boolean:
-#   front_door:
-#     name: Front door
-#     initial: off
-#     icon: mdi:door
-
 envisalink: !include envisalink.yaml
 
 lutron: !include lutron.yaml
@@ -160,3 +156,7 @@ nuheat:
   devices: !secret nuheat_device
 
 ios: !include ios.yaml
+
+zwave:
+  usb_path: /dev/ttyACM0
+  network_key: !secret zwave_network_key
