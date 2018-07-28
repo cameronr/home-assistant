@@ -2,4 +2,6 @@ Zwave:
   entities:
     - zwave.aeotec_zw090_zstick_gen5_us
     - zwave.schlage_be469_touchscreen_deadbolt
+    - zwave.schlage_be469_touchscreen_deadbolt_2
+    - zwave.schlage_be469_touchscreen_deadbolt_3
 

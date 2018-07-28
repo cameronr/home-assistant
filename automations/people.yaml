@@ -47,10 +47,23 @@
   action:
     - service: notify.push_family
       data:
-        message: "Setting away mode"
+        message: "Setting to away mode"
         data:
           push:
-            # actions only work when on the vpn, so disable for now
-            # category: 'away'
-            badge: 1
+            category: 'away'
+            # badge: 1
+
+- alias: People - Unlock when we get home
+  trigger:
+    platform: state
+    entity_id: group.people
+    from: 'not_home'
+    to: 'home'
+  action:
+    - service: lock.unlock
+      data:
+        entity_id: lock.schlage_be469_touchscreen_deadbolt_locked_3
+    - service: notify.push_family
+      data:
+        message: "Welcome home"
 
