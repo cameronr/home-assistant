@@ -1,4 +1,4 @@
-- alias: Heated Floor - Turn off when we leave
+- alias: NuHeat - Turn off when we leave
   initial_state: True
   hide_entity: False
   trigger:
@@ -12,7 +12,7 @@
       entity_id: climate.master_nuheat
       temperature: 60
 
-- alias: Heated Floor - Turn on at 6:15am if we're home
+- alias: NuHeat - Turn on at 6:15am if we're home
   initial_state: True
   hide_entity: False
   trigger:
@@ -32,7 +32,7 @@
       temperature: 90
 
 # if m-f, turn off at 7:30am
-- alias: Heated Floor - Turn off at 7:30 on M-F
+- alias: NuHeat - Turn off at 7:30 on M-F
   initial_state: True
   hide_entity: False
   trigger:
@@ -53,7 +53,7 @@
       temperature: 60
 
 # if ss, turn off at 10am
-- alias: Heated Floor - Turn off at 10am on SS
+- alias: NuHeat - Turn off at 10am on SS
   initial_state: True
   hide_entity: False
   trigger:
@@ -73,7 +73,7 @@
 
 # FIXME: don't turn on if inside temp is >= 75 or ac is on
 # if we're home and time is 6:30pm, turn on
-- alias: Heated Floor - Turn on at 6:30pm if we're home
+- alias: NuHeat - Turn on at 6:30pm if we're home
   initial_state: True
   hide_entity: False
   trigger:
@@ -95,7 +95,7 @@
       temperature: 90
 
 # if we come home and time is > 6:30pm and < 11:30pm and ac is not on
-- alias: Heated Floor - Turn on when we come home if 6:30pm < now < 11:30pm
+- alias: NuHeat - Turn on when we come home if 6:30pm < now < 11:30pm
   initial_state: True
   hide_entity: False
   trigger:
@@ -119,7 +119,7 @@
       temperature: 90
 
 # turn off at 11:30pm
-- alias: Heated Floor - Turn off at 11:30pm
+- alias: NuHeat - Turn off at 11:30pm
   initial_state: True
   hide_entity: False
   trigger:
@@ -130,3 +130,28 @@
     data:
       entity_id: climate.master_nuheat
       temperature: 60
+
+- alias: NuHeat - Input off
+  trigger:
+    platform: state
+    entity_id: input_boolean.master_floor_heat
+    from: 'off'
+    to: 'on'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.master_nuheat
+      temperature: 90
+
+- alias: NuHeat - Input on
+  trigger:
+    platform: state
+    entity_id: input_boolean.master_floor_heat
+    from: 'on'
+    to: 'off'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.master_nuheat
+      temperature: 60
+

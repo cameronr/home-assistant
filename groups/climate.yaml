@@ -4,4 +4,4 @@ Climate:
     - input_number.climate_temp
     - climate.entryway
     - climate.bedrooms_hallway
-    - climate.master_nuheat
+    - input_boolean.master_floor_heat

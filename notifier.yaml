@@ -15,3 +15,11 @@
   services:
     - service: ios_junxblah
     - service: ios_astropanda
+- name: push_cam
+  platform: group
+  services:
+    - service: ios_junxblah
+- name: push_sandy
+  platform: group
+  services:
+    - service: ios_astropanda

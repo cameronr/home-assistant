@@ -20,18 +20,3 @@
     service: alarm_control_panel.alarm_disarm
     entity_id: alarm_control_panel.home_alarm
 
-- alias: Garage - Notify if garage open at night
-  initial_state: True
-  hide_entity: False
-  trigger:
-    - platform: time
-      at: '23:30:00'
-  condition:
-    - condition: state
-      entity_id: cover.garage_door_opener
-      state: 'open'
-  action:
-    - service: notify.push_family
-      data:
-        message: "Garage door is still open"
-

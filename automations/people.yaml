@@ -53,17 +53,60 @@
             category: 'away'
             # badge: 1
 
-- alias: People - Unlock when we get home
+# - alias: People - Unlock first in group is home
+#   trigger:
+#     platform: state
+#     entity_id: group.people
+#     from: 'not_home'
+#     to: 'home'
+#   action:
+#     - service: lock.unlock
+#       data:
+#         entity_id: lock.schlage_be469_touchscreen_deadbolt_locked_3
+#     - service: notify.push_family
+#       data:
+#         message: "Welcome home"
+
+- alias: People - Unlock whenever cam comes home
   trigger:
-    platform: state
-    entity_id: group.people
-    from: 'not_home'
-    to: 'home'
+    - platform: state
+      entity_id: device_tracker.junxblah
+      from: 'not_home'
+      to: 'home'
   action:
     - service: lock.unlock
       data:
         entity_id: lock.schlage_be469_touchscreen_deadbolt_locked_3
+    - service: notify.push_cam
+      data:
+        message: "Welcome home, cam"
+
+- alias: People - Unlock whenever sandy comes home
+  trigger:
+    - platform: state
+      entity_id: device_tracker.astropanda
+      from: 'not_home'
+      to: 'home'
+  action:
+    - service: lock.unlock
+      data:
+        entity_id: lock.schlage_be469_touchscreen_deadbolt_locked_3
+    - service: notify.push_sandy
+      data:
+        message: "Welcome home, sandy"
+
+- alias: People - Notify when not home and door is opened
+  trigger:
+    - platform: state
+      entity_id: lock.schlage_be469_touchscreen_deadbolt_locked_3
+      from: 'locked'
+      to: 'unlocked'
+  condition:
+    - condition: state
+      entity_id: group.people
+      state: 'not_home'
+  action:
     - service: notify.push_family
       data:
-        message: "Welcome home"
+        message: "Door opened while not home"
 

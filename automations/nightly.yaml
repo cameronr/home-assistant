@@ -1,0 +1,32 @@
+- alias: Nightly - Notify if garage, door, or gate are open
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: time
+      at: '23:30:00'
+  condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: lock.schlage_be469_touchscreen_deadbolt_locked_3
+          state: 'unlocked'
+        - condition: state
+          entity_id: cover.garage_door_opener
+          state: 'open'
+        - condition: state
+          entity_id: switch.gate
+          state: 'on'
+  action:
+    - service: notify.push_family
+      data_template:
+        message: >
+          Left open:
+          {%- if is_state("lock.schlage_be469_touchscreen_deadbolt_locked_3", "unlocked") %}
+            {{ states.lock.schlage_be469_touchscreen_deadbolt_locked_3.attributes.friendly_name }}
+          {%- endif -%}
+          {%- if is_state("cover.garage_door_opener", "open") %}
+            {{ states.cover.garage_door_opener.attributes.friendly_name }}
+          {%- endif %}
+          {%- if is_state("switch.gate", "on") %}
+            {{ states.switch.gate.attributes.friendly_name }}
+          {%- endif -%}

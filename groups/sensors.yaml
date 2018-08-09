@@ -5,3 +5,4 @@ Sensors:
     - group.ring
     - group.alarm_sensors
     - group.zwave
+    - climate.master_nuheat
