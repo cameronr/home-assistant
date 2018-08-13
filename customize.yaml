@@ -2,6 +2,8 @@ group.switches:
   hidden: false
 group.all_automations:
   hidden: false
+group.all_remotes:
+  hidden: false
 climate.bedrooms_hallway:
   friendly_name: Bedrooms
 climate.master_nuheat:
@@ -37,6 +39,6 @@ lock.schlage_be469_touchscreen_deadbolt_locked_2:
   friendly_name: Front Door Lock
 lock.schlage_be469_touchscreen_deadbolt_locked_3:
   friendly_name: Front Door Lock
-
-# input_boolean.front_door:
-#   homebridge_visible: true
+script.goodnight:
+  friendly_name: Goodnight
+  icon: mdi:weather-night

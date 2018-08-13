@@ -1,0 +1,5 @@
+climate_other:
+  name: Climate Other
+  entities:
+    - climate.master_nuheat
+    - climate.guest_nuheat

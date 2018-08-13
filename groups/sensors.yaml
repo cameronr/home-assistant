@@ -2,7 +2,8 @@ Sensors:
   view: yes
   entities:
     - group.nest
+    - group.climate_other
     - group.ring
     - group.alarm_sensors
     - group.zwave
-    - climate.master_nuheat
+    - group.all_remotes

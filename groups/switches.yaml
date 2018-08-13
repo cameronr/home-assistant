@@ -6,3 +6,4 @@ Switches:
     - switch.dehumidifier
     - switch.water_heater_recirc_pump
     - cover.garage_door_opener
+    - script.goodnight

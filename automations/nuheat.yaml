@@ -7,10 +7,9 @@
     from: 'home'
     to: 'not_home'
   action:
-    service: climate.set_temperature
+    service: input_boolean.turn_off
     data:
-      entity_id: climate.master_nuheat
-      temperature: 60
+      entity_id: input_boolean.master_floor_heat
 
 - alias: NuHeat - Turn on at 6:15am if we're home
   initial_state: True
@@ -26,10 +25,9 @@
       entity_id: sensor.bedrooms_thermostat_hallway_temperature
       below: '76'
   action:
-    service: climate.set_temperature
+    service: input_boolean.turn_on
     data:
-      entity_id: climate.master_nuheat
-      temperature: 90
+      entity_id: input_boolean.master_floor_heat
 
 # if m-f, turn off at 7:30am
 - alias: NuHeat - Turn off at 7:30 on M-F
@@ -47,10 +45,9 @@
         - thu
         - fri
   action:
-    service: climate.set_temperature
+    service: input_boolean.turn_off
     data:
-      entity_id: climate.master_nuheat
-      temperature: 60
+      entity_id: input_boolean.master_floor_heat
 
 # if ss, turn off at 10am
 - alias: NuHeat - Turn off at 10am on SS
@@ -65,10 +62,9 @@
         - sat
         - sun
   action:
-    service: climate.set_temperature
+    service: input_boolean.turn_off
     data:
-      entity_id: climate.master_nuheat
-      temperature: 60
+      entity_id: input_boolean.master_floor_heat
 
 
 # FIXME: don't turn on if inside temp is >= 75 or ac is on
@@ -89,10 +85,9 @@
     - condition: template
       value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
   action:
-    service: climate.set_temperature
+    service: input_boolean.turn_on
     data:
-      entity_id: climate.master_nuheat
-      temperature: 90
+      entity_id: input_boolean.master_floor_heat
 
 # if we come home and time is > 6:30pm and < 11:30pm and ac is not on
 - alias: NuHeat - Turn on when we come home if 6:30pm < now < 11:30pm
@@ -113,10 +108,9 @@
     - condition: template
       value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
   action:
-    service: climate.set_temperature
+    service: input_boolean.turn_on
     data:
-      entity_id: climate.master_nuheat
-      temperature: 90
+      entity_id: input_boolean.master_floor_heat
 
 # turn off at 11:30pm
 - alias: NuHeat - Turn off at 11:30pm
@@ -126,10 +120,9 @@
     - platform: time
       at: '23:30:00'
   action:
-    service: climate.set_temperature
+    service: input_boolean.turn_off
     data:
-      entity_id: climate.master_nuheat
-      temperature: 60
+      entity_id: input_boolean.master_floor_heat
 
 - alias: NuHeat - Input off
   trigger:

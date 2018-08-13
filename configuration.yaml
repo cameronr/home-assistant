@@ -41,7 +41,6 @@ discovery:
   ignore:
     - yamaha
     - apple_tv
-    - harmony
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 # conversation:
@@ -177,7 +176,7 @@ lutron: !include lutron.yaml
 nuheat:
   username: !secret nuheat_username
   password: !secret nuheat_password
-  devices: !secret nuheat_device
+  devices: !secret nuheat_devices
 
 ios: !include ios.yaml
 
