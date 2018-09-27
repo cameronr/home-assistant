@@ -1,0 +1,119 @@
+title: Westridge
+# Include external resources
+# resources:
+#   - url: /local/my-custom-card.js
+#     type: js
+#   - url: /local/my-webfont.css
+#     type: css
+
+#
+# Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
+# background: center / cover no-repeat url("/background.png") fixed
+# Exclude entities from "Unused entities" view
+excluded_entities:
+views:
+    # View tab title.
+  - icon: mdi:home
+    title: Home
+    # Optional unique id for direct access /lovelace/${id}
+    id: home
+    # Optional background (overwrites the global background).
+    # background: radial-gradient(crimson, skyblue)
+    # Each view can have a different theme applied. Theme should be defined in the frontend.
+    # theme: dark-mode
+    # The cards to show on this view.
+    cards:
+        # The filter card will filter entities for their state
+      # - type: entity-filter
+      #   entities:
+      #     - device_tracker.junxblah
+      #     - device_tracker.astropanda
+      #   state_filter:
+      #     - 'home'
+      #   card:
+      #     type: glance
+      #     title: People that are home
+
+      - type: entities
+        # Title of the entities card
+        title: Switches
+        # The entities here will be shown in the same order as specified.
+        # Each entry is an entity ID or a map with extra options.
+        entities:
+          - switch.gate
+          - lock.schlage_be469_touchscreen_deadbolt_locked_3
+          - switch.water_heater_recirc_pump
+          - cover.garage_door_opener
+          - script.goodnight
+
+      - type: entities
+        title: Lights
+        entities:
+          - light.front_door_lights
+          - light.front_hallway_hallway
+          - light.front_hallway_kitchen
+          - light.front_hallway_great_room
+          - light.great_room_patio_lights
+          - light.front_door_garage
+          - light.great_room_fan
+
+      - type: entities
+        title: Shades
+        entities:
+          - cover.dining_room_front
+          - cover.dining_room_side
+
+      - type: entities
+        title: People
+        entities:
+          - device_tracker.junxblah
+          - device_tracker.astropanda
+          - device_tracker.ephone
+          # - device_tracker.jerryjesiphone7
+          # - device_tracker.juliajesiphone3
+          - input_select.occupants
+
+      - type: entities
+        title: Alarm
+        entities:
+          - alarm_control_panel.home_alarm
+          - sensor.home_alarm_keypad
+
+      - type: entities
+        title: Weather
+        entities:
+          - sensor.date__time
+          - sensor.pws_weather_1d
+          - sensor.pws_temp_f
+          - sensor.pws_temp_high_1d_f
+          - sensor.pws_temp_low_1d_f
+          - sensor.pws_weather_2d
+          - sensor.pws_alerts
+
+      - type: entities
+        # Title of the entities card
+        title: Climate
+        entities:
+          - input_select.climate_mode
+          - input_number.climate_temp
+          - climate.entryway
+          - climate.bedrooms_hallway
+          - input_boolean.master_floor_heat
+
+      - type: entities
+        title: Solar
+        entities:
+          - sensor.enphase
+          - sensor.enphase_yesterday
+
+    # Specify a tab icon if you want the view tab to be an icon.
+  - icon: mdi:home-assistant
+    # Title of the view. Will be used as the tooltip for tab icon
+    title: Second view
+    cards:
+        # Entities card will take a list of entities and show their state.
+        # The markdown card will render markdown text.
+      - type: markdown
+        title: Lovelace
+        content: >
+          Welcome to your **Lovelace UI**.

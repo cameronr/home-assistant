@@ -1,0 +1,6 @@
+panic:
+  sequence:
+    - service: alarm_control_panel.alarm_trigger
+      data:
+        entity_id: alarm_control_panel.home_alarm
+
