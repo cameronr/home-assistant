@@ -1,7 +1,9 @@
 Climate:
+  control: hidden
   entities:
     - input_select.climate_mode
     - input_number.climate_temp
     - climate.entryway
     - climate.bedrooms_hallway
     - input_boolean.master_floor_heat
+    - input_boolean.guest_floor_heat

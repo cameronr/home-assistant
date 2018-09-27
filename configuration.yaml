@@ -168,6 +168,8 @@ input_number:
 input_boolean:
   master_floor_heat:
     icon: mdi:radiator
+  guest_floor_heat:
+    icon: mdi:radiator
 
 envisalink: !include envisalink.yaml
 

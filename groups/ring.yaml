@@ -6,4 +6,6 @@ Ring:
     - sensor.ring_front_door_last_ding
     - sensor.ring_front_door_last_motion
     - sensor.ring_front_door_battery
+    - binary_sensor.ring_master_bedroom_motion
+    - sensor.ring_master_bedroom_last_activity
 
