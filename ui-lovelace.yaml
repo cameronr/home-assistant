@@ -1,11 +1,8 @@
 title: Westridge
 # Include external resources
-# resources:
-#   - url: /local/my-custom-card.js
-#     type: js
-#   - url: /local/my-webfont.css
-#     type: css
-
+resources:
+  - url: /local/custom-lovelace/alarm_control_panel-card/alarm_control_panel-card.js?v=1
+    type: js
 #
 # Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
 # background: center / cover no-repeat url("/background.png") fixed
@@ -69,30 +66,20 @@ views:
         entities:
           - device_tracker.junxblah
           - device_tracker.astropanda
-          - device_tracker.ephone
-          # - device_tracker.jerryjesiphone7
-          # - device_tracker.juliajesiphone3
+          - group.guests
           - input_select.occupants
 
-      - type: entities
+      - type: custom:alarm_control_panel-card
+        entity: alarm_control_panel.home_alarm
+        show_keypad: false
         title: Alarm
-        entities:
-          - alarm_control_panel.home_alarm
-          - sensor.home_alarm_keypad
+        states:
+          - arm_away
+
+      - type: weather-forecast
+        entity: weather.dark_sky
 
       - type: entities
-        title: Weather
-        entities:
-          - sensor.date__time
-          - sensor.pws_weather_1d
-          - sensor.pws_temp_f
-          - sensor.pws_temp_high_1d_f
-          - sensor.pws_temp_low_1d_f
-          - sensor.pws_weather_2d
-          - sensor.pws_alerts
-
-      - type: entities
-        # Title of the entities card
         title: Climate
         show_header_toggle: false
         entities:

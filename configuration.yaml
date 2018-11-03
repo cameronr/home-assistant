@@ -60,17 +60,11 @@ recorder:
       - camera
       - group
       - media_player
+      - weather
     entities:
       - sensor.last_boot
       - sensor.date
       - sensor.date__time
-      - sensor.pws_weather_1d
-      - sensor.pws_weather_1d_2
-      - sensor.pws_weather_2d
-      - sensor.pws_weather_2d_2
-      - sensor.pws_temp_f_2
-      - sensor.pws_temp_f
-      - sensor.pws_alerts
       - sensor.home_alarm_keypad
       - sun.sun
       - sensor.schlage_be469_touchscreen_deadbolt_access_control_1
@@ -181,6 +175,10 @@ nuheat:
   devices: !secret nuheat_devices
 
 ios: !include ios.yaml
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky_api_key
 
 zwave:
   usb_path: /dev/ttyACM0

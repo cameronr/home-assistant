@@ -8,6 +8,5 @@ default_view:
     - group.shades
     - group.people
     - group.alarm
-    - group.weather
     - group.climate
     - group.solar
