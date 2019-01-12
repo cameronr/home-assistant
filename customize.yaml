@@ -11,7 +11,7 @@ climate.master_nuheat:
 switch.water_heater_recirc_pump:
   icon: mdi:reload
 switch.dehumidifier:
-  icon: mdi:water-percent
+  friendly_name: Xmas lights
 switch.gate:
   friendly_name: Gate
   icon: mdi:gate
@@ -42,3 +42,5 @@ lock.schlage_be469_touchscreen_deadbolt_locked_3:
 script.goodnight:
   friendly_name: Goodnight
   icon: mdi:weather-night
+switch.xmaslights:
+  icon: mdi:pine-tree

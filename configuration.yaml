@@ -10,6 +10,10 @@ homeassistant:
 # Enables the frontend
 frontend:
 
+# Put Lovelace in yaml mode
+lovelace:
+  mode: yaml
+
 # Enables configuration UI
 config:
 
@@ -34,6 +38,9 @@ logger:
     homeassistant.core: warn
     homeassistant.components.envisalink: info
     pyenvisalink.envisalink_base_client: info
+    homeassistant.components.tesla: debug
+    homeassistant.components.sensor.tesla: debug
+    homeassistant.components.binary_sensor.tesla: debug
 
 
 # Discover some devices automatically
@@ -110,23 +117,6 @@ switch: !include_dir_merge_list switches/
 cover: !include_dir_merge_list covers/
 group: !include_dir_merge_named groups/
 
-nest:
-  client_id: !secret nest_client_id
-  client_secret: !secret nest_client_secret
-  sensors:
-    monitored_conditions:
-      - 'humidity'
-      - 'temperature'
-      - 'operation_mode'
-      - 'target'
-      - 'hvac_state'
-  binary_sensors:
-    monitored_conditions:
-
-ring:
-  username: !secret ring_username
-  password: !secret ring_password
-
 
 device_tracker:
   - platform: unifi
@@ -135,6 +125,8 @@ device_tracker:
     host: !secret unifi_host
     new_device_defaults:
       track_new_devices: False
+
+envisalink: !include envisalink.yaml
 
 input_select:
   occupants:
@@ -165,20 +157,41 @@ input_boolean:
   guest_floor_heat:
     icon: mdi:radiator
 
-envisalink: !include envisalink.yaml
+ios: !include ios.yaml
 
 lutron: !include lutron.yaml
+
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+  sensors:
+    monitored_conditions:
+      - 'humidity'
+      - 'temperature'
+      - 'operation_mode'
+      - 'target'
+      - 'hvac_state'
+  binary_sensors:
+    monitored_conditions:
 
 nuheat:
   username: !secret nuheat_username
   password: !secret nuheat_password
   devices: !secret nuheat_devices
 
-ios: !include ios.yaml
+ring:
+  username: !secret ring_username
+  password: !secret ring_password
+
+# tesla:
+#   username: !secret tesla_username
+#   password: !secret tesla_password
+#   scan_interval: 86400
 
 weather:
   - platform: darksky
     api_key: !secret darksky_api_key
+    mode: daily
 
 zwave:
   usb_path: /dev/ttyACM0

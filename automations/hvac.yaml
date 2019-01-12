@@ -121,8 +121,6 @@
       data:
         temperature: 70
         message: 'Welcome home, setting heat to 70'
-    - service: light.turn_on
-      entity_id: light.great_room_fan
 
 # If in heat mode and we're home, set temp to 70 at 7:30am
 - alias: HVAC - Turn on heat in the morning
