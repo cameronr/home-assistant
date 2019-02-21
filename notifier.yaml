@@ -14,7 +14,7 @@
   platform: group
   services:
     - service: ios_junxblah
-    - service: ios_astropanda
+    - service: ios_rocketpanda
 - name: push_cam
   platform: group
   services:
@@ -22,4 +22,4 @@
 - name: push_sandy
   platform: group
   services:
-    - service: ios_astropanda
+    - service: ios_rocketpanda

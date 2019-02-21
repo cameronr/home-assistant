@@ -42,7 +42,7 @@
         temperature: 74
         message: '5pm, precooling AC to 74'
     - service: light.turn_on
-      entity_id: light.great_room_fan
+      entity_id: switch.great_room_fan
 
 
 - alias: HVAC - If in cool mode and arrived home, set temp to 74
@@ -71,7 +71,7 @@
         temperature: 74
         message: 'Welcome home, setting AC to 70'
     - service: light.turn_on
-      entity_id: light.great_room_fan
+      entity_id: switch.great_room_fan
 
 
 - alias: HVAC - If in heat mode and left home, set temp to 60

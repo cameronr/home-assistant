@@ -1,17 +1,17 @@
 CamSandy:
   entities:
     - device_tracker.junxblah
-    - device_tracker.astropanda
+    - device_tracker.rocketpanda
 
 Guests:
   entities:
-    - device_tracker.ephone
+    - device_tracker.ephone_2
     - device_tracker.jerryjesiphone7
     - device_tracker.juliajesiphone3
 
 People:
   entities:
     - device_tracker.junxblah
-    - device_tracker.astropanda
+    - device_tracker.rocketpanda
     - group.guests
     - input_select.occupants

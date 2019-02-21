@@ -27,7 +27,7 @@ light.front_hallway_hallway:
   friendly_name: Front hallway
 light.front_hallway_kitchen:
   friendly_name: Kitchen
-light.great_room_fan:
+switch.great_room_fan:
   friendly_name: Great room fan
 light.great_room_patio_lights:
   friendly_name: Patio
@@ -42,5 +42,16 @@ lock.schlage_be469_touchscreen_deadbolt_locked_3:
 script.goodnight:
   friendly_name: Goodnight
   icon: mdi:weather-night
+script.open_shades_full:
+  friendly_name: Open full
+  icon: mdi:arrow-collapse-up
+script.open_shades_half:
+  friendly_name: Open half
+  icon: mdi:arrow-expand-up
+script.close_shades:
+  friendly_name: Close
+  icon: mdi:arrow-collapse-down
 switch.xmaslights:
   icon: mdi:pine-tree
+device_tracker.junxblah:
+  track_ios: false

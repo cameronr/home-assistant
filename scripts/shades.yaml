@@ -1,0 +1,28 @@
+set_shades:
+  sequence:
+    - service: cover.set_cover_position
+      data_template:
+        entity_id:
+          - cover.dining_room_front
+          - cover.dining_room_side
+        position: " {{ position }} "
+
+open_shades_full:
+  sequence:
+    - service: script.set_shades
+      data:
+        position: 100
+
+open_shades_half:
+  sequence:
+    - service: script.set_shades
+      data:
+        position: 50
+
+close_shades:
+  sequence:
+    - service: script.set_shades
+      data:
+        position: 0
+
+

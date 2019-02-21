@@ -71,7 +71,7 @@ recorder:
     entities:
       - sensor.last_boot
       - sensor.date
-      - sensor.date__time
+      - sensor.date_time
       - sensor.home_alarm_keypad
       - sun.sun
       - sensor.schlage_be469_touchscreen_deadbolt_access_control_1
@@ -160,6 +160,10 @@ input_boolean:
 ios: !include ios.yaml
 
 lutron: !include lutron.yaml
+
+neato:
+  username: !secret neato_username
+  password: !secret neato_password
 
 nest:
   client_id: !secret nest_client_id

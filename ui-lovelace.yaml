@@ -3,6 +3,8 @@ title: Westridge
 resources:
   - url: /local/custom-lovelace/alarm_control_panel-card/alarm_control_panel-card.js?v=1
     type: js
+  - url: /local/custom-lovelace/group-card/group-card.js?v=1
+    type: js
 #
 # Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
 # background: center / cover no-repeat url("/background.png") fixed
@@ -40,7 +42,7 @@ views:
           - switch.gate
           - lock.schlage_be469_touchscreen_deadbolt_locked_3
           - switch.water_heater_recirc_pump
-          - switch.xmaslights
+          - switch.wemo
           - cover.garage_door_opener
           - script.goodnight
 
@@ -53,19 +55,24 @@ views:
           - light.great_room_patio_lights
           - light.front_door_lights
           - light.front_door_garage
-          - light.great_room_fan
+          - switch.great_room_fan
 
       - type: entities
         title: Shades
+        show_header_toggle: false
         entities:
           - cover.dining_room_front
           - cover.dining_room_side
+          - script.open_shades_full
+          - script.open_shades_half
+          - script.close_shades
 
       - type: entities
         title: People
+        show_header_toggle: false
         entities:
           - device_tracker.junxblah
-          - device_tracker.astropanda
+          - device_tracker.rocketpanda
           - group.guests
           - input_select.occupants
 
@@ -92,9 +99,16 @@ views:
 
       - type: entities
         title: Solar
+        show_header_toggle: false
         entities:
           - sensor.enphase
           - sensor.enphase_yesterday
+
+      - type: entities
+        title: Robots
+        show_header_toggle: false
+        entities:
+          - vacuum.pandabot
 
     # Specify a tab icon if you want the view tab to be an icon.
   - title: Sensors
@@ -102,6 +116,7 @@ views:
     cards:
       - type: entities
         title: Nest
+        show_header_toggle: false
         entities:
           - sensor.bedrooms_thermostat_hallway_temperature
           - sensor.bedrooms_thermostat_hallway_operation_mode
@@ -115,11 +130,13 @@ views:
           - sensor.entryway_thermostat_humidity
       - type: entities
         title: Climate Other
+        show_header_toggle: false
         entities:
           - climate.master_nuheat
           - climate.guest_nuheat
       - type: entities
         title: Ring
+        show_header_toggle: false
         entities:
           - binary_sensor.ring_front_door_ding
           - binary_sensor.ring_front_door_motion
@@ -131,6 +148,7 @@ views:
           - sensor.ring_master_bedroom_last_activity
       - type: entities
         title: Alarm Sensors
+        show_header_toggle: false
         entities:
           - binary_sensor.fire_sprinklers
           - binary_sensor.front_door
@@ -138,7 +156,7 @@ views:
           - binary_sensor.guest_bedroom
           - binary_sensor.kitchen
           - binary_sensor.laundry
-          - binary_sensor.lift__slide
+          - binary_sensor.lift_slide
           - binary_sensor.master
           - binary_sensor.master_bath
           - binary_sensor.mudroom_powder
@@ -149,12 +167,14 @@ views:
           - script.panic
       - type: entities
         title: ZWave
+        show_header_toggle: false
         entities:
           - zwave.aeotec_zw090_zstick_gen5_us
           - zwave.aeotec_zw117_range_extender_6_2
           - zwave.schlage_be469_touchscreen_deadbolt_3
       - type: entities
         title: Harmony
+        show_header_toggle: false
         entities:
           - remote.harmony_hub
 
@@ -162,7 +182,6 @@ views:
     # Title of the view. Will be used as the tooltip for tab icon
     title: Automations
     cards:
-      - type: entities
+      - type: custom:group-card
         title: Automations
-        entities:
-          - group.all_automations
+        group: group.all_automations

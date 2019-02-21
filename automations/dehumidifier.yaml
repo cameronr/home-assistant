@@ -3,14 +3,15 @@
   hide_entity: False
   trigger:
     platform: numeric_state
-    entity_id: sensor.pws_temp_f
+    entity_id: weather.dark_sky
+    value_template: "{{ state.attributes.temperature }}"
     below: '44'
   condition:
     condition: numeric_state
     entity_id: sensor.bedrooms_thermostat_hallway_humidity
-    above: '45'
+    above: '40'
   action:
-    entity_id: switch.dehumidifier
+    entity_id: switch.wemo
     service: switch.turn_on
 
 - alias: Dehumidifier off if above 50 F
@@ -18,7 +19,8 @@
   hide_entity: False
   trigger:
     platform: numeric_state
-    entity_id: sensor.pws_temp_f
+    entity_id: weather.dark_sky
+    value_template: "{{ state.attributes.temperature }}"
     above: '50'
   action:
     entity_id: switch.dehumidifier
