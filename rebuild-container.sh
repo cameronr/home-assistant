@@ -3,6 +3,7 @@
 # set -x
 
 UPDATE=
+VERSION=0.91.4
 
 #https://stackoverflow.com/questions/14786984/best-way-to-parse-command-line-args-in-bash
 while getopts "u" opt; do
@@ -28,4 +29,4 @@ docker run \
   --restart=always \
   --device=/dev/ttyACM0 \
   --privileged=true \
-  homeassistant/home-assistant:latest
+  homeassistant/home-assistant:$VERSION

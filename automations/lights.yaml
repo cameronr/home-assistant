@@ -20,7 +20,6 @@
     - service: light.turn_off
       entity_id: light.great_room_patio_lights
 
-
 - alias: Lights - If we arrived home, turn on garage / front door lights
   initial_state: True
   hide_entity: False
@@ -38,18 +37,41 @@
       from: 'not_home'
       to: 'home'
   condition:
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
+    - condition: sun
+      after: sunset
+      after_offset: "-02:00:00"
   action:
     - service: light.turn_on
-      entity_id: light.front_door_lights
-    - service: light.turn_on
-      entity_id: light.front_door_garage
-    - service: light.turn_on
-      entity_id: light.front_hallway_hallway
-    - service: light.turn_on
-      entity_id: light.front_hallway_great_room
-    - service: light.turn_on
-      entity_id: light.front_hallway_kitchen
+      entity_id:
+        - light.front_door_lights
+        - light.front_door_garage
+        - light.front_hallway_hallway
+        - light.front_hallway_great_room
+        - light.front_hallway_kitchen
+
+- alias: Lights - Turn off when we leave
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: state
+      entity_id: group.people
+      from: 'home'
+      to: 'not_home'
+  condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'auto'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'dogs'
+  action:
+    - service: light.turn_off
+      entity_id:
+        - light.front_door_lights
+        - light.front_door_garage
+        - light.front_hallway_hallway
+        - light.front_hallway_great_room
+        - light.front_hallway_kitchen
 

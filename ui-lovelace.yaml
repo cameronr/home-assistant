@@ -47,6 +47,15 @@ views:
           - script.goodnight
 
       - type: entities
+        title: People
+        show_header_toggle: false
+        entities:
+          - device_tracker.junxblah
+          - device_tracker.rocketpanda
+          - group.guests
+          - input_select.occupants
+
+      - type: entities
         title: Lights
         entities:
           - light.front_hallway_hallway
@@ -58,6 +67,17 @@ views:
           - switch.great_room_fan
 
       - type: entities
+        title: Climate
+        show_header_toggle: false
+        entities:
+          - input_select.climate_mode
+          - input_number.climate_temp
+          - climate.entryway
+          - climate.bedrooms_hallway
+          - input_boolean.master_floor_heat
+          - input_boolean.guest_floor_heat
+
+      - type: entities
         title: Shades
         show_header_toggle: false
         entities:
@@ -66,15 +86,6 @@ views:
           - script.open_shades_full
           - script.open_shades_half
           - script.close_shades
-
-      - type: entities
-        title: People
-        show_header_toggle: false
-        entities:
-          - device_tracker.junxblah
-          - device_tracker.rocketpanda
-          - group.guests
-          - input_select.occupants
 
       - type: custom:alarm_control_panel-card
         entity: alarm_control_panel.home_alarm
@@ -85,17 +96,6 @@ views:
 
       - type: weather-forecast
         entity: weather.dark_sky
-
-      - type: entities
-        title: Climate
-        show_header_toggle: false
-        entities:
-          - input_select.climate_mode
-          - input_number.climate_temp
-          - climate.entryway
-          - climate.bedrooms_hallway
-          - input_boolean.master_floor_heat
-          - input_boolean.guest_floor_heat
 
       - type: entities
         title: Solar

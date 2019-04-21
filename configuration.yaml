@@ -18,7 +18,6 @@ lovelace:
 config:
 
 http:
-  api_password: !secret api_password
   server_host: !secret server_host
   server_port: !secret server_port
   base_url: !secret base_url
@@ -183,6 +182,8 @@ nuheat:
   password: !secret nuheat_password
   devices: !secret nuheat_devices
 
+person:
+
 ring:
   username: !secret ring_username
   password: !secret ring_password
@@ -191,6 +192,8 @@ ring:
 #   username: !secret tesla_username
 #   password: !secret tesla_password
 #   scan_interval: 86400
+
+system_health:
 
 weather:
   - platform: darksky

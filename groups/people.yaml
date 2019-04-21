@@ -1,7 +1,7 @@
 CamSandy:
   entities:
-    - device_tracker.junxblah
-    - device_tracker.rocketpanda
+    - person.cam
+    - person.sandy
 
 Guests:
   entities:
@@ -11,7 +11,7 @@ Guests:
 
 People:
   entities:
-    - device_tracker.junxblah
-    - device_tracker.rocketpanda
+    - person.cam
+    - person.sandy
     - group.guests
     - input_select.occupants

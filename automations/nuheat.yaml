@@ -306,6 +306,7 @@
 
 
 - alias: NuHeat - Master Input off
+  initial_state: True
   trigger:
     platform: state
     entity_id: input_boolean.master_floor_heat
@@ -318,6 +319,7 @@
       temperature: 90
 
 - alias: NuHeat - Master Input on
+  initial_state: True
   trigger:
     platform: state
     entity_id: input_boolean.master_floor_heat
