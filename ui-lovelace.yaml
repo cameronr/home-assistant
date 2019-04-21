@@ -39,6 +39,7 @@ views:
         # Each entry is an entity ID or a map with extra options.
         show_header_toggle: false
         entities:
+          - script.open_gate_temporarily
           - switch.gate
           - lock.schlage_be469_touchscreen_deadbolt_locked_3
           - switch.water_heater_recirc_pump

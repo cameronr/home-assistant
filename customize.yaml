@@ -13,7 +13,7 @@ switch.water_heater_recirc_pump:
 switch.dehumidifier:
   friendly_name: Xmas lights
 switch.gate:
-  friendly_name: Gate
+  friendly_name: Gate Hold
   icon: mdi:gate
 cover.garage_door_opener:
   friendly_name: Garage Door
@@ -55,3 +55,5 @@ switch.xmaslights:
   icon: mdi:pine-tree
 device_tracker.junxblah:
   track_ios: false
+script.open_gate_temporarily:
+  icon: mdi:gate

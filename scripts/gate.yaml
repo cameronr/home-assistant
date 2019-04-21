@@ -1,0 +1,17 @@
+open_gate_temporarily:
+  alias: Gate Open
+  sequence:
+    - service: script.open_gate_temporarily_action
+
+# Do actual sequence in a subaction so the main action does not
+# show as a toggle
+open_gate_temporarily_action:
+  alias: Gate Open
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.gate
+    - delay: '00:02:00'
+    - service: switch.turn_off
+      data:
+        entity_id: switch.gate
