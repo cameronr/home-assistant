@@ -254,7 +254,7 @@
 
 
 - alias: NuHeat - Eric, turn on at 11am if home
-  initial_state: True
+  initial_state: False
   hide_entity: False
   trigger:
     - platform: time
@@ -272,7 +272,7 @@
       entity_id: input_boolean.guest_floor_heat
 
 - alias: NuHeat - Eric, turn off at 2am
-  initial_state: True
+  initial_state: False
   hide_entity: False
   trigger:
     - platform: time
@@ -283,7 +283,7 @@
       entity_id: input_boolean.guest_floor_heat
 
 - alias: NuHeat - Eric, turn on when arrive home if 6:30pm < now < 2am
-  initial_state: True
+  initial_state: False
   hide_entity: False
   trigger:
     platform: state

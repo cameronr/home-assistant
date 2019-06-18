@@ -3,21 +3,21 @@
 # set -x
 
 UPDATE=
-VERSION=0.91.4
+VERSION=0.94.3
 
 #https://stackoverflow.com/questions/14786984/best-way-to-parse-command-line-args-in-bash
-while getopts "u" opt; do
-  case $opt in
-    u)
-      UPDATE=yes
-      ;;
-
-  esac
-done
-
-if [ "$UPDATE" == "yes" ]; then
-  docker pull homeassistant/home-assistant:latest
-fi
+# while getopts "u" opt; do
+#   case $opt in
+#     u)
+#       UPDATE=yes
+#       ;;
+#
+#   esac
+# done
+#
+# if [ "$UPDATE" == "yes" ]; then
+#   docker pull homeassistant/home-assistant:latest
+# fi
 
 docker rm -f home-assistant >&/dev/null
 

@@ -106,10 +106,11 @@ views:
           - sensor.enphase_yesterday
 
       - type: entities
-        title: Robots
+        title: Devices
         show_header_toggle: false
         entities:
           - vacuum.pandabot
+          - switch.mediabox
 
     # Specify a tab icon if you want the view tab to be an icon.
   - title: Sensors

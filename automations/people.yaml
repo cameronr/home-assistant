@@ -1,4 +1,5 @@
 - alias: People - Turn off guest/dog mode when we get back home
+  initial_state: True
   trigger:
     platform: state
     entity_id: group.people
@@ -11,6 +12,7 @@
         option: 'auto'
 
 - alias: People - Set guests mode from notification
+  initial_state: True
   trigger:
     platform: event
     event_type: ios.notification_action_fired
@@ -23,6 +25,7 @@
         option: 'guests'
 
 - alias: People - Set dog mode from notification
+  initial_state: True
   trigger:
     platform: event
     event_type: ios.notification_action_fired
@@ -35,6 +38,7 @@
         option: 'dogs'
 
 - alias: People - Notify on away
+  initial_state: True
   trigger:
     platform: state
     entity_id: group.people
@@ -68,9 +72,10 @@
 #         message: "Welcome home"
 
 - alias: People - Unlock whenever cam comes home
+  initial_state: True
   trigger:
     - platform: state
-      entity_id: device_tracker.junxblah
+      entity_id: person.cam
       from: 'not_home'
       to: 'home'
   action:
@@ -82,9 +87,10 @@
         message: "Welcome home, cam"
 
 - alias: People - Unlock whenever sandy comes home
+  initial_state: True
   trigger:
     - platform: state
-      entity_id: device_tracker.astropanda
+      entity_id: person.sandy
       from: 'not_home'
       to: 'home'
   action:
@@ -96,6 +102,7 @@
         message: "Welcome home, sandy"
 
 - alias: People - Notify when not home and door is opened
+  initial_state: True
   trigger:
     - platform: state
       entity_id: lock.schlage_be469_touchscreen_deadbolt_locked_3

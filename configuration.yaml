@@ -116,6 +116,9 @@ switch: !include_dir_merge_list switches/
 cover: !include_dir_merge_list covers/
 group: !include_dir_merge_named groups/
 
+ambient_station:
+  api_key: !secret ambient_api_key
+  app_key: !secret ambient_app_key
 
 device_tracker:
   - platform: unifi
@@ -194,6 +197,8 @@ ring:
 #   scan_interval: 86400
 
 system_health:
+
+wake_on_lan:
 
 weather:
   - platform: darksky
