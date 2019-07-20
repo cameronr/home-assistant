@@ -131,7 +131,7 @@
       at: '07:30:00'
   condition:
     - condition: state
-      entity_id: sensor.entryway_thermostat_operation_mode
+      entity_id: sensor.entryway_thermostat_hvac_mode
       state: 'heat'
     - condition: state
       entity_id: group.people
@@ -153,7 +153,7 @@
       temperature: 70
 
 # If in heat mode and we're home, set LR temp to 70 at 6:30am
-- alias: HVAC - Turn on heat in the morning
+- alias: HVAC - Turn on heat in GR in the morning
   initial_state: True
   hide_entity: False
   trigger:
@@ -161,7 +161,7 @@
       at: '06:30:00'
   condition:
     - condition: state
-      entity_id: sensor.entryway_thermostat_operation_mode
+      entity_id: sensor.entryway_thermostat_hvac_mode
       state: 'heat'
     - condition: state
       entity_id: group.people
@@ -181,7 +181,7 @@
     service: climate.set_temperature
     data:
       entity_id: climate.entryway
-      operation_mode: 'heat'
+      hvac_mode: 'heat'
       temperature: '70'
 
 # If in heat mode, set temp front to 60 at 1am
@@ -193,7 +193,7 @@
       at: '01:00:00'
   condition:
     - condition: state
-      entity_id: sensor.entryway_thermostat_operation_mode
+      entity_id: sensor.entryway_thermostat_hvac_mode
       state: 'heat'
     - condition: or
       conditions:
@@ -210,7 +210,7 @@
     - service: climate.set_temperature
       data:
         entity_id: climate.entryway
-        operation_mode: 'heat'
+        hvac_mode: 'heat'
         temperature: '60'
 
 # If in heat mode, set temp at back to 68 at midnight
@@ -222,7 +222,7 @@
       at: '00:00:00'
   condition:
     - condition: state
-      entity_id: sensor.entryway_thermostat_operation_mode
+      entity_id: sensor.entryway_thermostat_hvac_mode
       state: 'heat'
     - condition: or
       conditions:
@@ -239,7 +239,7 @@
     - service: climate.set_temperature
       data:
         entity_id: climate.bedrooms_hallway
-        operation_mode: 'heat'
+        hvac_mode: 'heat'
         temperature: '68'
 
 # These four automations bind the UI to the Nest and vice versa
@@ -250,14 +250,14 @@
     platform: state
     entity_id: input_select.climate_mode
   action:
-    - service: climate.set_operation_mode
+    - service: climate.set_hvac_mode
       data_template:
         entity_id: climate.entryway
-        operation_mode: '{{ states.input_select.climate_mode.state }}'
-    - service: climate.set_operation_mode
+        hvac_mode: '{{ states.input_select.climate_mode.state }}'
+    - service: climate.set_hvac_mode
       data_template:
         entity_id: climate.bedrooms_hallway
-        operation_mode: '{{ states.input_select.climate_mode.state }}'
+        hvac_mode: '{{ states.input_select.climate_mode.state }}'
     # if we're not in eco, set temp (nest doesn't let you set temp in eco mode)
     - condition: or
       conditions:
@@ -288,7 +288,7 @@
       - condition: and
         conditions:
         - condition: state
-          entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
+          entity_id: sensor.bedrooms_thermostat_hallway_hvac_mode
           state: 'heat'
         - condition: numeric_state
           entity_id: input_number.climate_temp
@@ -296,7 +296,7 @@
       - condition: and
         conditions:
         - condition: state
-          entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
+          entity_id: sensor.bedrooms_thermostat_hallway_hvac_mode
           state: 'cool'
         - condition: numeric_state
           entity_id: input_number.climate_temp
@@ -312,12 +312,12 @@
 #   hide_entity: False
 #   trigger:
 #     - platform: state
-#       entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
+#       entity_id: sensor.bedrooms_thermostat_hallway_hvac_mode
 #   action:
 #     - service: input_select.select_option
 #       data_template:
 #         entity_id: input_select.climate_mode
-#         option: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state }}'
+#         option: '{{ states.sensor.bedrooms_thermostat_hallway_hvac_mode.state }}'
 #
 # - alias: Set temperature from the Nest
 #   initial_state: True
@@ -347,6 +347,6 @@
     - service: input_select.select_option
       entity_id: input_select.climate_mode
       data_template:
-        option: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state }}'
+        option: '{{ states.sensor.bedrooms_thermostat_hallway_hvac_mode.state }}'
 
 

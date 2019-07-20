@@ -205,6 +205,9 @@ weather:
     api_key: !secret darksky_api_key
     mode: daily
 
+wemo:
+  discovery: true
+
 zwave:
   usb_path: /dev/ttyACM0
   network_key: !secret zwave_network_key

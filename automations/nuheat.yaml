@@ -83,7 +83,7 @@
       entity_id: sensor.bedrooms_thermostat_hallway_temperature
       below: '75'
     - condition: template
-      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
+      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_hvac_mode.state != "cool" }}'
   action:
     service: input_boolean.turn_on
     data:
@@ -105,7 +105,7 @@
       entity_id: sensor.bedrooms_thermostat_hallway_temperature
       below: '75'
     - condition: template
-      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
+      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_hvac_mode.state != "cool" }}'
   action:
     service: input_boolean.turn_on
     data:
@@ -208,7 +208,7 @@
       entity_id: sensor.bedrooms_thermostat_hallway_temperature
       below: '75'
     - condition: template
-      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
+      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_hvac_mode.state != "cool" }}'
   action:
     service: input_boolean.turn_on
     data:
@@ -230,7 +230,7 @@
       entity_id: sensor.bedrooms_thermostat_hallway_temperature
       below: '75'
     - condition: template
-      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
+      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_hvac_mode.state != "cool" }}'
   action:
     service: input_boolean.turn_on
     data:
@@ -298,7 +298,7 @@
       entity_id: sensor.bedrooms_thermostat_hallway_temperature
       below: '75'
     - condition: template
-      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
+      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_hvac_mode.state != "cool" }}'
   action:
     service: input_boolean.turn_on
     data:

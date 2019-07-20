@@ -5,6 +5,8 @@ resources:
     type: js
   - url: /local/custom-lovelace/group-card/group-card.js?v=1
     type: js
+  - url: /local/custom-lovelace/monster-card/monster-card.js?v=1
+    type: js
 #
 # Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
 # background: center / cover no-repeat url("/background.png") fixed
@@ -43,7 +45,6 @@ views:
           - switch.gate
           - lock.schlage_be469_touchscreen_deadbolt_locked_3
           - switch.water_heater_recirc_pump
-          - switch.wemo
           - cover.garage_door_opener
           - script.goodnight
 
@@ -75,6 +76,7 @@ views:
           - input_number.climate_temp
           - climate.entryway
           - climate.bedrooms_hallway
+          - sensor.westridge_temp
           - input_boolean.master_floor_heat
           - input_boolean.guest_floor_heat
 
@@ -179,6 +181,14 @@ views:
         show_header_toggle: false
         entities:
           - remote.harmony_hub
+
+      - type: custom:monster-card
+        card:
+          type: entities
+          title: Weather Station
+        filter:
+          include:
+            - entity_id: "sensor.westridge*"
 
   - icon: mdi:home-assistant
     # Title of the view. Will be used as the tooltip for tab icon
