@@ -243,22 +243,30 @@
         temperature: '68'
 
 # These four automations bind the UI to the Nest and vice versa
-- alias: HVAC - Set operation mode based on UI
+- alias: HVAC - Set eco mode based on UI
   initial_state: True
   hide_entity: False
   trigger:
     platform: state
     entity_id: input_select.climate_mode
+    to: 'eco'
   action:
-    - service: climate.set_hvac_mode
+    - service: climate.set_preset_mode
       data_template:
         entity_id: climate.entryway
-        hvac_mode: '{{ states.input_select.climate_mode.state }}'
-    - service: climate.set_hvac_mode
+        preset_mode: 'eco'
+    - service: climate.set_preset_mode
       data_template:
         entity_id: climate.bedrooms_hallway
-        hvac_mode: '{{ states.input_select.climate_mode.state }}'
-    # if we're not in eco, set temp (nest doesn't let you set temp in eco mode)
+        preset_mode: 'eco'
+
+- alias: "HVAC - Set hvac mode (non eco) based on UI"
+  initial_state: True
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: input_select.climate_mode
+  condition:
     - condition: or
       conditions:
       - condition: state
@@ -270,6 +278,15 @@
       - condition: state
         entity_id: input_select.climate_mode
         state: 'auto'
+  action:
+    - service: climate.set_hvac_mode
+      data_template:
+        entity_id: climate.entryway
+        hvac_mode: '{{ states.input_select.climate_mode.state }}'
+    - service: climate.set_hvac_mode
+      data_template:
+        entity_id: climate.bedrooms_hallway
+        hvac_mode: '{{ states.input_select.climate_mode.state }}'
     - delay: '00:00:10'
     - service: script.set_temperature
       data_template:
@@ -307,37 +324,15 @@
         temperature: '{{ states.input_number.climate_temp.state | float }}'
         message: 'Setting HVAC to {{ states.input_number.climate_temp.state }} (mode: {{ states.input_select.climate_mode.state }})'
 
-# - alias: HVAC - Set operation mode from the Nest
-#   initial_state: True
-#   hide_entity: False
-#   trigger:
-#     - platform: state
-#       entity_id: sensor.bedrooms_thermostat_hallway_hvac_mode
-#   action:
-#     - service: input_select.select_option
-#       data_template:
-#         entity_id: input_select.climate_mode
-#         option: '{{ states.sensor.bedrooms_thermostat_hallway_hvac_mode.state }}'
-#
-# - alias: Set temperature from the Nest
-#   initial_state: True
-#   hide_entity: False
-#   trigger:
-#     - platform: state
-#       entity_id: sensor.bedrooms_thermostat_hallway_target
-#   action:
-#     - service: input_number.set_value
-#       data_template:
-#         entity_id: input_number.climate_temp
-#         value: '{{ states.sensor.bedrooms_thermostat_hallway_target.state }}'
-#
-
-- alias: HVAC - Set operation mode on startup
+- alias: HVAC - Set hvac mode on startup
   initial_state: True
   hide_entity: False
   trigger:
     platform: homeassistant
     event: start
+  condition:
+    - condition: template
+      value_template: '{{ states.climate.bedrooms_hallway.attributes.preset_mode == None }}'
   action:
     - service: input_number.set_value
       entity_id: input_number.climate_temp
@@ -349,4 +344,23 @@
       data_template:
         option: '{{ states.sensor.bedrooms_thermostat_hallway_hvac_mode.state }}'
 
+- alias: HVAC - Set eco hvac mode on startup
+  initial_state: True
+  hide_entity: False
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+    - condition: template
+      value_template: '{{ states.climate.bedrooms_hallway.attributes.preset_mode == "eco" }}'
+  action:
+    - service: input_number.set_value
+      entity_id: input_number.climate_temp
+      data_template:
+        value: '{{ states.sensor.bedrooms_thermostat_hallway_target.state }}'
+    - delay: '00:00:10'
+    - service: input_select.select_option
+      entity_id: input_select.climate_mode
+      data:
+        option: 'eco'
 
