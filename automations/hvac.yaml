@@ -131,7 +131,7 @@
       at: '07:30:00'
   condition:
     - condition: state
-      entity_id: sensor.entryway_thermostat_hvac_mode
+      entity_id: sensor.entryway_thermostat_operation_mode
       state: 'heat'
     - condition: state
       entity_id: group.people
@@ -161,7 +161,7 @@
       at: '06:30:00'
   condition:
     - condition: state
-      entity_id: sensor.entryway_thermostat_hvac_mode
+      entity_id: sensor.entryway_thermostat_operation_mode
       state: 'heat'
     - condition: state
       entity_id: group.people
@@ -193,7 +193,7 @@
       at: '01:00:00'
   condition:
     - condition: state
-      entity_id: sensor.entryway_thermostat_hvac_mode
+      entity_id: sensor.entryway_thermostat_operation_mode
       state: 'heat'
     - condition: or
       conditions:
@@ -222,7 +222,7 @@
       at: '00:00:00'
   condition:
     - condition: state
-      entity_id: sensor.entryway_thermostat_hvac_mode
+      entity_id: sensor.entryway_thermostat_operation_mode
       state: 'heat'
     - condition: or
       conditions:
@@ -305,7 +305,7 @@
       - condition: and
         conditions:
         - condition: state
-          entity_id: sensor.bedrooms_thermostat_hallway_hvac_mode
+          entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
           state: 'heat'
         - condition: numeric_state
           entity_id: input_number.climate_temp
@@ -313,7 +313,7 @@
       - condition: and
         conditions:
         - condition: state
-          entity_id: sensor.bedrooms_thermostat_hallway_hvac_mode
+          entity_id: sensor.bedrooms_thermostat_hallway_operation_mode
           state: 'cool'
         - condition: numeric_state
           entity_id: input_number.climate_temp
@@ -342,7 +342,7 @@
     - service: input_select.select_option
       entity_id: input_select.climate_mode
       data_template:
-        option: '{{ states.sensor.bedrooms_thermostat_hallway_hvac_mode.state }}'
+        option: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state }}'
 
 - alias: HVAC - Set eco hvac mode on startup
   initial_state: True
