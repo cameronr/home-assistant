@@ -54,6 +54,8 @@ discovery:
 # Enables support for tracking state changes over time
 history:
 
+# list most groups to track groups.people to see if it transitions
+# to unknown when there's a network hiccup
 recorder:
   db_url: !secret db_url
   purge_keep_days: 14
@@ -64,7 +66,6 @@ recorder:
       - weblink
       - updater
       - camera
-      - group
       - media_player
       - weather
     entities:
@@ -96,6 +97,31 @@ recorder:
       - sensor.schlage_be469_touchscreen_deadbolt_system_3
       - sensor.ring_front_door_last_activity
       - cover.myq
+      - group.alarm
+      - group.alarm_sensors
+      - group.all_automations
+      - group.all_covers
+      - group.all_devices
+      - group.all_lights
+      - group.all_locks
+      - group.all_remotes
+      - group.all_scripts
+      - group.all_switches
+      - group.all_vacuum_cleaners
+      - group.automations
+      - group.climate
+      - group.climate_other
+      - group.default_view
+      - group.general
+      - group.lights
+      - group.nest
+      - group.ring
+      - group.sensors
+      - group.shades
+      - group.solar
+      - group.switches
+      - group.zwave
+
 
 # View all events in a logbook
 logbook:
@@ -119,14 +145,6 @@ group: !include_dir_merge_named groups/
 ambient_station:
   api_key: !secret ambient_api_key
   app_key: !secret ambient_app_key
-
-device_tracker:
-  - platform: unifi
-    username: !secret unifi_username
-    password: !secret unifi_password
-    host: !secret unifi_host
-    new_device_defaults:
-      track_new_devices: False
 
 envisalink: !include envisalink.yaml
 
@@ -159,9 +177,11 @@ input_boolean:
   guest_floor_heat:
     icon: mdi:radiator
 
-ios: !include ios.yaml
+# ios: !include ios.yaml
 
 lutron: !include lutron.yaml
+
+mobile_app:
 
 neato:
   username: !secret neato_username
@@ -198,6 +218,13 @@ ring:
 
 system_health:
 
+unifi:
+  controllers:
+    - host: !secret unifi_host
+      site: !secret unifi_site
+      ssid_filter:
+        - !secret unifi_ssid
+
 wake_on_lan:
 
 weather:
@@ -207,6 +234,12 @@ weather:
 
 wemo:
   discovery: true
+
+zone:
+  - name: home
+    latitude: !secret latitude
+    longitude: !secret longitude
+    track_ios: false
 
 zwave:
   usb_path: /dev/ttyACM0

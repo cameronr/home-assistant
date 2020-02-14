@@ -133,14 +133,11 @@
     - condition: state
       entity_id: sensor.entryway_thermostat_operation_mode
       state: 'heat'
-    - condition: state
-      entity_id: group.people
-      state: 'home'
     - condition: or
       conditions:
         - condition: state
-          entity_id: input_select.occupants
-          state: 'auto'
+          entity_id: group.people
+          state: 'home'
         - condition: state
           entity_id: input_select.occupants
           state: 'dogs'
@@ -163,14 +160,11 @@
     - condition: state
       entity_id: sensor.entryway_thermostat_operation_mode
       state: 'heat'
-    - condition: state
-      entity_id: group.people
-      state: 'home'
     - condition: or
       conditions:
         - condition: state
-          entity_id: input_select.occupants
-          state: 'auto'
+          entity_id: group.people
+          state: 'home'
         - condition: state
           entity_id: input_select.occupants
           state: 'dogs'
@@ -198,8 +192,8 @@
     - condition: or
       conditions:
         - condition: state
-          entity_id: input_select.occupants
-          state: 'auto'
+          entity_id: group.people
+          state: 'home'
         - condition: state
           entity_id: input_select.occupants
           state: 'dogs'
@@ -227,8 +221,8 @@
     - condition: or
       conditions:
         - condition: state
-          entity_id: input_select.occupants
-          state: 'auto'
+          entity_id: group.people
+          state: 'home'
         - condition: state
           entity_id: input_select.occupants
           state: 'dogs'
@@ -309,7 +303,7 @@
           state: 'heat'
         - condition: numeric_state
           entity_id: input_number.climate_temp
-          below: '72'
+          below: '73'
       - condition: and
         conditions:
         - condition: state

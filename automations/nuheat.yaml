@@ -318,7 +318,7 @@
       entity_id: climate.master_nuheat
       temperature: 90
 
-- alias: NuHeat - Master Input on
+- alias: NuHeat - Master Input off
   initial_state: True
   trigger:
     platform: state
@@ -329,9 +329,9 @@
     service: climate.set_temperature
     data:
       entity_id: climate.master_nuheat
-      temperature: 60
+      temperature: 45
 
-- alias: NuHeat - Guest Input off
+- alias: NuHeat - Guest Input on
   initial_state: True
   trigger:
     platform: state
@@ -344,7 +344,7 @@
       entity_id: climate.guest_nuheat
       temperature: 80
 
-- alias: NuHeat - Guest Input on
+- alias: NuHeat - Guest Input off
   initial_state: True
   trigger:
     platform: state
@@ -355,6 +355,6 @@
     service: climate.set_temperature
     data:
       entity_id: climate.guest_nuheat
-      temperature: 60
+      temperature: 45
 
 

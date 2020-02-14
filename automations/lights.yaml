@@ -26,15 +26,12 @@
   trigger:
     - platform: state
       entity_id: group.people
-      from: 'not_home'
       to: 'home'
     - platform: state
-      entity_id: device_tracker.junxblah
-      from: 'not_home'
+      entity_id: person.cam
       to: 'home'
     - platform: state
-      entity_id: device_tracker.astropanda
-      from: 'not_home'
+      entity_id: person.sandy
       to: 'home'
   condition:
     - condition: sun
@@ -48,6 +45,7 @@
         - light.front_hallway_hallway
         - light.front_hallway_great_room
         - light.front_hallway_kitchen
+        - light.dining_room_dining_room
 
 - alias: Lights - Turn off when we leave
   initial_state: True
@@ -74,4 +72,5 @@
         - light.front_hallway_hallway
         - light.front_hallway_great_room
         - light.front_hallway_kitchen
+        - light.dining_room_dining_room
 

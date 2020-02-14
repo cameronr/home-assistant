@@ -5,9 +5,9 @@ CamSandy:
 
 Guests:
   entities:
-    - device_tracker.ephone_2
-    - device_tracker.jerryjesiphone7
-    - device_tracker.juliajesiphone3
+    - person.eric
+    - person.jerry
+    - person.julia
 
 People:
   entities:

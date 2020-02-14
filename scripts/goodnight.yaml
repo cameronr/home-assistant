@@ -3,6 +3,15 @@ goodnight:
     - service: homeassistant.turn_off
       data:
         entity_id: group.lights
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.entryway
+        hvac_mode: 'heat'
+        temperature: '60'
+    - service: switch.turn_off
+      entity_id: switch.wemo_switch
+    - service: switch.turn_off
+      entity_id: switch.water_heater_recirc_pump
     - service: remote.turn_off
       data:
         entity_id: remote.harmony_hub

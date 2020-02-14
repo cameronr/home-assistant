@@ -27,12 +27,12 @@ views:
       # Show update card if there are updates
       - type: conditional
         conditions:
-          - entity: updater.updater
-            state_not: "nullplaceholder"
+          - entity: binary_sensor.updater
+            state: "on"
         card:
           type: entities
           entities:
-            - updater.updater
+            - sensor.latest_version
 
       - type: entities
         # Title of the entities card
@@ -45,15 +45,18 @@ views:
           - switch.gate
           - lock.schlage_be469_touchscreen_deadbolt_locked_3
           - switch.water_heater_recirc_pump
+          - switch.dehumidifier
+          - switch.wemo_switch
           - cover.garage_door_opener
+          - switch.mediabox
           - script.goodnight
 
       - type: entities
         title: People
         show_header_toggle: false
         entities:
-          - device_tracker.junxblah
-          - device_tracker.rocketpanda
+          - person.cam
+          - person.sandy
           - group.guests
           - input_select.occupants
 
@@ -63,6 +66,7 @@ views:
           - light.front_hallway_hallway
           - light.front_hallway_kitchen
           - light.front_hallway_great_room
+          - light.dining_room_dining_room
           - light.great_room_patio_lights
           - light.front_door_lights
           - light.front_door_garage
@@ -112,7 +116,6 @@ views:
         show_header_toggle: false
         entities:
           - vacuum.pandabot
-          - switch.mediabox
 
     # Specify a tab icon if you want the view tab to be an icon.
   - title: Sensors

@@ -3,7 +3,7 @@
 # set -x
 
 UPDATE=
-VERSION=0.96.1
+VERSION=0.102.2
 
 #https://stackoverflow.com/questions/14786984/best-way-to-parse-command-line-args-in-bash
 # while getopts "u" opt; do

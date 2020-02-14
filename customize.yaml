@@ -10,8 +10,6 @@ climate.master_nuheat:
   friendly_name: Master bath floor
 switch.water_heater_recirc_pump:
   icon: mdi:reload
-switch.dehumidifier:
-  friendly_name: Xmas lights
 switch.gate:
   friendly_name: Gate Hold
   icon: mdi:gate
@@ -27,6 +25,8 @@ light.front_hallway_hallway:
   friendly_name: Front hallway
 light.front_hallway_kitchen:
   friendly_name: Kitchen
+light.dining_room_dining_room:
+  friendly_name: Dining room
 switch.great_room_fan:
   friendly_name: Great room fan
 light.great_room_patio_lights:
