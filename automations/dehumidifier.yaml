@@ -1,28 +1,51 @@
-- alias: Dehumidifier on if below 44 F
-  initial_state: True
-  hide_entity: False
-  trigger:
-    platform: numeric_state
-    entity_id: weather.dark_sky
-    value_template: "{{ state.attributes.temperature }}"
-    below: '44'
-  condition:
-    condition: numeric_state
-    entity_id: sensor.bedrooms_thermostat_hallway_humidity
-    above: '40'
-  action:
-    entity_id: switch.wemo
-    service: switch.turn_on
+# - alias: Dehumidifier on if below 44 F
+#   initial_state: True
+#   hide_entity: False
+#   trigger:
+#     platform: numeric_state
+#     entity_id: sensor.westridge_temp
+#     below: '42'
+#   condition:
+#     condition: numeric_state
+#     entity_id: sensor.bedrooms_thermostat_hallway_humidity
+#     above: '40'
+#   action:
+#     entity_id: switch.dehumidifier
+#     service: switch.turn_on
+#
+# - alias: Dehumidifier off if above 50 F
+#   initial_state: True
+#   hide_entity: False
+#   trigger:
+#     platform: numeric_state
+#     entity_id: sensor.westridge_temp
+#     above: '50'
+#   action:
+#     entity_id: switch.dehumidifier
+#     service: switch.turn_off
 
-- alias: Dehumidifier off if above 50 F
+- alias: Dehumidifier off at 4am
   initial_state: True
   hide_entity: False
   trigger:
-    platform: numeric_state
-    entity_id: weather.dark_sky
-    value_template: "{{ state.attributes.temperature }}"
-    above: '50'
+    - platform: time
+      at: '04:00:00'
   action:
     entity_id: switch.dehumidifier
     service: switch.turn_off
+
+- alias: Dehumidifier on at midnight if below 43
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: time
+      at: '00:00:00'
+  condition:
+    condition: numeric_state
+    entity_id: sensor.westridge_temp
+    below: '43'
+  action:
+    entity_id: switch.dehumidifier
+    service: switch.turn_off
+
 
