@@ -1,0 +1,4 @@
+- platform: version
+  source: docker
+- platform: version
+  source: local
