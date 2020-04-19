@@ -31,7 +31,7 @@
 
 # if m-f, turn off at 7:30am
 - alias: NuHeat - Turn off at 7:45 on M-F
-  initial_state: True
+  initial_state: False
   hide_entity: False
   trigger:
     - platform: time

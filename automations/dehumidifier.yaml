@@ -46,6 +46,6 @@
     below: '43'
   action:
     entity_id: switch.dehumidifier
-    service: switch.turn_off
+    service: switch.turn_on
 
 
