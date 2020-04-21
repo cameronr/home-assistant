@@ -99,24 +99,12 @@ recorder:
       - cover.myq
       - group.alarm
       - group.alarm_sensors
-      - group.all_automations
-      - group.all_covers
-      - group.all_devices
-      - group.all_lights
-      - group.all_locks
-      - group.all_remotes
-      - group.all_scripts
-      - group.all_switches
-      - group.all_vacuum_cleaners
-      - group.automations
       - group.climate
       - group.climate_other
-      - group.default_view
       - group.general
       - group.lights
       - group.nest
       - group.ring
-      - group.sensors
       - group.shades
       - group.solar
       - group.switches
@@ -208,8 +196,6 @@ nuheat:
 person:
 
 ring:
-  username: !secret ring_username
-  password: !secret ring_password
 
 # tesla:
 #   username: !secret tesla_username
@@ -217,13 +203,6 @@ ring:
 #   scan_interval: 86400
 
 system_health:
-
-unifi:
-  controllers:
-    - host: !secret unifi_host
-      site: !secret unifi_site
-      ssid_filter:
-        - !secret unifi_ssid
 
 wake_on_lan:
 
@@ -239,7 +218,6 @@ zone:
   - name: home
     latitude: !secret latitude
     longitude: !secret longitude
-    track_ios: false
 
 zwave:
   usb_path: /dev/ttyACM0

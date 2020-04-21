@@ -1,9 +1,3 @@
-group.switches:
-  hidden: false
-group.all_automations:
-  hidden: false
-group.all_remotes:
-  hidden: false
 climate.bedrooms_hallway:
   friendly_name: Bedrooms
 climate.master_nuheat:

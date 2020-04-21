@@ -1,5 +1,4 @@
 Climate:
-  control: hidden
   entities:
     - input_select.climate_mode
     - input_number.climate_temp

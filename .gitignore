@@ -24,3 +24,4 @@ __pycache__
 !/.travis.yml
 ip_bans.yaml
 /icloud/*
+/custom_components/hacs

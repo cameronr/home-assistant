@@ -1,9 +1,0 @@
-Sensors:
-  view: yes
-  entities:
-    - group.nest
-    - group.climate_other
-    - group.ring
-    - group.alarm_sensors
-    - group.zwave
-    - group.all_remotes

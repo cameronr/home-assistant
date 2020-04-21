@@ -1,5 +1,4 @@
 Switches:
-  control: hidden
   entities:
     - switch.gate
     - lock.schlage_be469_touchscreen_deadbolt_locked_3

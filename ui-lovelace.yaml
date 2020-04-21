@@ -3,10 +3,8 @@ title: Westridge
 resources:
   - url: /local/custom-lovelace/alarm_control_panel-card/alarm_control_panel-card.js?v=1
     type: js
-  - url: /local/custom-lovelace/group-card/group-card.js?v=1
-    type: js
-  - url: /local/custom-lovelace/monster-card/monster-card.js?v=1
-    type: js
+  - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+    type: module
 #
 # Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
 # background: center / cover no-repeat url("/background.png") fixed
@@ -185,18 +183,24 @@ views:
         entities:
           - remote.harmony_hub
 
-      - type: custom:monster-card
+      - type: custom:auto-entities
         card:
           type: entities
           title: Weather Station
         filter:
           include:
             - entity_id: "sensor.westridge*"
+        sort:
+          method: name
 
   - icon: mdi:home-assistant
     # Title of the view. Will be used as the tooltip for tab icon
     title: Automations
     cards:
-      - type: custom:group-card
-        title: Automations
-        group: group.all_automations
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Automations
+        filter:
+          include:
+            - entity_id: "automation.*"
