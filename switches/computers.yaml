@@ -1,4 +1,4 @@
 - platform: wake_on_lan
-  mac_address: !secret mediabox_mac
+  mac: !secret mediabox_mac
   name: mediabox
   host: !secret mediabox_ip
