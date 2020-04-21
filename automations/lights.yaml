@@ -1,6 +1,5 @@
 - alias: Lights - Turn on patio when sliding door is opened
   initial_state: True
-  hide_entity: False
   trigger:
     platform: state
     entity_id: binary_sensor.lift_slide
@@ -22,7 +21,6 @@
 
 - alias: Lights - If we arrived home, turn on garage / front door lights
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: state
       entity_id: group.people
@@ -49,7 +47,6 @@
 
 - alias: Lights - Turn off when we leave
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: state
       entity_id: group.people

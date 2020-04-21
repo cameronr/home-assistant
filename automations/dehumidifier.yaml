@@ -1,6 +1,5 @@
 # - alias: Dehumidifier on if below 44 F
 #   initial_state: True
-#   hide_entity: False
 #   trigger:
 #     platform: numeric_state
 #     entity_id: sensor.westridge_temp
@@ -15,7 +14,6 @@
 #
 # - alias: Dehumidifier off if above 50 F
 #   initial_state: True
-#   hide_entity: False
 #   trigger:
 #     platform: numeric_state
 #     entity_id: sensor.westridge_temp
@@ -26,7 +24,6 @@
 
 - alias: Dehumidifier off at 4am
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: time
       at: '04:00:00'
@@ -36,7 +33,6 @@
 
 - alias: Dehumidifier on at midnight if below 43
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: time
       at: '00:00:00'

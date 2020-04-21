@@ -1,6 +1,5 @@
 - alias: Nightly - Notify if garage, door, or gate are open
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: time
       at: '23:30:00'

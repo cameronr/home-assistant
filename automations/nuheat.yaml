@@ -1,6 +1,5 @@
 - alias: NuHeat - Turn off when we leave
   initial_state: True
-  hide_entity: False
   trigger:
     platform: state
     entity_id: group.camsandy
@@ -13,7 +12,6 @@
 
 - alias: NuHeat - Turn on at 6:15am if we're home
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: time
       at: '06:15:00'
@@ -32,7 +30,6 @@
 # if m-f, turn off at 7:30am
 - alias: NuHeat - Turn off at 7:45 on M-F
   initial_state: False
-  hide_entity: False
   trigger:
     - platform: time
       at: '07:45:00'
@@ -52,7 +49,6 @@
 # if ss, turn off at 10am
 - alias: NuHeat - Turn off at 10am on SS
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: time
       at: '10:00:00'
@@ -71,7 +67,6 @@
 # if we're home and time is 6:30pm, turn on
 - alias: NuHeat - Turn on at 6:30pm if we're home
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: time
       at: '18:30:00'
@@ -91,7 +86,6 @@
 
 - alias: NuHeat - Turn on when we come home if 6:30pm < now < 11:45pm
   initial_state: True
-  hide_entity: False
   trigger:
     platform: state
     entity_id: group.camsandy
@@ -113,7 +107,6 @@
 
 - alias: NuHeat - Turn off at 11:45pm
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: time
       at: '23:45:00'
@@ -127,7 +120,6 @@
 
 - alias: NuHeat - Guest Turn off when not home
   initial_state: True
-  hide_entity: False
   trigger:
     platform: state
     entity_id: group.guests
@@ -140,7 +132,6 @@
 
 - alias: NuHeat - Guest Turn on at 6:15am if home
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: time
       at: '06:15:00'
@@ -159,7 +150,6 @@
 # if m-f, turn off at 7:30am
 - alias: NuHeat - Guest Turn off at 8:30 on M-F
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: time
       at: '08:30:00'
@@ -179,7 +169,6 @@
 # if ss, turn off at 10am
 - alias: NuHeat - Guest Turn off at 9am on SS
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: time
       at: '9:00:00'
@@ -196,7 +185,6 @@
 
 - alias: NuHeat - Guest Turn on at 6:30pm if home
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: time
       at: '18:30:00'
@@ -216,7 +204,6 @@
 
 - alias: NuHeat - Guest Turn on when arrive home if 6:30pm < now < 10:30pm
   initial_state: True
-  hide_entity: False
   trigger:
     platform: state
     entity_id: group.guests
@@ -239,7 +226,6 @@
 # turn off at 11:30pm
 - alias: NuHeat - Guest Turn off at 10:30pm
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: time
       at: '22:30:00'
@@ -255,7 +241,6 @@
 
 - alias: NuHeat - Eric, turn on at 11am if home
   initial_state: False
-  hide_entity: False
   trigger:
     - platform: time
       at: '11:00:00'
@@ -273,7 +258,6 @@
 
 - alias: NuHeat - Eric, turn off at 2am
   initial_state: False
-  hide_entity: False
   trigger:
     - platform: time
       at: '02:00:00'
@@ -284,7 +268,6 @@
 
 - alias: NuHeat - Eric, turn on when arrive home if 6:30pm < now < 2am
   initial_state: False
-  hide_entity: False
   trigger:
     platform: state
     entity_id: device_tracker.ephone_2

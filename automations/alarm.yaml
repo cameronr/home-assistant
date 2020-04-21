@@ -1,6 +1,5 @@
 - alias: Alarm - Arm when we leave
   initial_state: True
-  hide_entity: False
   trigger:
     platform: state
     entity_id: group.people
@@ -37,7 +36,6 @@
 
 - alias: Alarm - Disarm when we come home
   initial_state: True
-  hide_entity: False
   trigger:
     - platform: state
       entity_id: group.people
@@ -63,7 +61,6 @@
 # unfinished: create a text string of zones that are on
 # - alias: Text alarm string
 #   initial_state: True
-#   hide_entity: False
 #   trigger:
 #     platform: state
 #     entity_id: group.alarm_sensors

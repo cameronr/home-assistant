@@ -1,6 +1,5 @@
 - alias: Water heater - Recirc off at 1am
   initial_state: True
-  hide_entity: False
   trigger:
     platform: time
     at: '01:00:00'
@@ -10,7 +9,6 @@
 
 - alias: Water heater - Recirc on at 5:45am
   initial_state: True
-  hide_entity: False
   trigger:
     platform: time
     at: '05:45:00'
@@ -24,7 +22,6 @@
 
 - alias: Water heater - Recirc off when we leave
   initial_state: True
-  hide_entity: False
   trigger:
     platform: state
     entity_id: group.people
@@ -45,7 +42,6 @@
 
 - alias: Water heater - Recirc on when we get home
   initial_state: True
-  hide_entity: False
   trigger:
     # maybe use zone: https://community.home-assistant.io/t/notify-when-someone-is-home-or-not-home/347/11
     # using a group https://community.home-assistant.io/t/lights-on-when-home/16158
