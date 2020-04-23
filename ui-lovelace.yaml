@@ -1,8 +1,6 @@
 title: Westridge
 # Include external resources
 resources:
-  - url: /local/custom-lovelace/alarm_control_panel-card/alarm_control_panel-card.js?v=1
-    type: js
   - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
     type: module
 #
@@ -92,7 +90,7 @@ views:
           - script.open_shades_half
           - script.close_shades
 
-      - type: custom:alarm_control_panel-card
+      - type: alarm-panel
         entity: alarm_control_panel.home_alarm
         show_keypad: false
         title: Alarm
