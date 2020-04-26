@@ -36,6 +36,7 @@ views:
         # The entities here will be shown in the same order as specified.
         # Each entry is an entity ID or a map with extra options.
         show_header_toggle: false
+        state_color: true
         entities:
           - script.open_gate_temporarily
           - switch.gate
@@ -58,6 +59,7 @@ views:
 
       - type: entities
         title: Lights
+        state_color: true
         entities:
           - light.front_hallway_hallway
           - light.front_hallway_kitchen
@@ -71,6 +73,7 @@ views:
       - type: entities
         title: Climate
         show_header_toggle: false
+        state_color: true
         entities:
           - input_select.climate_mode
           - input_number.climate_temp
