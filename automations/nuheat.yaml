@@ -21,7 +21,9 @@
       state: 'home'
     - condition: numeric_state
       entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      below: '76'
+      below: '73'
+    - condition: template
+      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
   action:
     service: input_boolean.turn_on
     data:
@@ -288,7 +290,7 @@
       entity_id: input_boolean.guest_floor_heat
 
 
-- alias: NuHeat - Master Input off
+- alias: NuHeat - Master Input on
   initial_state: True
   trigger:
     platform: state
