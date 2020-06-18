@@ -6,6 +6,7 @@ homeassistant:
   unit_system: imperial
   time_zone: America/Los_Angeles
   customize: !include customize.yaml
+  internal_url: !secret internal_url
 
 # Enables the frontend
 frontend:
@@ -20,7 +21,6 @@ config:
 http:
   server_host: !secret server_host
   server_port: !secret server_port
-  base_url: !secret base_url
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -35,11 +35,19 @@ logger:
   default: info
   logs:
     homeassistant.core: warn
-    homeassistant.components.envisalink: info
-    pyenvisalink.envisalink_base_client: info
-    homeassistant.components.tesla: debug
-    homeassistant.components.sensor.tesla: debug
-    homeassistant.components.binary_sensor.tesla: debug
+    homeassistant.components.ambient_station: warn
+    engineio.client: warn
+  #   homeassistant.components.envisalink: info
+  #   pyenvisalink.envisalink_base_client: info
+  #   homeassistant.components.tesla: debug
+  #   homeassistant.components.sensor.tesla: debug
+  #   homeassistant.components.binary_sensor.tesla: debug
+  #   homeassistant.components.unifi: debug
+  #   homeassistant.components.unifi.device_tracker: debug
+  #   homeassistant.components.device_tracker.unifi: debug
+  #   homeassistant.components.switch.unifi: debug
+  #   homeassistant.components.device_tracker: debug
+    # aiounifi: debug
 
 
 # Discover some devices automatically
@@ -59,10 +67,8 @@ history:
 recorder:
   db_url: !secret db_url
   purge_keep_days: 14
-  purge_interval: 1
   exclude:
     domains:
-      - automation
       - weblink
       - updater
       - camera

@@ -54,6 +54,7 @@ views:
         entities:
           - person.cam
           - person.sandy
+          - group.camsandy
           - group.guests
           - input_select.occupants
 
@@ -176,7 +177,7 @@ views:
         show_header_toggle: false
         entities:
           - zwave.aeotec_zw090_zstick_gen5_us
-          - zwave.aeotec_zw117_range_extender_6_2
+          - zwave.aeotec_zw117_range_extender_6
           - zwave.schlage_be469_touchscreen_deadbolt_3
       - type: entities
         title: Harmony
