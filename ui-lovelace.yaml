@@ -40,10 +40,11 @@ views:
         entities:
           - script.open_gate_temporarily
           - switch.gate
-          - lock.schlage_be469_touchscreen_deadbolt_locked_3
+          - lock.schlage_be469_touchscreen_deadbolt_locked
           - switch.water_heater_recirc_pump
-          - switch.dehumidifier
-          - switch.wemo_switch
+          - switch.kep_lights
+          - switch.ecm
+          - switch.wemo_dehumidifier
           - cover.garage_door_opener
           - switch.mediabox
           - script.goodnight
@@ -80,6 +81,7 @@ views:
           - input_number.climate_temp
           - climate.entryway
           - climate.bedrooms_hallway
+          - sensor.westridge_inside_temp
           - sensor.westridge_temp
           - input_boolean.master_floor_heat
           - input_boolean.guest_floor_heat

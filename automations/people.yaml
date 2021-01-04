@@ -81,7 +81,7 @@
   action:
     - service: lock.unlock
       data:
-        entity_id: lock.schlage_be469_touchscreen_deadbolt_locked_3
+        entity_id: lock.schlage_be469_touchscreen_deadbolt_locked
     - service: notify.push_cam
       data:
         message: "Welcome home, cam"
@@ -96,7 +96,7 @@
   action:
     - service: lock.unlock
       data:
-        entity_id: lock.schlage_be469_touchscreen_deadbolt_locked_3
+        entity_id: lock.schlage_be469_touchscreen_deadbolt_locked
     - service: notify.push_sandy
       data:
         message: "Welcome home, sandy"
@@ -105,7 +105,7 @@
   initial_state: True
   trigger:
     - platform: state
-      entity_id: lock.schlage_be469_touchscreen_deadbolt_locked_3
+      entity_id: lock.schlage_be469_touchscreen_deadbolt_locked
       from: 'locked'
       to: 'unlocked'
   condition:

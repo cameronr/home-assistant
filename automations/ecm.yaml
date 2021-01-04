@@ -1,0 +1,27 @@
+# - alias: ECM on at 1345
+#   initial_state: True
+#   trigger:
+#     - platform: time
+#       at: '13:45:00'
+#   condition:
+#     condition: state
+#     entity_id: person.cam
+#     state: 'home'
+#   action:
+#     entity_id: switch.ecm
+#     service: switch.turn_on
+
+- alias: ECM on at 0700
+  initial_state: True
+  trigger:
+    - platform: time
+      at: '07:00:00'
+  condition:
+    condition: state
+    entity_id: person.cam
+    state: 'home'
+  action:
+    entity_id: switch.ecm
+    service: switch.turn_on
+
+

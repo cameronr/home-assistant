@@ -1,12 +1,12 @@
 open_gate_temporarily:
-  alias: Gate Open
+  alias: Gate Hold Open
   sequence:
     - service: script.open_gate_temporarily_action
 
 # Do actual sequence in a subaction so the main action does not
 # show as a toggle
 open_gate_temporarily_action:
-  alias: Gate Open
+  alias: Gate Open and Close
   sequence:
     - service: switch.turn_on
       data:

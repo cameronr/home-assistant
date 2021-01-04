@@ -22,13 +22,13 @@
 #     entity_id: switch.dehumidifier
 #     service: switch.turn_off
 
-- alias: Dehumidifier off at 4am
+- alias: Dehumidifier off at 2am
   initial_state: True
   trigger:
     - platform: time
-      at: '04:00:00'
+      at: '02:00:00'
   action:
-    entity_id: switch.dehumidifier
+    entity_id: switch.wemo_dehumidifier
     service: switch.turn_off
 
 - alias: Dehumidifier on at midnight if below 43
@@ -41,7 +41,7 @@
     entity_id: sensor.westridge_temp
     below: '43'
   action:
-    entity_id: switch.dehumidifier
+    entity_id: switch.wemo_dehumidifier
     service: switch.turn_on
 
 
