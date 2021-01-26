@@ -18,7 +18,7 @@
       at: '07:00:00'
   condition:
     condition: state
-    entity_id: person.cam
+    entity_id: group.camsandy
     state: 'home'
   action:
     entity_id: switch.ecm

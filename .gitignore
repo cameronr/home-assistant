@@ -25,3 +25,4 @@ __pycache__
 ip_bans.yaml
 /icloud/*
 /custom_components/hacs
+emulated_hue_ids.json

@@ -142,6 +142,9 @@ ambient_station:
 
 envisalink: !include envisalink.yaml
 
+emulated_hue:
+  listen_port: 28888
+
 input_select:
   occupants:
     name: Occupancy
@@ -176,10 +179,6 @@ input_boolean:
 lutron: !include lutron.yaml
 
 mobile_app:
-
-neato:
-  username: !secret neato_username
-  password: !secret neato_password
 
 nest:
   client_id: !secret nest_client_id

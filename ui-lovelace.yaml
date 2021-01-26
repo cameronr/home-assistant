@@ -113,48 +113,16 @@ views:
           - sensor.enphase
           - sensor.enphase_yesterday
 
-      - type: entities
-        title: Devices
-        show_header_toggle: false
-        entities:
-          - vacuum.pandabot
-
     # Specify a tab icon if you want the view tab to be an icon.
   - title: Sensors
     id: sensors
     cards:
-      - type: entities
-        title: Nest
-        show_header_toggle: false
-        entities:
-          - sensor.bedrooms_thermostat_hallway_temperature
-          - sensor.bedrooms_thermostat_hallway_operation_mode
-          - sensor.bedrooms_thermostat_hallway_hvac_state
-          - sensor.bedrooms_thermostat_hallway_target
-          - sensor.bedrooms_thermostat_hallway_humidity
-          - sensor.entryway_thermostat_temperature
-          - sensor.entryway_thermostat_operation_mode
-          - sensor.entryway_thermostat_hvac_state
-          - sensor.entryway_thermostat_target
-          - sensor.entryway_thermostat_humidity
       - type: entities
         title: Climate Other
         show_header_toggle: false
         entities:
           - climate.master_nuheat
           - climate.guest_nuheat
-      - type: entities
-        title: Ring
-        show_header_toggle: false
-        entities:
-          - binary_sensor.ring_front_door_ding
-          - binary_sensor.ring_front_door_motion
-          - sensor.ring_front_door_last_activity
-          - sensor.ring_front_door_last_ding
-          - sensor.ring_front_door_last_motion
-          - sensor.ring_front_door_battery
-          - binary_sensor.ring_master_bedroom_motion
-          - sensor.ring_master_bedroom_last_activity
       - type: entities
         title: Alarm Sensors
         show_header_toggle: false
@@ -174,19 +142,6 @@ views:
           - binary_sensor.pantry
           - binary_sensor.hall_bath
           - script.panic
-      - type: entities
-        title: ZWave
-        show_header_toggle: false
-        entities:
-          - zwave.aeotec_zw090_zstick_gen5_us
-          - zwave.aeotec_zw117_range_extender_6
-          - zwave.schlage_be469_touchscreen_deadbolt_3
-      - type: entities
-        title: Harmony
-        show_header_toggle: false
-        entities:
-          - remote.harmony_hub
-
       - type: custom:auto-entities
         card:
           type: entities
@@ -196,6 +151,47 @@ views:
             - entity_id: "sensor.westridge*"
         sort:
           method: name
+      - type: entities
+        title: Nest
+        show_header_toggle: false
+        entities:
+          - sensor.bedrooms_thermostat_hallway_temperature
+          - sensor.bedrooms_thermostat_hallway_operation_mode
+          - sensor.bedrooms_thermostat_hallway_hvac_state
+          - sensor.bedrooms_thermostat_hallway_target
+          - sensor.bedrooms_thermostat_hallway_humidity
+          - sensor.entryway_thermostat_temperature
+          - sensor.entryway_thermostat_operation_mode
+          - sensor.entryway_thermostat_hvac_state
+          - sensor.entryway_thermostat_target
+          - sensor.entryway_thermostat_humidity
+      - type: entities
+        title: Ring
+        show_header_toggle: false
+        entities:
+          - binary_sensor.ring_front_door_ding
+          - binary_sensor.ring_front_door_motion
+          - sensor.ring_front_door_last_activity
+          - sensor.ring_front_door_last_ding
+          - sensor.ring_front_door_last_motion
+          - sensor.ring_front_door_battery
+          - binary_sensor.ring_master_bedroom_motion
+          - sensor.ring_master_bedroom_last_activity
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Zwave
+        filter:
+          include:
+            - entity_id: "zwave.*"
+        sort:
+          method: name
+      - type: entities
+        title: Harmony
+        show_header_toggle: false
+        entities:
+          - remote.harmony_hub
+
 
   - icon: mdi:home-assistant
     # Title of the view. Will be used as the tooltip for tab icon
