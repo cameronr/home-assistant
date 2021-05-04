@@ -42,11 +42,11 @@ logger:
   #   homeassistant.components.tesla: debug
   #   homeassistant.components.sensor.tesla: debug
   #   homeassistant.components.binary_sensor.tesla: debug
-  #   homeassistant.components.unifi: debug
-  #   homeassistant.components.unifi.device_tracker: debug
-  #   homeassistant.components.device_tracker.unifi: debug
-  #   homeassistant.components.switch.unifi: debug
-  #   homeassistant.components.device_tracker: debug
+    # homeassistant.components.unifi: debug
+    # homeassistant.components.unifi.device_tracker: debug
+    # homeassistant.components.device_tracker.unifi: debug
+    # homeassistant.components.switch.unifi: debug
+    # homeassistant.components.device_tracker: debug
     # aiounifi: debug
 
 

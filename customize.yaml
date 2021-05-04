@@ -23,6 +23,7 @@ light.dining_room_dining_room:
   friendly_name: Dining room
 switch.great_room_fan:
   friendly_name: Great room fan
+  icon: mdi:fan
 light.great_room_patio_lights:
   friendly_name: Patio
 light.front_door_garage:

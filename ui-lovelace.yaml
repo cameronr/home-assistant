@@ -43,8 +43,10 @@ views:
           - lock.schlage_be469_touchscreen_deadbolt_locked
           - switch.water_heater_recirc_pump
           - switch.kep_lights
+          - switch.meimei_lights
           - switch.ecm
           - switch.wemo_dehumidifier
+          - switch.great_room_fan
           - cover.garage_door_opener
           - switch.mediabox
           - script.goodnight

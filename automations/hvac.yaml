@@ -117,12 +117,12 @@
         temperature: 70
         message: 'Welcome home, setting heat to 70'
 
-# If in heat mode and we're home, set temp to 70 at 7:30am
+# If in heat mode and we're home, set temp to 70 at 7:00am
 - alias: HVAC - Turn on heat in the morning
   initial_state: True
   trigger:
     - platform: time
-      at: '07:30:00'
+      at: '07:00:00'
   condition:
     - condition: state
       entity_id: sensor.entryway_thermostat_operation_mode
