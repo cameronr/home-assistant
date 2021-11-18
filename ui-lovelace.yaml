@@ -3,6 +3,9 @@ title: Westridge
 resources:
   - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
     type: module
+  - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
+    type: module
+
 #
 # Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
 # background: center / cover no-repeat url("/background.png") fixed
@@ -72,6 +75,8 @@ views:
           - light.great_room_patio_lights
           - light.front_door_lights
           - light.front_door_garage
+          - switch.front_door_xmas_lights
+          - switch.garage_xmas_lights
           - switch.great_room_fan
 
       - type: entities
@@ -107,6 +112,15 @@ views:
 
       - type: weather-forecast
         entity: weather.dark_sky
+
+      - type: entities
+        title: Harmony
+        show_header_toggle: false
+        entities:
+          - remote.harmony_hub
+
+      - type: custom:mini-media-player
+        entity: media_player.marantz_sr5012_2
 
       - type: entities
         title: Solar
@@ -188,11 +202,6 @@ views:
             - entity_id: "zwave.*"
         sort:
           method: name
-      - type: entities
-        title: Harmony
-        show_header_toggle: false
-        entities:
-          - remote.harmony_hub
 
 
   - icon: mdi:home-assistant

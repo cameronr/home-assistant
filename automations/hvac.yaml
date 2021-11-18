@@ -92,7 +92,7 @@
       message: 'Goodbye, setting heat to 60'
 
 
-- alias: HVAC - If in heat mode and arrived home, set temp to 70
+- alias: HVAC - If in heat mode and arrived home, set temp to 68
   initial_state: True
   trigger:
     - platform: state
@@ -114,8 +114,8 @@
   action:
     - service: script.set_temperature
       data:
-        temperature: 70
-        message: 'Welcome home, setting heat to 70'
+        temperature: 68
+        message: 'Welcome home, setting heat to 68'
 
 # If in heat mode and we're home, set temp to 70 at 7:00am
 - alias: HVAC - Turn on heat in the morning
@@ -141,7 +141,7 @@
   action:
     service: script.set_temperature
     data:
-      temperature: 70
+      temperature: 68
 
 # If in heat mode and we're home, set LR temp to 70 at 6:30am
 - alias: HVAC - Turn on heat in GR in the morning
@@ -169,7 +169,7 @@
     data:
       entity_id: climate.entryway
       hvac_mode: 'heat'
-      temperature: '70'
+      temperature: '68'
 
 # If in heat mode, set temp front to 60 at 1am
 - alias: HVAC - Turn off front heat at night

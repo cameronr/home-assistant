@@ -15,8 +15,6 @@
         - condition: state
           entity_id: switch.gate
           state: 'on'
-        - condition: template
-          value_template: "{{ not is_state('vacuum.pandabot', 'docked') }}"
   action:
     - service: notify.push_family
       data_template:
@@ -30,7 +28,4 @@
           {%- endif %}
           {%- if is_state("switch.gate", "on") %}
             {{ states.switch.gate.attributes.friendly_name }}
-          {%- endif -%}
-          {%- if not is_state('vacuum.pandabot', 'docked') %}
-            pandabot
           {%- endif -%}
