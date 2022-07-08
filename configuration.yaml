@@ -27,9 +27,6 @@ http:
 # the developers to assist with development of Home Assistant.
 # For more information, please see:
 # https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
-updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
 
 logger:
   default: info
@@ -136,10 +133,6 @@ switch: !include_dir_merge_list switches/
 cover: !include_dir_merge_list covers/
 group: !include_dir_merge_named groups/
 
-ambient_station:
-  api_key: !secret ambient_api_key
-  app_key: !secret ambient_app_key
-
 envisalink: !include envisalink.yaml
 
 emulated_hue:
@@ -166,7 +159,7 @@ input_number:
     min: 55
     max: 85
     step: 1
-    mode: slider
+    mode: box
 
 input_boolean:
   master_floor_heat:
@@ -193,23 +186,17 @@ nest:
   binary_sensors:
     monitored_conditions:
 
-nicehash:
-  organization_id: !secret nicehash_org_id
-  api_key: !secret nicehash_api_key
-  api_secret: !secret nicehash_api_secret
-  balances: true # (default = false) - Enable balance sensors
-  rigs: true # (default = false) - Enable rig sensors
-  devices: true # (default = false) - Enable device sensors
-  payouts: true # (default = false) - Enable payout sensors
+# nicehash:
+#   organization_id: !secret nicehash_org_id
+#   api_key: !secret nicehash_api_key
+#   api_secret: !secret nicehash_api_secret
+#   balances: true # (default = false) - Enable balance sensors
+#   rigs: true # (default = false) - Enable rig sensors
+#   devices: true # (default = false) - Enable device sensors
+#   payouts: true # (default = false) - Enable payout sensors
 
-nuheat:
-  username: !secret nuheat_username
-  password: !secret nuheat_password
-  devices: !secret nuheat_devices
 
 person:
-
-ring:
 
 # tesla:
 #   username: !secret tesla_username
@@ -233,6 +220,6 @@ zone:
     latitude: !secret latitude
     longitude: !secret longitude
 
-zwave:
-  usb_path: /dev/ttyACM0
-  network_key: !secret zwave_network_key
+# zwave:
+#   usb_path: /dev/ttyACM0
+#   network_key: !secret zwave_network_key

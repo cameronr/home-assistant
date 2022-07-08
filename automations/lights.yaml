@@ -72,7 +72,7 @@
         - light.dining_room_dining_room
 
 - alias: Lights - Xmas lights on at 4:30pm
-  initial_state: True
+  initial_state: False
   trigger:
     - platform: time
       at: '16:30:00'
@@ -84,7 +84,7 @@
         - switch.garage_xmas_lights
 
 - alias: Lights - Xmas lights off at 2am
-  initial_state: True
+  initial_state: False
   trigger:
     - platform: time
       at: '2:00:00'

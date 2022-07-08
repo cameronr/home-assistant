@@ -5,7 +5,7 @@ import logging
 import voluptuous as vol
 import requests
 
-from homeassistant.components.switch import (SwitchDevice)
+from homeassistant.components.switch import (SwitchEntity)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -41,7 +41,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     add_devices([Doorking(config.get(CONF_NAME), config.get(CONF_HOST), config.get(CONF_PORT))])
 
 
-class Doorking(SwitchDevice):
+class Doorking(SwitchEntity):
     def __init__(self, name, host, port):
         """Initialize the sensor."""
         self._name = name

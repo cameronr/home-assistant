@@ -52,3 +52,4 @@ device_tracker.junxblah:
   track_ios: false
 script.open_gate_temporarily:
   icon: mdi:gate
+  friendly_name: Gate Temp Open

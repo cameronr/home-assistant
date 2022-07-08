@@ -43,15 +43,16 @@ views:
         entities:
           - script.open_gate_temporarily
           - switch.gate
-          - lock.schlage_be469_touchscreen_deadbolt_locked
+          - lock.node_10
           - switch.water_heater_recirc_pump
           - switch.kep_lights
           - switch.meimei_lights
+          - switch.great_room_fan
           - switch.ecm
           - switch.wemo_dehumidifier
-          - switch.great_room_fan
           - cover.garage_door_opener
           - switch.mediabox
+          - remote.harmony_hub
           - script.goodnight
 
       - type: entities
@@ -200,6 +201,15 @@ views:
         filter:
           include:
             - entity_id: "zwave.*"
+        sort:
+          method: name
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Tasmota
+        filter:
+          include:
+            - entity_id: "sensor.tasmota.*"
         sort:
           method: name
 
