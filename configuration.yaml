@@ -3,10 +3,12 @@ homeassistant:
   latitude: !secret latitude
   longitude: !secret longitude
   elevation: !secret elevation
-  unit_system: imperial
-  time_zone: America/Los_Angeles
   customize: !include customize.yaml
   internal_url: !secret internal_url
+  unit_system: imperial
+  country: US
+  time_zone: America/Los_Angeles
+  currency: USD
 
 # Enables the frontend
 frontend:
@@ -156,7 +158,7 @@ input_select:
 input_number:
   climate_temp:
     name: Temp
-    min: 55
+    min: 50
     max: 85
     step: 1
     mode: box
@@ -165,6 +167,8 @@ input_boolean:
   master_floor_heat:
     icon: mdi:radiator
   guest_floor_heat:
+    icon: mdi:radiator
+  kids_floor_heat:
     icon: mdi:radiator
 
 # ios: !include ios.yaml

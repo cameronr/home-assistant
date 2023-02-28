@@ -20,6 +20,19 @@
     entity_id: switch.water_heater_recirc_pump
     service: switch.turn_on
 
+- alias: Water heater - Recirc on at 6pm
+  initial_state: True
+  trigger:
+    platform: time
+    at: '18:00:00'
+  condition:
+    condition: state
+    entity_id: group.people
+    state: 'home'
+  action:
+    entity_id: switch.water_heater_recirc_pump
+    service: switch.turn_on
+
 - alias: Water heater - Recirc off when we leave
   initial_state: True
   trigger:

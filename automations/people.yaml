@@ -57,20 +57,6 @@
             category: 'away'
             # badge: 1
 
-# - alias: People - Unlock first in group is home
-#   trigger:
-#     platform: state
-#     entity_id: group.people
-#     from: 'not_home'
-#     to: 'home'
-#   action:
-#     - service: lock.unlock
-#       data:
-#         entity_id: lock.schlage_be469_touchscreen_deadbolt_locked_3
-#     - service: notify.push_family
-#       data:
-#         message: "Welcome home"
-
 - alias: People - Unlock whenever cam comes home
   initial_state: True
   trigger:
@@ -81,7 +67,7 @@
   action:
     - service: lock.unlock
       data:
-        entity_id: lock.schlage_be469_touchscreen_deadbolt_locked
+        entity_id: lock.be469
     - service: notify.push_cam
       data:
         message: "Welcome home, cam"
@@ -96,16 +82,28 @@
   action:
     - service: lock.unlock
       data:
-        entity_id: lock.schlage_be469_touchscreen_deadbolt_locked
+        entity_id: lock.be469
     - service: notify.push_sandy
       data:
         message: "Welcome home, sandy"
+
+- alias: People - Unlock whenever Tif comes back
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: person.tif
+      from: 'not_home'
+      to: 'home'
+  action:
+    - service: lock.unlock
+      data:
+        entity_id: lock.be469
 
 - alias: People - Notify when not home and door is opened
   initial_state: True
   trigger:
     - platform: state
-      entity_id: lock.schlage_be469_touchscreen_deadbolt_locked
+      entity_id: lock.be469
       from: 'locked'
       to: 'unlocked'
   condition:

@@ -72,7 +72,7 @@
         - light.dining_room_dining_room
 
 - alias: Lights - Xmas lights on at 4:30pm
-  initial_state: False
+  initial_state: True
   trigger:
     - platform: time
       at: '16:30:00'
@@ -80,11 +80,12 @@
     service: switch.turn_on
     data:
       entity_id:
-        - switch.front_door_xmas_lights
-        - switch.garage_xmas_lights
+        - switch.front_door_figures
+        # - switch.front_door_xmas_lights
+        # - switch.garage_xmas_lights
 
 - alias: Lights - Xmas lights off at 2am
-  initial_state: False
+  initial_state: True
   trigger:
     - platform: time
       at: '2:00:00'
@@ -92,6 +93,6 @@
     service: switch.turn_off
     data:
       entity_id:
-        - switch.front_door_xmas_lights
-        - switch.garage_xmas_lights
-
+        - switch.front_door_figures
+        # - switch.front_door_xmas_lights
+        # - switch.garage_xmas_lights

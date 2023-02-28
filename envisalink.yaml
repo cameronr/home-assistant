@@ -28,7 +28,7 @@ zones:
     name: 'Kitchen'
     type: 'opening'
   8:
-    name: 'Other Bedroom'
+    name: 'Elara Bedroom'
     type: 'opening'
   10:
     name: 'Hall Bath'
@@ -43,7 +43,7 @@ zones:
     name: 'Master'
     type: 'opening'
   14:
-    name: 'Nursery'
+    name: 'Kep Bedroom'
     type: 'opening'
   15:
     name: 'Guest Bedroom'

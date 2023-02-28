@@ -1,3 +1,81 @@
+- alias: NuHeat - Master Input on
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: input_boolean.master_floor_heat
+    from: 'off'
+    to: 'on'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.master_nuheat
+      temperature: 90
+
+- alias: NuHeat - Master Input off
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: input_boolean.master_floor_heat
+    from: 'on'
+    to: 'off'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.master_nuheat
+      temperature: 45
+
+- alias: NuHeat - Guest Input on
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: input_boolean.guest_floor_heat
+    from: 'off'
+    to: 'on'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.guest_nuheat
+      temperature: 80
+
+- alias: NuHeat - Guest Input off
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: input_boolean.guest_floor_heat
+    from: 'on'
+    to: 'off'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.guest_nuheat
+      temperature: 45
+
+- alias: NuHeat - Kids Input on
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: input_boolean.kids_floor_heat
+    from: 'off'
+    to: 'on'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.kids_nuheat
+      temperature: 85
+
+- alias: NuHeat - Kids Input off
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: input_boolean.kids_floor_heat
+    from: 'on'
+    to: 'off'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.kids_nuheat
+      temperature: 45
+
 - alias: NuHeat - Turn off when we leave
   initial_state: True
   trigger:
@@ -8,20 +86,25 @@
   action:
     service: input_boolean.turn_off
     data:
-      entity_id: input_boolean.master_floor_heat
+      entity_id:
+        - input_boolean.master_floor_heat
+        - input_boolean.kids_floor_heat
 
-- alias: NuHeat - Turn on at 6:15am if we're home
+- alias: NuHeat - Turn on at 5:30am if we're home
   initial_state: True
   trigger:
     - platform: time
-      at: '06:15:00'
+      at: '05:30:00'
   condition:
     - condition: state
       entity_id: group.camsandy
       state: 'home'
     - condition: numeric_state
       entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      below: '73'
+      below: '71'
+    - condition: numeric_state
+      entity_id: sensor.westridge_temp
+      below: '60'
     - condition: template
       value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
   action:
@@ -237,10 +320,6 @@
       entity_id: input_boolean.guest_floor_heat
 
 
-
-
-
-
 - alias: NuHeat - Eric, turn on at 11am if home
   initial_state: False
   trigger:
@@ -290,56 +369,35 @@
       entity_id: input_boolean.guest_floor_heat
 
 
-- alias: NuHeat - Master Input on
+
+- alias: NuHeat - Kids turn on at 6:45am and 6pm if home
   initial_state: True
   trigger:
-    platform: state
-    entity_id: input_boolean.master_floor_heat
-    from: 'off'
-    to: 'on'
+    - platform: time
+      at: '06:45:00'
+    - platform: time
+      at: '18:00:00'
+  condition:
+    - condition: state
+      entity_id: group.camsandy
+      state: 'home'
+    - condition: numeric_state
+      entity_id: sensor.bedrooms_thermostat_hallway_temperature
+      below: '76'
   action:
-    service: climate.set_temperature
+    service: input_boolean.turn_on
     data:
-      entity_id: climate.master_nuheat
-      temperature: 90
+      entity_id: input_boolean.kids_floor_heat
 
-- alias: NuHeat - Master Input off
+- alias: NuHeat - Kids turn off at 7:15am and 7:30pm
   initial_state: True
   trigger:
-    platform: state
-    entity_id: input_boolean.master_floor_heat
-    from: 'on'
-    to: 'off'
+    - platform: time
+      at: '07:15:00'
+    - platform: time
+      at: '19:30:00'
   action:
-    service: climate.set_temperature
+    service: input_boolean.turn_off
     data:
-      entity_id: climate.master_nuheat
-      temperature: 45
-
-- alias: NuHeat - Guest Input on
-  initial_state: True
-  trigger:
-    platform: state
-    entity_id: input_boolean.guest_floor_heat
-    from: 'off'
-    to: 'on'
-  action:
-    service: climate.set_temperature
-    data:
-      entity_id: climate.guest_nuheat
-      temperature: 80
-
-- alias: NuHeat - Guest Input off
-  initial_state: True
-  trigger:
-    platform: state
-    entity_id: input_boolean.guest_floor_heat
-    from: 'on'
-    to: 'off'
-  action:
-    service: climate.set_temperature
-    data:
-      entity_id: climate.guest_nuheat
-      temperature: 45
-
+      entity_id: input_boolean.kids_floor_heat
 
