@@ -111,6 +111,9 @@
     - condition: state
       entity_id: input_select.climate_mode
       state: 'heat'
+    - condition: numeric_state
+      entity_id: sensor.bedrooms_thermostat_hallway_target
+      below: '68'
   action:
     - service: script.set_temperature
       data:

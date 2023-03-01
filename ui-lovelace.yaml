@@ -93,6 +93,7 @@ views:
           - sensor.westridge_inside_temp
           - sensor.westridge_temp
           - input_boolean.master_floor_heat
+          - input_boolean.kids_floor_heat
           - input_boolean.guest_floor_heat
 
       - type: entities
@@ -140,6 +141,7 @@ views:
         show_header_toggle: false
         entities:
           - climate.master_nuheat
+          - climate.kids_nuheat
           - climate.guest_nuheat
       - type: entities
         title: Alarm Sensors
