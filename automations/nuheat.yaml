@@ -226,7 +226,7 @@
       state: 'home'
     - condition: numeric_state
       entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      below: '76'
+      below: '75'
   action:
     service: input_boolean.turn_on
     data:
@@ -331,7 +331,7 @@
       state: 'home'
     - condition: numeric_state
       entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      below: '76'
+      below: '75'
   action:
     service: input_boolean.turn_on
     data:
@@ -383,7 +383,7 @@
       state: 'home'
     - condition: numeric_state
       entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      below: '76'
+      below: '75'
   action:
     service: input_boolean.turn_on
     data:

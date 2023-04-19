@@ -20,7 +20,7 @@
     entity_id: alarm_control_panel.home_alarm
 
 - alias: Garage - Notify if setting away and door left open
-  initial_state: True
+  initial_state: False
   trigger:
     platform: state
     entity_id: group.people
