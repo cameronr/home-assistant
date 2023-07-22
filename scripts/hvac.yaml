@@ -2,11 +2,11 @@ set_temperature:
   sequence:
     - service: climate.set_temperature
       data_template:
-        entity_id: climate.entryway
+        entity_id: climate.front
         temperature: "{{ temperature }}"
     - service: climate.set_temperature
       data_template:
-        entity_id: climate.bedrooms_hallway
+        entity_id: climate.back
         temperature: "{{ temperature }}"
     - service: input_number.set_value
       data_template:

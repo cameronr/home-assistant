@@ -1,0 +1,15 @@
+# Get attribute of climate state in form of sensor
+- platform: template
+  sensors:
+    front_thermostat_operation_mode:
+      friendly_name: "Front Operation Mode"
+      value_template: "{{ states.climate.front.state }}"
+    front_thermostat_target:
+      friendly_name: "Front Target Temperature"
+      value_template: "{{ state_attr('climate.front', 'temperature') }}"
+    back_thermostat_operation_mode:
+      friendly_name: "Back Operation Mode"
+      value_template: "{{ states.climate.back.state }}"
+    back_thermostat_target:
+      friendly_name: "Back Target Temperature"
+      value_template: "{{ state_attr('climate.back', 'temperature') }}"

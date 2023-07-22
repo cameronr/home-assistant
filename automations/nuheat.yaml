@@ -90,7 +90,8 @@
         - input_boolean.master_floor_heat
         - input_boolean.kids_floor_heat
 
-- alias: NuHeat - Turn on at 5:30am if we're home
+- id: nuheat_master_on_morning
+  alias: NuHeat - Turn on at 5:30am if we're home
   initial_state: True
   trigger:
     - platform: time
@@ -100,13 +101,13 @@
       entity_id: group.camsandy
       state: 'home'
     - condition: numeric_state
-      entity_id: sensor.bedrooms_thermostat_hallway_temperature
+      entity_id: sensor.westridge_inside_temp
       below: '71'
     - condition: numeric_state
-      entity_id: sensor.westridge_temp
-      below: '60'
+      entity_id: sensor.pirateweather_daytime_high_temperature_0d
+      below: 72
     - condition: template
-      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
+      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
     service: input_boolean.turn_on
     data:
@@ -150,7 +151,8 @@
 
 # FIXME: don't turn on if inside temp is >= 75 or ac is on
 # if we're home and time is 6:30pm, turn on
-- alias: NuHeat - Turn on at 6:30pm if we're home
+- id: nuheat_master_on_evening
+  alias: NuHeat - Turn on at 6:30pm if we're home
   initial_state: True
   trigger:
     - platform: time
@@ -160,10 +162,13 @@
       entity_id: group.camsandy
       state: 'home'
     - condition: numeric_state
-      entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      below: '75'
+      entity_id: sensor.westridge_inside_temp
+      below: '72'
+    - condition: numeric_state
+      entity_id: sensor.pirateweather_daytime_high_temperature_0d
+      below: 72
     - condition: template
-      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
+      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
     service: input_boolean.turn_on
     data:
@@ -181,10 +186,10 @@
       after: '18:30:00'
       before: '23:45:00'
     - condition: numeric_state
-      entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      below: '75'
+      entity_id: sensor.westridge_inside_temp
+      below: '72'
     - condition: template
-      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
+      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
     service: input_boolean.turn_on
     data:
@@ -225,8 +230,11 @@
       entity_id: group.guests
       state: 'home'
     - condition: numeric_state
-      entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      below: '75'
+      entity_id: sensor.pirateweather_daytime_high_temperature_0d
+      below: 72
+    - condition: numeric_state
+      entity_id: sensor.westridge_inside_temp
+      below: '72'
   action:
     service: input_boolean.turn_on
     data:
@@ -278,10 +286,10 @@
       entity_id: group.guests
       state: 'home'
     - condition: numeric_state
-      entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      below: '75'
+      entity_id: sensor.westridge_inside_temp
+      below: '72'
     - condition: template
-      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
+      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
     service: input_boolean.turn_on
     data:
@@ -299,10 +307,10 @@
       after: '18:30:00'
       before: '22:30:00'
     - condition: numeric_state
-      entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      below: '75'
+      entity_id: sensor.westridge_inside_temp
+      below: '72'
     - condition: template
-      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
+      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
     service: input_boolean.turn_on
     data:
@@ -330,8 +338,8 @@
       entity_id: device_tracker.ephone_2
       state: 'home'
     - condition: numeric_state
-      entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      below: '75'
+      entity_id: sensor.westridge_inside_temp
+      below: '72'
   action:
     service: input_boolean.turn_on
     data:
@@ -359,10 +367,10 @@
       after: '18:30:00'
       before: '02:00:00'
     - condition: numeric_state
-      entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      below: '75'
+      entity_id: sensor.westridge_inside_temp
+      below: '72'
     - condition: template
-      value_template: '{{ states.sensor.bedrooms_thermostat_hallway_operation_mode.state != "cool" }}'
+      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
     service: input_boolean.turn_on
     data:
@@ -382,8 +390,13 @@
       entity_id: group.camsandy
       state: 'home'
     - condition: numeric_state
-      entity_id: sensor.bedrooms_thermostat_hallway_temperature
-      below: '75'
+      entity_id: sensor.pirateweather_daytime_high_temperature_0d
+      below: 72
+    - condition: numeric_state
+      entity_id: sensor.westridge_inside_temp
+      below: '72'
+    - condition: template
+      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
     service: input_boolean.turn_on
     data:
