@@ -4,16 +4,16 @@
   system_id: !secret envoy_system_id
   user_id: !secret envoy_user_id
 
-- platform: template
-  sensors:
-    enphase_yesterday:
-      friendly_name: "Energy Yesterday"
-      unit_of_measurement: 'kW'
-      value_template: >-
-        {% if states.sensor.enphase.attributes.energy_yesterday is defined %}
-          {{ (states.sensor.enphase.attributes.energy_yesterday | float / 1000) | round(2) }}
-        {% else %}
-          unknown
-        {% endif %}
-
+# - platform: template
+#   sensors:
+#     enphase_yesterday:
+#       friendly_name: "Energy Yesterday"
+#       unit_of_measurement: 'kW'
+#       value_template: >-
+#         {% if states.sensor.enphase.attributes.energy_yesterday is defined %}
+#           {{ (states.sensor.enphase.attributes.energy_yesterday | float / 1000) | round(2) }}
+#         {% else %}
+#           unknown
+#         {% endif %}
+#
 

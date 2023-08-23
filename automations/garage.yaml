@@ -1,6 +1,6 @@
 # Presence detection can be a little slow so disarm alarm when the garage door is opened
 - alias: Garage - Disarm when garage door is opened
-  initial_state: True
+  initial_state: False
   trigger:
     platform: state
     entity_id: cover.garage_door_opener

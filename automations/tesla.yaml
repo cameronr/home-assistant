@@ -1,0 +1,28 @@
+- alias: Tesla - Force car awake at 23:00 to refresh state
+  initial_state: True
+  trigger:
+    - platform: time
+      at: '23:00:00'
+  condition:
+    condition: state
+    entity_id: group.camsandy
+    state: 'home'
+  action:
+    - service: button.big_car_flash_lights
+
+- alias: Tesla - notify if car not plugged in
+  initial_state: False
+  trigger:
+    - platform: time
+      at: '23:10:00'
+  condition:
+    - condition: state
+      entity_id: group.camsandy
+      state: 'home'
+    - condition: state
+      entity_id: binary_sensor.big_car_charger_sensor
+      state: 'off'
+  action:
+    - service: notify.push_family
+      data:
+        message: "Car not plugged in"

@@ -7,9 +7,16 @@
     front_thermostat_target:
       friendly_name: "Front Target Temperature"
       value_template: "{{ state_attr('climate.front', 'temperature') }}"
+    front_thermostat_relative_humidity:
+      friendly_name: "Front Relative Humidity"
+      value_template: "{{ state_attr('climate.front', 'current_humidity') }}"
     back_thermostat_operation_mode:
       friendly_name: "Back Operation Mode"
       value_template: "{{ states.climate.back.state }}"
     back_thermostat_target:
       friendly_name: "Back Target Temperature"
       value_template: "{{ state_attr('climate.back', 'temperature') }}"
+    back_thermostat_relative_humidity:
+      friendly_name: "Front Relative Humidity"
+      value_template: "{{ state_attr('climate.back', 'current_humidity') }}"
+

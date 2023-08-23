@@ -3,11 +3,6 @@
   name: mediabox_wol
   host: !secret mediabox_ip
 
-- platform: command_line
-  switches:
-    mediabox_off:
-      command_off: !secret mediabox_shutdown_cmd
-
 - platform: template
   switches:
     mediabox:
@@ -16,5 +11,4 @@
         service: switch.turn_on
         entity_id: switch.mediabox_wol
       turn_off:
-        service: switch.turn_off
-        entity_id: switch.mediabox_off
+        service: shell_command.mediabox_off
