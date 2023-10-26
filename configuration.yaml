@@ -179,19 +179,19 @@ lutron: !include lutron.yaml
 
 mobile_app:
 
-nest:
-  client_id: !secret nest_client_id
-  client_secret: !secret nest_client_secret
-  sensors:
-    monitored_conditions:
-      - 'humidity'
-      - 'temperature'
-      - 'operation_mode'
-      - 'target'
-      - 'hvac_state'
-  binary_sensors:
-    monitored_conditions:
-
+# nest:
+#   client_id: !secret nest_client_id
+#   client_secret: !secret nest_client_secret
+#   sensors:
+#     monitored_conditions:
+#       - 'humidity'
+#       - 'temperature'
+#       - 'operation_mode'
+#       - 'target'
+#       - 'hvac_state'
+#   binary_sensors:
+#     monitored_conditions:
+#
 # nicehash:
 #   organization_id: !secret nicehash_org_id
 #   api_key: !secret nicehash_api_key
