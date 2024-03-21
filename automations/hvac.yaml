@@ -120,115 +120,121 @@
 #         temperature: 68
 #         message: 'Welcome home, setting heat to 68'
 #
-# If in heat mode and we're home, set temp to 70 at 7:00am
-# - alias: HVAC - Turn on heat in the morning
-#   initial_state: True
-#   trigger:
-#     - platform: time
-#       at: '07:00:00'
-#   condition:
-#     - condition: state
-#       entity_id: sensor.entryway_thermostat_operation_mode
-#       state: 'heat'
-#     - condition: or
-#       conditions:
-#         - condition: state
-#           entity_id: group.people
-#           state: 'home'
-#         - condition: state
-#           entity_id: input_select.occupants
-#           state: 'dogs'
-#         - condition: state
-#           entity_id: input_select.occupants
-#           state: 'guests'
-#   action:
-#     service: script.set_temperature
-#     data:
-#       temperature: 68
+# If in heat mode and we're home, set temp to 73 at 6:30am
+- alias: HVAC - Turn up front heat in the morning
+  id: hvac_morning_front_heat_up
+  initial_state: True
+  trigger:
+    - platform: time
+      at: '05:00:00'
+  condition:
+    - condition: state
+      entity_id: climate.front
+      state: 'heat'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: group.people
+          state: 'home'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'dogs'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'guests'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.front
+      hvac_mode: 'heat'
+      temperature: 73
 
-# If in heat mode and we're home, set LR temp to 70 at 6:30am
-# - alias: HVAC - Turn on heat in GR in the morning
-#   initial_state: True
-#   trigger:
-#     - platform: time
-#       at: '06:30:00'
-#   condition:
-#     - condition: state
-#       entity_id: sensor.entryway_thermostat_operation_mode
-#       state: 'heat'
-#     - condition: or
-#       conditions:
-#         - condition: state
-#           entity_id: group.people
-#           state: 'home'
-#         - condition: state
-#           entity_id: input_select.occupants
-#           state: 'dogs'
-#         - condition: state
-#           entity_id: input_select.occupants
-#           state: 'guests'
-#   action:
-#     service: climate.set_temperature
-#     data:
-#       entity_id: climate.entryway
-#       hvac_mode: 'heat'
-#       temperature: '68'
+# Turn up heat in the bedrooms later
+- alias: HVAC - Turn up back heat in the morning
+  id: hvac_morning_back_heat_up
+  initial_state: False
+  trigger:
+    - platform: time
+      at: '08:00:00'
+  condition:
+    - condition: state
+      entity_id: climate.back
+      state: 'heat'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: group.people
+          state: 'home'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'dogs'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'guests'
+  action:
+    service: climate.set_temperature
+    data:
+      entity_id: climate.back
+      hvac_mode: 'heat'
+      temperature: 70
 
-# If in heat mode, set temp front to 60 at 1am
-# - alias: HVAC - Turn off front heat at night
-#   initial_state: True
-#   trigger:
-#     - platform: time
-#       at: '01:00:00'
-#   condition:
-#     - condition: state
-#       entity_id: sensor.entryway_thermostat_operation_mode
-#       state: 'heat'
-#     - condition: or
-#       conditions:
-#         - condition: state
-#           entity_id: group.people
-#           state: 'home'
-#         - condition: state
-#           entity_id: input_select.occupants
-#           state: 'dogs'
-#         - condition: state
-#           entity_id: input_select.occupants
-#           state: 'guests'
-#   action:
-#     - service: climate.set_temperature
-#       data:
-#         entity_id: climate.entryway
-#         hvac_mode: 'heat'
-#         temperature: '60'
-#
-# If in heat mode, set temp at back to 68 at midnight
-# - alias: HVAC - Set back heat to 68 at night
-#   initial_state: True
-#   trigger:
-#     - platform: time
-#       at: '00:00:00'
-#   condition:
-#     - condition: state
-#       entity_id: sensor.entryway_thermostat_operation_mode
-#       state: 'heat'
-#     - condition: or
-#       conditions:
-#         - condition: state
-#           entity_id: group.people
-#           state: 'home'
-#         - condition: state
-#           entity_id: input_select.occupants
-#           state: 'dogs'
-#         - condition: state
-#           entity_id: input_select.occupants
-#           state: 'guests'
-#   action:
-#     - service: climate.set_temperature
-#       data:
-#         entity_id: climate.bedrooms_hallway
-#         hvac_mode: 'heat'
-#         temperature: '68'
+# If in heat mode, set temp front to 65 at night
+- alias: HVAC - Turn off front heat at night
+  id: hvac_evening_front_heat_down
+  initial_state: True
+  trigger:
+    - platform: time
+      at: '00:30:00'
+  condition:
+    - condition: state
+      entity_id: climate.front
+      state: 'heat'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: group.people
+          state: 'home'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'dogs'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'guests'
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.front
+        hvac_mode: 'heat'
+        temperature: '65'
+
+# If in heat mode, set temp at back to 64 at midnight
+- alias: HVAC - Set back heat to 64 at 10pm
+  id: hvac_evening_back_heat_down
+  initial_state: True
+  trigger:
+    - platform: time
+      at: '22:00:00'
+  condition:
+    - condition: state
+      entity_id: climate.back
+      state: 'heat'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: group.people
+          state: 'home'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'dogs'
+        - condition: state
+          entity_id: input_select.occupants
+          state: 'guests'
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.back
+        hvac_mode: 'heat'
+        temperature: '64'
 
 # These automations bind the UI to the Thermostat and vice versa
 - id: hvac_set_mode_from_ui
