@@ -113,6 +113,33 @@
     data:
       entity_id: input_boolean.master_floor_heat
 
+- id: nuheat_master_on_morning2
+  alias: NuHeat - Turn on at 5:30am if we're home2
+  initial_state: True
+  trigger:
+    - platform: time
+      at: '05:30:00'
+  condition:
+    - condition: state
+      entity_id: group.camsandy
+      state: 'home'
+    - condition: numeric_state
+      entity_id: sensor.westridge_inside_temp
+      below: '71'
+    - condition: numeric_state
+      entity_id: sensor.pirateweather_daytime_high_temperature_0d
+      below: 77
+    - condition: template
+      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
+    - condition: numeric_state
+      entity_id: sensor.westridge_temp
+      below: 53
+  action:
+    service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.master_floor_heat
+
+
 # if m-f, turn off at 7:30am
 - alias: NuHeat - Turn off at 7:45 on M-F
   initial_state: False
@@ -195,11 +222,11 @@
     data:
       entity_id: input_boolean.master_floor_heat
 
-- alias: NuHeat - Turn off at 11:45pm
+- alias: NuHeat - Turn off at 9pm
   initial_state: True
   trigger:
     - platform: time
-      at: '23:45:00'
+      at: '21:00:00'
   action:
     service: input_boolean.turn_off
     data:
@@ -289,7 +316,7 @@
       entity_id: sensor.westridge_inside_temp
       below: '72'
     - condition: template
-      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
+      value_template: '{{ states.sensor.back_thermostat_operation_mode.state == "heat" }}'
   action:
     service: input_boolean.turn_on
     data:
@@ -310,7 +337,7 @@
       entity_id: sensor.westridge_inside_temp
       below: '72'
     - condition: template
-      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
+      value_template: '{{ states.sensor.back_thermostat_operation_mode.state == "heat" }}'
   action:
     service: input_boolean.turn_on
     data:
