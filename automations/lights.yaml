@@ -81,8 +81,8 @@
     data:
       entity_id:
         - switch.front_door_figures
+        - switch.garage_xmas_lights
         # - switch.front_door_xmas_lights
-        # - switch.garage_xmas_lights
 
 - alias: Lights - Xmas lights off at 2am
   initial_state: True
@@ -94,5 +94,5 @@
     data:
       entity_id:
         - switch.front_door_figures
+        - switch.garage_xmas_lights
         # - switch.front_door_xmas_lights
-        # - switch.garage_xmas_lights
