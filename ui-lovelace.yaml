@@ -69,13 +69,13 @@ views:
         title: Lights
         state_color: true
         entities:
-          - light.front_hallway_hallway
           - light.front_hallway_kitchen
           - light.front_hallway_great_room
           - light.dining_room_dining_room
-          - light.great_room_patio_lights
+          - light.front_hallway_hallway
           - light.front_door_lights
           - light.front_door_garage
+          - light.great_room_patio_lights
           - switch.front_door_xmas_lights
           - switch.front_door_figures
           - switch.garage_xmas_lights
@@ -97,14 +97,25 @@ views:
           - input_boolean.guest_floor_heat
 
       - type: entities
-        title: Shades
+        title: Dining Shades
         show_header_toggle: false
         entities:
           - cover.dining_room_front
           - cover.dining_room_side
-          - script.open_shades_full
-          - script.open_shades_half
-          - script.close_shades
+          - script.open_dining_shades_full
+          - script.open_dining_shades_half
+          - script.close_dining_shades
+
+      - type: entities
+        title: Master Shades
+        show_header_toggle: false
+        entities:
+          - cover.master_back_left
+          - cover.master_back_right
+          - cover.master_big_window
+          - script.open_master_shades_full
+          - script.open_master_shades_half
+          - script.close_master_shades
 
       - type: alarm-panel
         entity: alarm_control_panel.home_alarm
@@ -125,7 +136,6 @@ views:
         show_header_toggle: false
         entities:
           - sensor.enphase
-          - sensor.enphase_yesterday
 
     # Specify a tab icon if you want the view tab to be an icon.
   - title: Sensors

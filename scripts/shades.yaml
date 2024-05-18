@@ -1,28 +1,47 @@
-set_shades:
+open_dining_shades_full:
   sequence:
     - service: cover.set_cover_position
-      data_template:
-        entity_id:
-          - cover.dining_room_front
-          - cover.dining_room_side
-        position: " {{ position }} "
-
-open_shades_full:
-  sequence:
-    - service: script.set_shades
+      target:
+          area_id: dining_room
       data:
         position: 100
 
-open_shades_half:
+open_dining_shades_half:
   sequence:
-    - service: script.set_shades
+    - service: cover.set_cover_position
+      target:
+          area_id: dining_room
       data:
         position: 50
 
-close_shades:
+close_dining_shades:
   sequence:
-    - service: script.set_shades
+    - service: cover.set_cover_position
+      target:
+          area_id: dining_room
       data:
         position: 0
 
+open_master_shades_full:
+  sequence:
+    - service: cover.set_cover_position
+      target:
+          area_id: master_bedroom
+      data:
+        position: 100
 
+open_master_shades_half:
+  sequence:
+    - service: cover.set_cover_position
+      target:
+          area_id: master_bedroom
+      data:
+        position: 25
+
+close_master_shades:
+  sequence:
+    - service: cover.set_cover_position
+      target:
+          area_id: master_bedroom
+      data:
+        position: 5

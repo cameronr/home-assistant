@@ -23,3 +23,17 @@
           {%- if is_state("switch.gate", "on") %}
             {{ states.switch.gate.attributes.friendly_name }}
           {%- endif -%}
+
+- alias: Gate - open on monday morning
+  initial_state: False
+  trigger:
+    - platform: time
+      at: '07:45:00'
+  condition:
+    - condition: time
+      weekday:
+        - mon
+  action:
+    service: switch.turn_on
+    data:
+      entity_id: switch.gate
