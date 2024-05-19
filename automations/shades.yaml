@@ -1,0 +1,49 @@
+- alias: Shades - open master in the morning
+  id: shades_open_master_in_morning
+  initial_state: True
+  trigger:
+    platform: time
+    at: '8:30:00'
+  condition:
+    condition: state
+    entity_id: group.camsandy
+    state: 'home'
+  action:
+    service: script.open_master_shades_half
+
+- alias: Shades - close master when after sunset
+  id: shades_close_master_after_sunset
+  initial_state: True
+  trigger:
+    platform: sun
+    event: sunset
+    offset: 00:30:00
+  action:
+    service: script.close_master_shades
+
+- alias: Shades - open dining in the morning
+  id: shades_open_dining_in_morning
+  initial_state: True
+  trigger:
+    platform: time
+    at: '6:50:00'
+  condition:
+    condition: state
+    entity_id: group.camsandy
+    state: 'home'
+  action:
+    - service: cover.set_cover_position
+      target:
+        entity_id: cover.dining_room_front
+      data:
+        position: 50
+
+- alias: Shades - close dining in evening
+  id: shades_close_master_after_sunset
+  initial_state: True
+  trigger:
+    platform: time
+    at: '20:00:00'
+  action:
+    service: script.close_master_shades
+
