@@ -18,7 +18,7 @@ set_temperature_and_notify:
     - service: script.set_temperature
       data_template:
         temperature: "{{ temperature }}"
-    - service: notify.gmail
-      data_template:
-        title: "{{ message }}"
-        message: "{{ message }}"
+    # - service: notify.gmail
+    #   data_template:
+    #     title: "{{ message }}"
+    #     message: "{{ message }}"

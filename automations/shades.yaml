@@ -39,11 +39,10 @@
         position: 50
 
 - alias: Shades - close dining in evening
-  id: shades_close_master_after_sunset
+  id: shades_close_dining_after_sunset
   initial_state: True
   trigger:
     platform: time
     at: '20:00:00'
   action:
-    service: script.close_master_shades
 

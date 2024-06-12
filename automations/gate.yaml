@@ -1,0 +1,44 @@
+- alias: Gate - open on specific date
+  id: gate_open_specific_date
+  initial_state: True
+  trigger:
+    - platform: time
+      at: '07:45:00'
+  condition:
+    condition: template
+    value_template: "{{ now().year == 2024 and now().month == 6 and now().day == 6 }}"
+  action:
+    service: switch.turn_on
+    data:
+      entity_id: switch.gate
+
+- alias: Gate - open on wednesday at noon for landscapers
+  id: gate_open_wednesday_noon_for_landscapers
+  initial_state: False
+  trigger:
+    - platform: time
+      at: '12:00:00'
+  condition:
+    - condition: time
+      weekday:
+        - wed
+  action:
+    service: switch.turn_on
+    data:
+      entity_id: switch.gate
+
+- alias: Gate - close on wednesday at 2pm after landscapers
+  id: gate_close_wednesday_2pm_after_landscapers
+  initial_state: False
+  trigger:
+    - platform: time
+      at: '14:00:00'
+  condition:
+    - condition: time
+      weekday:
+        - wed
+  action:
+    service: switch.turn_off
+    data:
+      entity_id: switch.gate
+

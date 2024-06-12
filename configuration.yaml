@@ -23,6 +23,9 @@ config:
 http:
   server_host: !secret server_host
   server_port: !secret server_port
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - !secret proxy_ip
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -79,29 +82,6 @@ recorder:
       - sensor.date_time
       - sensor.home_alarm_keypad
       - sun.sun
-      - sensor.schlage_be469_touchscreen_deadbolt_access_control_1
-      - sensor.schlage_be469_touchscreen_deadbolt_alarm_level_1
-      - sensor.schlage_be469_touchscreen_deadbolt_alarm_type_1
-      - sensor.schlage_be469_touchscreen_deadbolt_burglar_1
-      - sensor.schlage_be469_touchscreen_deadbolt_power_management_1
-      - sensor.schlage_be469_touchscreen_deadbolt_sourcenodeid_1
-      - sensor.schlage_be469_touchscreen_deadbolt_system_1
-      - sensor.schlage_be469_touchscreen_deadbolt_access_control_2
-      - sensor.schlage_be469_touchscreen_deadbolt_alarm_level_2
-      - sensor.schlage_be469_touchscreen_deadbolt_alarm_type_2
-      - sensor.schlage_be469_touchscreen_deadbolt_burglar_2
-      - sensor.schlage_be469_touchscreen_deadbolt_power_management_2
-      - sensor.schlage_be469_touchscreen_deadbolt_sourcenodeid_2
-      - sensor.schlage_be469_touchscreen_deadbolt_system_2
-      - sensor.schlage_be469_touchscreen_deadbolt_access_control_3
-      - sensor.schlage_be469_touchscreen_deadbolt_alarm_level_3
-      - sensor.schlage_be469_touchscreen_deadbolt_alarm_type_3
-      - sensor.schlage_be469_touchscreen_deadbolt_burglar_3
-      - sensor.schlage_be469_touchscreen_deadbolt_power_management_3
-      - sensor.schlage_be469_touchscreen_deadbolt_sourcenodeid_3
-      - sensor.schlage_be469_touchscreen_deadbolt_system_3
-      - sensor.ring_front_door_last_activity
-      - cover.myq
       - group.alarm
       - group.alarm_sensors
       - group.climate
@@ -174,8 +154,6 @@ input_boolean:
     icon: mdi:radiator
 
 # ios: !include ios.yaml
-
-lutron: !include lutron.yaml
 
 mobile_app:
 
