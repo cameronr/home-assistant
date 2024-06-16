@@ -1,3 +1,4 @@
+---
 homeassistant:
   name: !secret name
   latitude: !secret latitude
@@ -9,30 +10,24 @@ homeassistant:
   country: US
   time_zone: America/Los_Angeles
   currency: USD
-
 # Enables the frontend
 frontend:
-
 # Put Lovelace in yaml mode
 lovelace:
   mode: yaml
-
 # Enables configuration UI
 config:
-
 http:
   server_host: !secret server_host
   server_port: !secret server_port
   use_x_forwarded_for: true
   trusted_proxies:
     - !secret proxy_ip
-
 # Checks for available updates
 # Note: This component will send some information about your system to
 # the developers to assist with development of Home Assistant.
 # For more information, please see:
 # https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
-
 logger:
   default: info
   logs:
@@ -50,20 +45,15 @@ logger:
     # homeassistant.components.switch.unifi: debug
     # homeassistant.components.device_tracker: debug
     # aiounifi: debug
-
-
 # Discover some devices automatically
 # discovery:
 #   ignore:
 #     - yamaha
 #     - apple_tv
-
 # Allows you to issue voice commands from the frontend in enabled browsers
 # conversation:
-
 # Enables support for tracking state changes over time
 history:
-
 # list most groups to track groups.people to see if it transitions
 # to unknown when there's a network hiccup
 recorder:
@@ -94,18 +84,13 @@ recorder:
       - group.solar
       - group.switches
       - group.zwave
-
-
 # View all events in a logbook
 logbook:
-
 # Track the sun
 sun:
-
 # Text to speech
 # tts:
 #   - platform: google
-
 notify: !include notifier.yaml
 automation: !include_dir_merge_list automations/
 script: !include_dir_merge_named scripts/
@@ -115,12 +100,9 @@ switch: !include_dir_merge_list switches/
 cover: !include_dir_merge_list covers/
 group: !include_dir_merge_named groups/
 shell_command: !include_dir_merge_named shell_commands/
-
 envisalink: !include envisalink.yaml
-
 emulated_hue:
   listen_port: 28888
-
 input_select:
   occupants:
     name: Occupancy
@@ -136,7 +118,6 @@ input_select:
       - cool
       - heat
       - 'fan only'
-
 input_number:
   climate_temp:
     name: Temp
@@ -144,7 +125,6 @@ input_number:
     max: 85
     step: 1
     mode: box
-
 input_boolean:
   master_floor_heat:
     icon: mdi:radiator
@@ -152,11 +132,8 @@ input_boolean:
     icon: mdi:radiator
   kids_floor_heat:
     icon: mdi:radiator
-
 # ios: !include ios.yaml
-
 mobile_app:
-
 # nest:
 #   client_id: !secret nest_client_id
 #   client_secret: !secret nest_client_secret
@@ -174,33 +151,24 @@ mobile_app:
 #   organization_id: !secret nicehash_org_id
 #   api_key: !secret nicehash_api_key
 #   api_secret: !secret nicehash_api_secret
-#   balances: true # (default = false) - Enable balance sensors
-#   rigs: true # (default = false) - Enable rig sensors
-#   devices: true # (default = false) - Enable device sensors
-#   payouts: true # (default = false) - Enable payout sensors
-
-
+#   balances: true  # (default = false) - Enable balance sensors
+#   rigs: true  # (default = false) - Enable rig sensors
+#   devices: true  # (default = false) - Enable device sensors
+#   payouts: true  # (default = false) - Enable payout sensors
 person:
-
 # tesla:
 #   username: !secret tesla_username
 #   password: !secret tesla_password
 #   scan_interval: 86400
-
 system_health:
-
 wake_on_lan:
-
 weather:
-
 wemo:
   discovery: true
-
 zone:
   - name: home
     latitude: !secret latitude
     longitude: !secret longitude
-
 # zwave:
 #   usb_path: /dev/ttyACM0
 #   network_key: !secret zwave_network_key
