@@ -50,7 +50,6 @@ views:
           - switch.great_room_fan
           - switch.ecm
           - switch.wemo_dehumidifier
-          - cover.garage_door_opener
           - switch.mediabox
           - remote.harmony_hub
           - script.goodnight
@@ -71,6 +70,7 @@ views:
         entities:
           - light.front_hallway_kitchen
           - light.front_hallway_great_room
+          - light.back_hallway_lights
           - light.dining_room_dining_room
           - light.front_hallway_hallway
           - light.front_door_lights
