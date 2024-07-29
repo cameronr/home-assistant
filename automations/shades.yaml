@@ -3,11 +3,14 @@
   initial_state: True
   trigger:
     platform: time
-    at: '8:30:00'
+    at: "8:30:00"
   condition:
-    condition: state
-    entity_id: group.camsandy
-    state: 'home'
+    - condition: state
+      entity_id: group.camsandy
+      state: "home"
+    - condition: numeric_state
+      entity_id: sensor.pirateweather_daytime_high_temperature_0d
+      below: 80
   action:
     service: script.open_master_shades_half
 
@@ -26,11 +29,11 @@
   initial_state: True
   trigger:
     platform: time
-    at: '6:50:00'
+    at: "6:50:00"
   condition:
     condition: state
     entity_id: group.camsandy
-    state: 'home'
+    state: "home"
   action:
     - service: cover.set_cover_position
       target:
@@ -43,6 +46,5 @@
   initial_state: True
   trigger:
     platform: time
-    at: '20:00:00'
+    at: "20:00:00"
   action:
-
