@@ -12,7 +12,7 @@ resources:
 # Exclude entities from "Unused entities" view
 excluded_entities:
 views:
-    # View tab title.
+  # View tab title.
   - icon: mdi:home
     title: Home
     # Optional unique id for direct access /lovelace/${id}
@@ -129,6 +129,9 @@ views:
         forecast_type: daily
 
       - type: custom:mini-media-player
+        entity: media_player.lg_webos_tv_b36b
+
+      - type: custom:mini-media-player
         entity: media_player.marantz_sr5012_2
 
       - type: entities
@@ -149,24 +152,31 @@ views:
           - climate.kids_nuheat
           - climate.guest_nuheat
       - type: entities
-        title: Alarm Sensors
-        show_header_toggle: false
         entities:
-          - binary_sensor.fire_sprinklers
+          - binary_sensor.elara_bedroom
           - binary_sensor.front_door
           - binary_sensor.front_windows
           - binary_sensor.guest_bedroom
+          - binary_sensor.hall_bath
+          - binary_sensor.kep_bedroom
           - binary_sensor.kitchen
           - binary_sensor.laundry
           - binary_sensor.lift_slide
           - binary_sensor.master
           - binary_sensor.master_bath
           - binary_sensor.mudroom_powder
-          - binary_sensor.kep_bedroom
-          - binary_sensor.elara_bedroom
           - binary_sensor.pantry
-          - binary_sensor.hall_bath
-          - script.panic
+          - binary_sensor.fire_sprinklers
+          - entity: binary_sensor.home_alarm_ready
+            name: Ready
+          - entity: sensor.home_alarm_keypad
+            name: Keypad
+          - entity: binary_sensor.home_alarm_alarm
+            name: Alarm
+          - entity: binary_sensor.home_alarm_fire
+            name: Fire
+        title: Home Alarm
+
       - type: custom:auto-entities
         card:
           type: entities
@@ -235,9 +245,6 @@ views:
             title: Big Car
           - type: thermostat
             entity: climate.big_car_hvac_climate_system
-
-
-
 
   - icon: mdi:home-assistant
     # Title of the view. Will be used as the tooltip for tab icon

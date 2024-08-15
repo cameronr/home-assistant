@@ -34,17 +34,18 @@ logger:
     homeassistant.core: warn
     homeassistant.components.ambient_station: warn
     engineio.client: warn
+    custom_components.doorking_1812ap: debug
   #   homeassistant.components.envisalink: info
   #   pyenvisalink.envisalink_base_client: info
   #   homeassistant.components.tesla: debug
   #   homeassistant.components.sensor.tesla: debug
   #   homeassistant.components.binary_sensor.tesla: debug
-    # homeassistant.components.unifi: debug
-    # homeassistant.components.unifi.device_tracker: debug
-    # homeassistant.components.device_tracker.unifi: debug
-    # homeassistant.components.switch.unifi: debug
-    # homeassistant.components.device_tracker: debug
-    # aiounifi: debug
+  # homeassistant.components.unifi: debug
+  # homeassistant.components.unifi.device_tracker: debug
+  # homeassistant.components.device_tracker.unifi: debug
+  # homeassistant.components.switch.unifi: debug
+  # homeassistant.components.device_tracker: debug
+  # aiounifi: debug
 # Discover some devices automatically
 # discovery:
 #   ignore:
@@ -100,7 +101,7 @@ switch: !include_dir_merge_list switches/
 cover: !include_dir_merge_list covers/
 group: !include_dir_merge_named groups/
 shell_command: !include_dir_merge_named shell_commands/
-envisalink: !include envisalink.yaml
+# envisalink_new: !include envisalink.yaml
 emulated_hue:
   listen_port: 28888
 input_select:
@@ -114,10 +115,10 @@ input_select:
   climate_mode:
     name: Climate Mode
     options:
-      - 'off'
+      - "off"
       - cool
       - heat
-      - 'fan only'
+      - "fan only"
 input_number:
   climate_temp:
     name: Temp
