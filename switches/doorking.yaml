@@ -1,4 +1,0 @@
-- platform: doorking
-  name: gate
-  host: !secret doorking_host
-  port: !secret doorking_port

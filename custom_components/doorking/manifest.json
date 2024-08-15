@@ -1,9 +1,0 @@
-{
-  "domain": "doorking",
-  "name": "Wrapper for custom Doorking webservice",
-  "documentation": "",
-  "dependencies": [],
-  "codeowners": [],
-  "requirements": [],
-  "version": "1.0.0"
-}
