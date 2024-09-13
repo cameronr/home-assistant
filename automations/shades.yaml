@@ -41,6 +41,19 @@
       data:
         position: 50
 
+- alias: Shades - close dining after breakfast if hot
+  id: shades_close_dining_after_breakfast
+  initial_state: True
+  trigger:
+    platform: time
+    at: "9:00:00"
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.pirateweather_daytime_high_temperature_0d
+      above: 79
+  action:
+    - service: script.close_dining_shades
+
 - alias: Shades - close dining in evening
   id: shades_close_dining_after_sunset
   initial_state: True
