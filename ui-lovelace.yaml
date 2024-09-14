@@ -117,6 +117,14 @@ views:
           - script.open_master_shades_half
           - script.close_master_shades
 
+      - type: entities
+        entities:
+          - entity: cover.ratgdov25i_0b0617_door
+            name: door
+          - entity: button.ratgdov25i_0b0617_toggle_door
+            name: toggle door
+        title: Garage Door
+
       - type: alarm-panel
         entity: alarm_control_panel.home_alarm
         show_keypad: false
