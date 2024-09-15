@@ -2,16 +2,19 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '23:30:00'
+      at: "23:30:00"
   condition:
     - condition: or
       conditions:
         - condition: state
           entity_id: lock.be469
-          state: 'unlocked'
+          state: "unlocked"
         - condition: state
           entity_id: switch.gate
-          state: 'on'
+          state: "on"
+        - condition: state
+          entity_id: cover.ratgdov25i_0b0617_door
+          state: "open"
   action:
     - service: notify.push_family
       data_template:
@@ -23,4 +26,6 @@
           {%- if is_state("switch.gate", "on") %}
             {{ states.switch.gate.attributes.friendly_name }}
           {%- endif -%}
-
+          {%- if is_state("cover.ratgdov25i_0b0617_door", "open") %}
+            Garage
+          {%- endif -%}
