@@ -148,7 +148,7 @@ views:
         entities:
           - sensor.enphase
 
-    # Specify a tab icon if you want the view tab to be an icon.
+  # Specify a tab icon if you want the view tab to be an icon.
   - title: Sensors
     id: sensors
     cards:
@@ -253,6 +253,21 @@ views:
             title: Big Car
           - type: thermostat
             entity: climate.big_car_hvac_climate_system
+
+  # Specify a tab icon if you want the view tab to be an icon.
+  - title: Solar
+    id: solar
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Solar
+        filter:
+          include:
+            - entity_id: "sensor.envoy*"
+            - entity_id: "sensor.solar*"
+        sort:
+          method: name
 
   - icon: mdi:home-assistant
     # Title of the view. Will be used as the tooltip for tab icon
