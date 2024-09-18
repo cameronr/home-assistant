@@ -126,27 +126,27 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '05:00:00'
+      at: "05:00:00"
   condition:
     - condition: state
       entity_id: climate.front
-      state: 'heat'
+      state: "heat"
     - condition: or
       conditions:
         - condition: state
           entity_id: group.people
-          state: 'home'
+          state: "home"
         - condition: state
           entity_id: input_select.occupants
-          state: 'dogs'
+          state: "dogs"
         - condition: state
           entity_id: input_select.occupants
-          state: 'guests'
+          state: "guests"
   action:
     service: climate.set_temperature
     data:
       entity_id: climate.front
-      hvac_mode: 'heat'
+      hvac_mode: "heat"
       temperature: 73
 
 # Turn up heat in the bedrooms later
@@ -155,27 +155,27 @@
   initial_state: False
   trigger:
     - platform: time
-      at: '08:00:00'
+      at: "08:00:00"
   condition:
     - condition: state
       entity_id: climate.back
-      state: 'heat'
+      state: "heat"
     - condition: or
       conditions:
         - condition: state
           entity_id: group.people
-          state: 'home'
+          state: "home"
         - condition: state
           entity_id: input_select.occupants
-          state: 'dogs'
+          state: "dogs"
         - condition: state
           entity_id: input_select.occupants
-          state: 'guests'
+          state: "guests"
   action:
     service: climate.set_temperature
     data:
       entity_id: climate.back
-      hvac_mode: 'heat'
+      hvac_mode: "heat"
       temperature: 70
 
 # If in heat mode, set temp front to 65 at night
@@ -184,28 +184,28 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '00:30:00'
+      at: "00:30:00"
   condition:
     - condition: state
       entity_id: climate.front
-      state: 'heat'
+      state: "heat"
     - condition: or
       conditions:
         - condition: state
           entity_id: group.people
-          state: 'home'
+          state: "home"
         - condition: state
           entity_id: input_select.occupants
-          state: 'dogs'
+          state: "dogs"
         - condition: state
           entity_id: input_select.occupants
-          state: 'guests'
+          state: "guests"
   action:
     - service: climate.set_temperature
       data:
         entity_id: climate.front
-        hvac_mode: 'heat'
-        temperature: '65'
+        hvac_mode: "heat"
+        temperature: "65"
 
 # If in heat mode, set temp at back to 64 at midnight
 - alias: HVAC - Set back heat to 64 at 10pm
@@ -213,28 +213,28 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '22:00:00'
+      at: "22:00:00"
   condition:
     - condition: state
       entity_id: climate.back
-      state: 'heat'
+      state: "heat"
     - condition: or
       conditions:
         - condition: state
           entity_id: group.people
-          state: 'home'
+          state: "home"
         - condition: state
           entity_id: input_select.occupants
-          state: 'dogs'
+          state: "dogs"
         - condition: state
           entity_id: input_select.occupants
-          state: 'guests'
+          state: "guests"
   action:
     - service: climate.set_temperature
       data:
         entity_id: climate.back
-        hvac_mode: 'heat'
-        temperature: '64'
+        hvac_mode: "heat"
+        temperature: "64"
 
 # These automations bind the UI to the Thermostat and vice versa
 - id: hvac_set_mode_from_ui
@@ -246,24 +246,24 @@
   condition:
     - condition: or
       conditions:
-      - condition: state
-        entity_id: input_select.climate_mode
-        state: 'heat'
-      - condition: state
-        entity_id: input_select.climate_mode
-        state: 'cool'
-      - condition: state
-        entity_id: input_select.climate_mode
-        state: 'off'
+        - condition: state
+          entity_id: input_select.climate_mode
+          state: "heat"
+        - condition: state
+          entity_id: input_select.climate_mode
+          state: "cool"
+        - condition: state
+          entity_id: input_select.climate_mode
+          state: "off"
   action:
     - service: climate.set_hvac_mode
       data_template:
         entity_id: climate.front
-        hvac_mode: '{{ states.input_select.climate_mode.state }}'
+        hvac_mode: "{{ states.input_select.climate_mode.state }}"
     - service: climate.set_hvac_mode
       data_template:
         entity_id: climate.back
-        hvac_mode: '{{ states.input_select.climate_mode.state }}'
+        hvac_mode: "{{ states.input_select.climate_mode.state }}"
 
 - id: hvac_set_mode_from_ui_fan_only
   alias: "HVAC - Set hvac mode to fan only based on UI"
@@ -274,16 +274,16 @@
   condition:
     - condition: state
       entity_id: input_select.climate_mode
-      state: 'fan only'
+      state: "fan only"
   action:
     - service: climate.set_hvac_mode
       data_template:
         entity_id: climate.front
-        hvac_mode: 'fan_only'
+        hvac_mode: "fan_only"
     - service: climate.set_hvac_mode
       data_template:
         entity_id: climate.back
-        hvac_mode: 'fan_only'
+        hvac_mode: "fan_only"
 
 - id: hvac_set_temp_from_ui
   alias: HVAC - Set temperature based on UI
@@ -296,25 +296,25 @@
     conditions:
       - condition: and
         conditions:
-        - condition: state
-          entity_id: sensor.front_thermostat_operation_mode
-          state: 'heat'
-        - condition: numeric_state
-          entity_id: input_number.climate_temp
-          below: '73'
+          - condition: state
+            entity_id: sensor.front_thermostat_operation_mode
+            state: "heat"
+          - condition: numeric_state
+            entity_id: input_number.climate_temp
+            below: "73"
       - condition: and
         conditions:
-        - condition: state
-          entity_id: sensor.front_thermostat_operation_mode
-          state: 'cool'
-        - condition: numeric_state
-          entity_id: input_number.climate_temp
-          above: '68'
+          - condition: state
+            entity_id: sensor.front_thermostat_operation_mode
+            state: "cool"
+          - condition: numeric_state
+            entity_id: input_number.climate_temp
+            above: "68"
   action:
     - service: script.set_temperature_and_notify
       data_template:
-        temperature: '{{ states.input_number.climate_temp.state | float }}'
-        message: 'Setting HVAC to {{ states.input_number.climate_temp.state }} (mode: {{ states.input_select.climate_mode.state }})'
+        temperature: "{{ states.input_number.climate_temp.state | float }}"
+        message: "Setting HVAC to {{ states.input_number.climate_temp.state }} (mode: {{ states.input_select.climate_mode.state }})"
 
 # - id: hvac_set_mode_on_startup
 #   alias: HVAC - Set hvac mode on startup
@@ -328,10 +328,9 @@
 #       data_template:
 #         option: '{{ states.sensor.front_thermostat_operation_mode.state }}'
 
-
 - id: hvac_set_temp_on_startup
   alias: HVAC - Set hvac temp on startup
-  initial_state: True
+  initial_state: false
   trigger:
     platform: homeassistant
     event: start
@@ -344,4 +343,4 @@
     - service: input_number.set_value
       entity_id: input_number.climate_temp
       data_template:
-        value: '{{ states.sensor.back_thermostat_target.state }}'
+        value: "{{ states.sensor.back_thermostat_target.state }}"
