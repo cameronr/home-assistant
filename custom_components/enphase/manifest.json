@@ -1,9 +1,0 @@
-{
-  "domain": "enphase",
-  "name": "Hacked up Enphase solar component",
-  "documentation": "",
-  "dependencies": [],
-  "codeowners": [],
-  "requirements": [],
-  "version": "1.0.0"
-}
