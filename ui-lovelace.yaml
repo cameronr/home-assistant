@@ -146,7 +146,7 @@ views:
         title: Solar
         show_header_toggle: false
         entities:
-          - sensor.enphase
+          - sensor.solar_power_today
 
   # Specify a tab icon if you want the view tab to be an icon.
   - title: Sensors
