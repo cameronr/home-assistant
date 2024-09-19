@@ -12,7 +12,7 @@
       {% set old_envoy = states('sensor.envoy_121440029747_today_s_energy_production') | float %}
       {% set iq_gateway = states('sensor.envoy_202338002455_energy_production_today') | float %}
       {{ (old_envoy + iq_gateway) | round(2) }}
-    unit_of_measurement: "kW"
+    unit_of_measurement: "kWh"
 
 - sensor:
     name: "Solar power produced total"
@@ -20,4 +20,4 @@
       {% set old_envoy = states('sensor.envoy_121440029747_lifetime_energy_production') | float %}
       {% set iq_gateway = states('sensor.envoy_202338002455_lifetime_energy_production') | float %}
       {{ (old_envoy / 1000000 + iq_gateway) | round(2) }}
-    unit_of_measurement: "MW"
+    unit_of_measurement: "MWh"
