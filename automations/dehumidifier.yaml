@@ -2,7 +2,7 @@
 #   initial_state: True
 #   trigger:
 #     platform: numeric_state
-#     entity_id: sensor.westridge_temp
+#     entity_id: sensor.westridge_temperature
 #     below: '42'
 #   condition:
 #     condition: numeric_state
@@ -16,7 +16,7 @@
 #   initial_state: True
 #   trigger:
 #     platform: numeric_state
-#     entity_id: sensor.westridge_temp
+#     entity_id: sensor.westridge_temperature
 #     above: '50'
 #   action:
 #     entity_id: switch.dehumidifier
@@ -27,7 +27,7 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '03:00:00'
+      at: "03:00:00"
   action:
     entity_id: switch.wemo_dehumidifier
     service: switch.turn_off
@@ -37,16 +37,14 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '01:00:00'
+      at: "01:00:00"
   condition:
     - condition: numeric_state
-      entity_id: sensor.westridge_temp
-      below: '43'
+      entity_id: sensor.westridge_temperature
+      below: "43"
     - condition: numeric_state
-      entity_id: sensor.westridge_inside_temp
-      above: '65'
+      entity_id: sensor.westridge_inside_temperature
+      above: "65"
   action:
     entity_id: switch.wemo_dehumidifier
     service: switch.turn_on
-
-

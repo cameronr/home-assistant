@@ -3,8 +3,8 @@
   trigger:
     platform: state
     entity_id: input_boolean.master_floor_heat
-    from: 'off'
-    to: 'on'
+    from: "off"
+    to: "on"
   action:
     service: climate.set_temperature
     data:
@@ -16,8 +16,8 @@
   trigger:
     platform: state
     entity_id: input_boolean.master_floor_heat
-    from: 'on'
-    to: 'off'
+    from: "on"
+    to: "off"
   action:
     service: climate.set_temperature
     data:
@@ -29,8 +29,8 @@
   trigger:
     platform: state
     entity_id: input_boolean.guest_floor_heat
-    from: 'off'
-    to: 'on'
+    from: "off"
+    to: "on"
   action:
     service: climate.set_temperature
     data:
@@ -42,8 +42,8 @@
   trigger:
     platform: state
     entity_id: input_boolean.guest_floor_heat
-    from: 'on'
-    to: 'off'
+    from: "on"
+    to: "off"
   action:
     service: climate.set_temperature
     data:
@@ -55,8 +55,8 @@
   trigger:
     platform: state
     entity_id: input_boolean.kids_floor_heat
-    from: 'off'
-    to: 'on'
+    from: "off"
+    to: "on"
   action:
     service: climate.set_temperature
     data:
@@ -68,8 +68,8 @@
   trigger:
     platform: state
     entity_id: input_boolean.kids_floor_heat
-    from: 'on'
-    to: 'off'
+    from: "on"
+    to: "off"
   action:
     service: climate.set_temperature
     data:
@@ -81,8 +81,8 @@
   trigger:
     platform: state
     entity_id: group.camsandy
-    from: 'home'
-    to: 'not_home'
+    from: "home"
+    to: "not_home"
   action:
     service: input_boolean.turn_off
     data:
@@ -95,14 +95,14 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '05:30:00'
+      at: "05:30:00"
   condition:
     - condition: state
       entity_id: group.camsandy
-      state: 'home'
+      state: "home"
     - condition: numeric_state
-      entity_id: sensor.westridge_inside_temp
-      below: '71'
+      entity_id: sensor.westridge_inside_temperature
+      below: "71"
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
       below: 72
@@ -118,14 +118,14 @@
   initial_state: False
   trigger:
     - platform: time
-      at: '05:30:00'
+      at: "05:30:00"
   condition:
     - condition: state
       entity_id: group.camsandy
-      state: 'home'
+      state: "home"
     - condition: numeric_state
-      entity_id: sensor.westridge_inside_temp
-      below: '71'
+      entity_id: sensor.westridge_inside_temperature
+      below: "71"
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
       below: 77
@@ -138,13 +138,12 @@
     data:
       entity_id: input_boolean.master_floor_heat
 
-
 # if m-f, turn off at 7:30am
 - alias: NuHeat - Turn off at 7:45 on M-F
   initial_state: False
   trigger:
     - platform: time
-      at: '07:45:00'
+      at: "07:45:00"
   condition:
     - condition: time
       weekday:
@@ -163,7 +162,7 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '10:00:00'
+      at: "10:00:00"
   condition:
     - condition: time
       weekday:
@@ -174,7 +173,6 @@
     data:
       entity_id: input_boolean.master_floor_heat
 
-
 # FIXME: don't turn on if inside temp is >= 75 or ac is on
 # if we're home and time is 6:30pm, turn on
 - id: nuheat_master_on_evening
@@ -182,14 +180,14 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '18:30:00'
+      at: "18:30:00"
   condition:
     - condition: state
       entity_id: group.camsandy
-      state: 'home'
+      state: "home"
     - condition: numeric_state
-      entity_id: sensor.westridge_inside_temp
-      below: '72'
+      entity_id: sensor.westridge_inside_temperature
+      below: "72"
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
       below: 72
@@ -205,15 +203,15 @@
   trigger:
     platform: state
     entity_id: group.camsandy
-    from: 'not_home'
-    to: 'home'
+    from: "not_home"
+    to: "home"
   condition:
     - condition: time
-      after: '18:30:00'
-      before: '23:45:00'
+      after: "18:30:00"
+      before: "23:45:00"
     - condition: numeric_state
-      entity_id: sensor.westridge_inside_temp
-      below: '72'
+      entity_id: sensor.westridge_inside_temperature
+      below: "72"
     - condition: template
       value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
@@ -225,22 +223,19 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '21:00:00'
+      at: "21:00:00"
   action:
     service: input_boolean.turn_off
     data:
       entity_id: input_boolean.master_floor_heat
-
-
-
 
 - alias: NuHeat - Guest Turn off when not home
   initial_state: True
   trigger:
     platform: state
     entity_id: group.guests
-    from: 'home'
-    to: 'not_home'
+    from: "home"
+    to: "not_home"
   action:
     service: input_boolean.turn_off
     data:
@@ -250,17 +245,17 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '06:15:00'
+      at: "06:15:00"
   condition:
     - condition: state
       entity_id: group.guests
-      state: 'home'
+      state: "home"
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
       below: 72
     - condition: numeric_state
-      entity_id: sensor.westridge_inside_temp
-      below: '72'
+      entity_id: sensor.westridge_inside_temperature
+      below: "72"
   action:
     service: input_boolean.turn_on
     data:
@@ -271,7 +266,7 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '08:30:00'
+      at: "08:30:00"
   condition:
     - condition: time
       weekday:
@@ -290,7 +285,7 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '9:00:00'
+      at: "9:00:00"
   condition:
     - condition: time
       weekday:
@@ -301,19 +296,18 @@
     data:
       entity_id: input_boolean.guest_floor_heat
 
-
 - alias: NuHeat - Guest Turn on at 6:30pm if home
   initial_state: True
   trigger:
     - platform: time
-      at: '18:30:00'
+      at: "18:30:00"
   condition:
     - condition: state
       entity_id: group.guests
-      state: 'home'
+      state: "home"
     - condition: numeric_state
-      entity_id: sensor.westridge_inside_temp
-      below: '72'
+      entity_id: sensor.westridge_inside_temperature
+      below: "72"
     - condition: template
       value_template: '{{ states.sensor.back_thermostat_operation_mode.state == "heat" }}'
   action:
@@ -326,15 +320,15 @@
   trigger:
     platform: state
     entity_id: group.guests
-    from: 'not_home'
-    to: 'home'
+    from: "not_home"
+    to: "home"
   condition:
     - condition: time
-      after: '18:30:00'
-      before: '22:30:00'
+      after: "18:30:00"
+      before: "22:30:00"
     - condition: numeric_state
-      entity_id: sensor.westridge_inside_temp
-      below: '72'
+      entity_id: sensor.westridge_inside_temperature
+      below: "72"
     - condition: template
       value_template: '{{ states.sensor.back_thermostat_operation_mode.state == "heat" }}'
   action:
@@ -347,25 +341,24 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '22:30:00'
+      at: "22:30:00"
   action:
     service: input_boolean.turn_off
     data:
       entity_id: input_boolean.guest_floor_heat
 
-
 - alias: NuHeat - Eric, turn on at 11am if home
   initial_state: False
   trigger:
     - platform: time
-      at: '11:00:00'
+      at: "11:00:00"
   condition:
     - condition: state
       entity_id: device_tracker.ephone_2
-      state: 'home'
+      state: "home"
     - condition: numeric_state
-      entity_id: sensor.westridge_inside_temp
-      below: '72'
+      entity_id: sensor.westridge_inside_temperature
+      below: "72"
   action:
     service: input_boolean.turn_on
     data:
@@ -375,7 +368,7 @@
   initial_state: False
   trigger:
     - platform: time
-      at: '02:00:00'
+      at: "02:00:00"
   action:
     service: input_boolean.turn_off
     data:
@@ -386,15 +379,15 @@
   trigger:
     platform: state
     entity_id: device_tracker.ephone_2
-    from: 'not_home'
-    to: 'home'
+    from: "not_home"
+    to: "home"
   condition:
     - condition: time
-      after: '18:30:00'
-      before: '02:00:00'
+      after: "18:30:00"
+      before: "02:00:00"
     - condition: numeric_state
-      entity_id: sensor.westridge_inside_temp
-      below: '72'
+      entity_id: sensor.westridge_inside_temperature
+      below: "72"
     - condition: template
       value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
@@ -402,25 +395,23 @@
     data:
       entity_id: input_boolean.guest_floor_heat
 
-
-
 - alias: NuHeat - Kids turn on at 6:30am and 5:45pm if home
   initial_state: True
   trigger:
     - platform: time
-      at: '06:30:00'
+      at: "06:30:00"
     - platform: time
-      at: '17:45:00'
+      at: "17:45:00"
   condition:
     - condition: state
       entity_id: group.camsandy
-      state: 'home'
+      state: "home"
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
       below: 72
     - condition: numeric_state
-      entity_id: sensor.westridge_inside_temp
-      below: '72'
+      entity_id: sensor.westridge_inside_temperature
+      below: "72"
     - condition: template
       value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
@@ -432,11 +423,10 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '07:30:00'
+      at: "07:30:00"
     - platform: time
-      at: '19:30:00'
+      at: "19:30:00"
   action:
     service: input_boolean.turn_off
     data:
       entity_id: input_boolean.kids_floor_heat
-
