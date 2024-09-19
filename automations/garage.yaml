@@ -4,32 +4,32 @@
   trigger:
     platform: state
     entity_id: cover.garage_door_opener
-    from: 'closed'
-    to: 'open'
+    from: "closed"
+    to: "open"
   condition:
     condition: or
     conditions:
       - condition: state
         entity_id: alarm_control_panel.home_alarm
-        state: 'armed_away'
+        state: "armed_away"
       - condition: state
         entity_id: alarm_control_panel.home_alarm
-        state: 'armed_home'
+        state: "armed_home"
   action:
     service: alarm_control_panel.alarm_disarm
     entity_id: alarm_control_panel.home_alarm
 
 - alias: Garage - Notify if setting away and door left open
-  initial_state: False
+  initial_state: true
   trigger:
     platform: state
     entity_id: group.people
-    from: 'home'
-    to: 'not_home'
+    from: "home"
+    to: "not_home"
   condition:
     - condition: state
-      entity_id: cover.garage_door_opener
-      state: 'open'
+      entity_id: cover.ratgdov25i_0b0617_door
+      state: "open"
   action:
     - service: notify.push_family
       data:
