@@ -264,8 +264,16 @@ views:
           title: Solar
         filter:
           include:
-            - entity_id: "sensor.envoy*"
             - entity_id: "sensor.solar*"
+        sort:
+          method: name
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Gateways
+        filter:
+          include:
+            - entity_id: "sensor.envoy*"
         sort:
           method: name
 
