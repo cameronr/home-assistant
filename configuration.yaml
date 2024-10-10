@@ -15,6 +15,19 @@ frontend:
 # Put Lovelace in yaml mode
 lovelace:
   mode: yaml
+  dashboards:
+    debug-dashboard:
+      mode: yaml
+      title: Debug
+      icon: mdi:information-variant-box-outline
+      show_in_sidebar: true
+      filename: ui-debug.yaml
+  resources:
+    - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+      type: module
+    - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
+      type: module
+
 # Enables configuration UI
 config:
 http:

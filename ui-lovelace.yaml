@@ -1,10 +1,4 @@
 title: Westridge
-# Include external resources
-resources:
-  - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
-    type: module
-  - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
-    type: module
 
 #
 # Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
@@ -82,6 +76,34 @@ views:
           - switch.great_room_fan
 
       - type: entities
+        entities:
+          - entity: cover.ratgdov25i_0b0617_door
+            name: door
+          - entity: button.ratgdov25i_0b0617_toggle_door
+            name: toggle door
+        title: Garage Door
+
+      - type: alarm-panel
+        entity: alarm_control_panel.home_alarm
+        show_keypad: false
+        title: Alarm
+        states:
+          - arm_away
+
+      - type: custom:mini-media-player
+        entity: media_player.lg_webos_tv_b36b
+
+      - type: custom:mini-media-player
+        entity: media_player.marantz_sr5012_2
+
+  - icon: mdi:weather-partly-snowy-rainy
+    title: Climate
+    id: climate
+    cards:
+      - type: weather-forecast
+        entity: weather.pirateweather
+        forecast_type: daily
+      - type: entities
         title: Climate
         show_header_toggle: false
         state_color: true
@@ -117,145 +139,9 @@ views:
           - script.open_master_shades_half
           - script.close_master_shades
 
-      - type: entities
-        entities:
-          - entity: cover.ratgdov25i_0b0617_door
-            name: door
-          - entity: button.ratgdov25i_0b0617_toggle_door
-            name: toggle door
-        title: Garage Door
-
-      - type: alarm-panel
-        entity: alarm_control_panel.home_alarm
-        show_keypad: false
-        title: Alarm
-        states:
-          - arm_away
-
-      - type: weather-forecast
-        entity: weather.pirateweather
-        forecast_type: daily
-
-      - type: custom:mini-media-player
-        entity: media_player.lg_webos_tv_b36b
-
-      - type: custom:mini-media-player
-        entity: media_player.marantz_sr5012_2
-
-      - type: entities
-        title: Solar
-        show_header_toggle: false
-        entities:
-          - sensor.solar_power_today
-
   # Specify a tab icon if you want the view tab to be an icon.
-  - title: Sensors
-    id: sensors
-    cards:
-      - type: entities
-        title: Climate Other
-        show_header_toggle: false
-        entities:
-          - climate.master_nuheat
-          - climate.kids_nuheat
-          - climate.guest_nuheat
-      - type: entities
-        entities:
-          - binary_sensor.elara_bedroom
-          - binary_sensor.front_door
-          - binary_sensor.front_windows
-          - binary_sensor.guest_bedroom
-          - binary_sensor.hall_bath
-          - binary_sensor.kep_bedroom
-          - binary_sensor.kitchen
-          - binary_sensor.laundry
-          - binary_sensor.lift_slide
-          - binary_sensor.master
-          - binary_sensor.master_bath
-          - binary_sensor.mudroom_powder
-          - binary_sensor.pantry
-          - binary_sensor.fire_sprinklers
-          - entity: binary_sensor.home_alarm_ready
-            name: Ready
-          - entity: sensor.home_alarm_keypad
-            name: Keypad
-          - entity: binary_sensor.home_alarm_alarm
-            name: Alarm
-          - entity: binary_sensor.home_alarm_fire
-            name: Fire
-        title: Home Alarm
-
-      - type: custom:auto-entities
-        card:
-          type: entities
-          title: Weather Station
-        filter:
-          include:
-            - entity_id: "sensor.westridge*"
-        sort:
-          method: name
-      - type: custom:auto-entities
-        card:
-          type: entities
-          title: Zwave
-        filter:
-          include:
-            - entity_id: "zwave.*"
-        sort:
-          method: name
-      - type: custom:auto-entities
-        card:
-          type: entities
-          title: Tasmota
-        filter:
-          include:
-            - entity_id: "sensor.tasmota.*"
-        sort:
-          method: name
-      - type: grid
-        square: false
-        columns: 1
-        cards:
-          - type: entities
-            entities:
-              - entity: lock.big_car_charger_door_lock
-                name: Charger door lock
-              - entity: switch.big_car_charger_switch
-                name: Charger switch
-              - entity: lock.big_car_door_lock
-                name: Door lock
-              - entity: button.big_car_flash_lights
-                name: Flash lights
-              - entity: lock.big_car_frunk_lock
-                name: Frunk lock
-              - entity: select.big_car_heated_seat_left
-                name: Heated seat left
-              - entity: select.big_car_heated_seat_rear_center
-                name: Heated seat rear_center
-              - entity: select.big_car_heated_seat_rear_left
-                name: Heated seat rear_left
-              - entity: select.big_car_heated_seat_rear_right
-                name: Heated seat rear_right
-              - entity: select.big_car_heated_seat_right
-                name: Heated seat right
-              - entity: switch.big_car_heated_steering_switch
-                name: Heated steering switch
-              - entity: button.big_car_horn
-                name: Horn
-              - entity: switch.big_car_maxrange_switch
-                name: Maxrange switch
-              - entity: switch.big_car_polling_switch
-                name: Polling switch
-              - entity: switch.big_car_sentry_mode_switch
-                name: Sentry mode switch
-              - entity: lock.big_car_trunk_lock
-                name: Trunk lock
-            title: Big Car
-          - type: thermostat
-            entity: climate.big_car_hvac_climate_system
-
-  # Specify a tab icon if you want the view tab to be an icon.
-  - title: Solar
+  - icon: mdi:solar-power
+    title: Solar
     id: solar
     cards:
       - type: custom:auto-entities
@@ -276,15 +162,3 @@ views:
             - entity_id: "sensor.envoy*"
         sort:
           method: name
-
-  - icon: mdi:home-assistant
-    # Title of the view. Will be used as the tooltip for tab icon
-    title: Automations
-    cards:
-      - type: custom:auto-entities
-        card:
-          type: entities
-          title: Automations
-        filter:
-          include:
-            - entity_id: "automation.*"
