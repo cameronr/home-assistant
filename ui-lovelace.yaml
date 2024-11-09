@@ -73,7 +73,6 @@ views:
           - switch.front_door_xmas_lights
           - switch.front_door_figures
           - switch.garage_xmas_lights
-          - switch.great_room_fan
 
       - type: entities
         entities:
@@ -114,6 +113,7 @@ views:
           - climate.back
           - sensor.westridge_inside_temperature
           - sensor.westridge_temperature
+          - switch.great_room_fan
           - input_boolean.master_floor_heat
           - input_boolean.kids_floor_heat
           - input_boolean.guest_floor_heat
