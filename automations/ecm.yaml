@@ -11,17 +11,39 @@
 #     entity_id: switch.ecm
 #     service: switch.turn_on
 
-- alias: ECM on at 0650
+- alias: ECM on at 0650 on weekdays
   initial_state: True
   trigger:
     - platform: time
-      at: '06:50:00'
+      at: "06:50:00"
   condition:
-    condition: state
-    entity_id: group.camsandy
-    state: 'home'
+    - condition: state
+      entity_id: group.camsandy
+      state: "home"
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
   action:
     entity_id: switch.ecm
     service: switch.turn_on
 
-
+- alias: ECM on at 715 on weekend
+  initial_state: True
+  trigger:
+    - platform: time
+      at: "07:15:00"
+  condition:
+    - condition: state
+      entity_id: group.camsandy
+      state: "home"
+    - condition: time
+      weekday:
+        - sat
+        - sun
+  action:
+    entity_id: switch.ecm
+    service: switch.turn_on
