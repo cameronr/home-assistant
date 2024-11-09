@@ -147,7 +147,7 @@
     data:
       entity_id: climate.front
       hvac_mode: "heat"
-      temperature: 73
+      temperature: 68
 
 # Turn up heat in the bedrooms later
 - alias: HVAC - Turn up back heat in the morning
@@ -301,7 +301,7 @@
             state: "heat"
           - condition: numeric_state
             entity_id: input_number.climate_temp
-            below: "73"
+            below: "69"
       - condition: and
         conditions:
           - condition: state
@@ -309,7 +309,7 @@
             state: "cool"
           - condition: numeric_state
             entity_id: input_number.climate_temp
-            above: "68"
+            above: "66"
   action:
     - service: script.set_temperature_and_notify
       data_template:
