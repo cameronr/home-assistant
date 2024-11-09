@@ -91,7 +91,7 @@
         - input_boolean.kids_floor_heat
 
 - id: nuheat_master_on_morning
-  alias: NuHeat - Turn on at 5:30am if we're home
+  alias: NuHeat - Turn on at 5:30am if it won't be too warm in the day
   initial_state: True
   trigger:
     - platform: time
@@ -100,22 +100,22 @@
     - condition: state
       entity_id: group.camsandy
       state: "home"
+    - condition: template
+      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
     - condition: numeric_state
       entity_id: sensor.westridge_inside_temperature
       below: "71"
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
       below: 72
-    - condition: template
-      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
     service: input_boolean.turn_on
     data:
       entity_id: input_boolean.master_floor_heat
 
 - id: nuheat_master_on_morning2
-  alias: NuHeat - Turn on at 5:30am if we're home2
-  initial_state: False
+  alias: NuHeat - Turn on at 5:30am if it's cold outside now
+  initial_state: True
   trigger:
     - platform: time
       at: "05:30:00"
@@ -123,16 +123,17 @@
     - condition: state
       entity_id: group.camsandy
       state: "home"
+    - condition: template
+      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
     - condition: numeric_state
       entity_id: sensor.westridge_inside_temperature
       below: "71"
     - condition: numeric_state
+      entity_id: sensor.westridge_outside_temperature
+      below: "45"
+    - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
-      below: 77
-    - condition: template
-      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
-    - condition: template
-      value_template: '{{ state_attr("climate.master_nuheat", "current_temperature") < 55}}'
+      below: 76
   action:
     service: input_boolean.turn_on
     data:
