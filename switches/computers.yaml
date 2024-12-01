@@ -1,14 +1,15 @@
+# mediabox_wol name seems like it's used so this gets named mediabox_wol_2
 - platform: wake_on_lan
   mac: !secret mediabox_mac
-  name: mediabox_wol
+  name: mediabox_wol_2
   host: !secret mediabox_ip
 
 - platform: template
   switches:
     mediabox:
-      value_template: '{{ states.switch.mediabox_wol.state }}'
+      value_template: "{{ states.switch.mediabox_wol_2.state }}"
       turn_on:
         service: switch.turn_on
-        entity_id: switch.mediabox_wol
+        entity_id: switch.mediabox_wol_2
       turn_off:
         service: shell_command.mediabox_off
