@@ -3,38 +3,44 @@
   trigger:
     platform: state
     entity_id: binary_sensor.lift_slide
-    from: 'off'
-    to: 'on'
+    from: "off"
+    to: "on"
   condition:
     - condition: state
       entity_id: sun.sun
-      state: 'below_horizon'
+      state: "below_horizon"
     - condition: state
       entity_id: light.great_room_patio_lights
-      state: 'off'
+      state: "off"
   action:
     - service: light.turn_on
       entity_id: light.great_room_patio_lights
-    - delay: '00:05:00'
+    - delay: "00:05:00"
     - service: light.turn_off
       entity_id: light.great_room_patio_lights
 
 - alias: Lights - If we arrived home, turn on garage / front door lights
+  id: lights_turn_on_arrive_home
   initial_state: True
   trigger:
     - platform: state
       entity_id: group.people
-      to: 'home'
+      to: "home"
     - platform: state
       entity_id: person.cam
-      to: 'home'
+      to: "home"
     - platform: state
       entity_id: person.sandy
-      to: 'home'
+      to: "home"
   condition:
-    - condition: sun
-      after: sunset
-      after_offset: "-02:00:00"
+    - condition: or
+      conditions:
+        - condition: sun
+          after: sunset
+          after_offset: "-02:00:00"
+        - condition: numeric_state
+          entity_id: sensor.westridge_irradiance
+          below: 100
   action:
     - service: light.turn_on
       entity_id:
@@ -50,17 +56,17 @@
   trigger:
     - platform: state
       entity_id: group.people
-      from: 'home'
-      to: 'not_home'
+      from: "home"
+      to: "not_home"
   condition:
     - condition: or
       conditions:
         - condition: state
           entity_id: input_select.occupants
-          state: 'auto'
+          state: "auto"
         - condition: state
           entity_id: input_select.occupants
-          state: 'dogs'
+          state: "dogs"
   action:
     - service: light.turn_off
       entity_id:
@@ -75,7 +81,7 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '16:30:00'
+      at: "16:30:00"
   action:
     service: switch.turn_on
     data:
@@ -88,7 +94,7 @@
   initial_state: True
   trigger:
     - platform: time
-      at: '2:00:00'
+      at: "2:00:00"
   action:
     service: switch.turn_off
     data:
