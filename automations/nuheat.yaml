@@ -174,14 +174,13 @@
     data:
       entity_id: input_boolean.master_floor_heat
 
-# FIXME: don't turn on if inside temp is >= 75 or ac is on
-# if we're home and time is 6:30pm, turn on
+# if we're home and time is 6:01pm, turn on
 - id: nuheat_master_on_evening
-  alias: NuHeat - Turn on at 6:30pm if we're home
+  alias: NuHeat - Turn on at 6:00pm if we're home
   initial_state: True
   trigger:
     - platform: time
-      at: "18:30:00"
+      at: "18:00:00"
   condition:
     - condition: state
       entity_id: group.camsandy
@@ -199,7 +198,8 @@
     data:
       entity_id: input_boolean.master_floor_heat
 
-- alias: NuHeat - Turn on when we come home if 6:30pm < now < 11:45pm
+- id: nuheat_master_turn_on_when_we_come_home
+  alias: NuHeat - Turn on when we come home if 6:00pm < now < 11:45pm
   initial_state: True
   trigger:
     platform: state
@@ -208,7 +208,7 @@
     to: "home"
   condition:
     - condition: time
-      after: "18:30:00"
+      after: "18:00:00"
       before: "23:45:00"
     - condition: numeric_state
       entity_id: sensor.westridge_inside_temperature
@@ -420,13 +420,13 @@
     data:
       entity_id: input_boolean.kids_floor_heat
 
-- alias: NuHeat - Kids turn off at 7:30am and 7:30pm
+- alias: NuHeat - Kids turn off at 7:30am and 6:30pm
   initial_state: True
   trigger:
     - platform: time
       at: "07:30:00"
     - platform: time
-      at: "19:30:00"
+      at: "16:30:00"
   action:
     service: input_boolean.turn_off
     data:
