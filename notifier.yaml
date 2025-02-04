@@ -13,13 +13,13 @@
 - name: push_family
   platform: group
   services:
-    - service: mobile_app_novacam
-    - service: mobile_app_lunapanda
+    - service: mobile_app_novacam2
+    - service: mobile_app_astrapanda
 - name: push_cam
   platform: group
   services:
-    - service: mobile_app_novacam
+    - service: mobile_app_novacam2
 - name: push_sandy
   platform: group
   services:
-    - service: mobile_app_lunapanda
+    - service: mobile_app_astrapanda
