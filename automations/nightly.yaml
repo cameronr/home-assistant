@@ -1,4 +1,5 @@
-- alias: Nightly - Notify if garage, door, or gate are open
+- id: nightly_check
+  alias: Nightly - Notify if garage, door, or gate are open
   initial_state: True
   trigger:
     - platform: time
