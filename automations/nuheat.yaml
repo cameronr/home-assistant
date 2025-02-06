@@ -76,7 +76,8 @@
       entity_id: climate.kids_nuheat
       temperature: 45
 
-- alias: NuHeat - Turn off when we leave
+- id: nuheat_turn_off_when_we_leave
+  alias: NuHeat - Turn off when we leave
   initial_state: True
   trigger:
     platform: state
@@ -140,7 +141,8 @@
       entity_id: input_boolean.master_floor_heat
 
 # if m-f, turn off at 7:30am
-- alias: NuHeat - Turn off at 7:45 on M-F
+- id: nuheat_turn_off_on_weekday_morning
+  alias: NuHeat - Turn off at 7:45 on M-F
   initial_state: False
   trigger:
     - platform: time
@@ -159,7 +161,8 @@
       entity_id: input_boolean.master_floor_heat
 
 # if ss, turn off at 10am
-- alias: NuHeat - Turn off at 10am on SS
+- id: nuheat_turn_off_weekend_morning
+  alias: NuHeat - Turn off at 10am on SS
   initial_state: True
   trigger:
     - platform: time
@@ -220,7 +223,8 @@
     data:
       entity_id: input_boolean.master_floor_heat
 
-- alias: NuHeat - Turn off at 9pm
+- id: nuheat_master_turn_off_in_evening
+  alias: NuHeat - Turn off at 9pm
   initial_state: True
   trigger:
     - platform: time
@@ -230,7 +234,8 @@
     data:
       entity_id: input_boolean.master_floor_heat
 
-- alias: NuHeat - Guest Turn off when not home
+- id: nuheat_guest_turn_off_when_guests_leave
+  alias: NuHeat - Guest Turn off when not home
   initial_state: True
   trigger:
     platform: state
@@ -242,7 +247,8 @@
     data:
       entity_id: input_boolean.guest_floor_heat
 
-- alias: NuHeat - Guest Turn on at 6:15am if home
+- id: nuheat_guest_turn_on_in_morning
+  alias: NuHeat - Guest Turn on at 6:15am if home
   initial_state: True
   trigger:
     - platform: time
@@ -263,7 +269,8 @@
       entity_id: input_boolean.guest_floor_heat
 
 # if m-f, turn off at 7:30am
-- alias: NuHeat - Guest Turn off at 8:30 on M-F
+- id: nuheat_guest_turn_off_weekday_morning
+  alias: NuHeat - Guest Turn off at 8:30 on M-F
   initial_state: True
   trigger:
     - platform: time
@@ -282,7 +289,8 @@
       entity_id: input_boolean.guest_floor_heat
 
 # if ss, turn off at 10am
-- alias: NuHeat - Guest Turn off at 9am on SS
+- id: nuheat_guest_turn_off_weekend_morning
+  alias: NuHeat - Guest Turn off at 9am on SS
   initial_state: True
   trigger:
     - platform: time
@@ -297,7 +305,8 @@
     data:
       entity_id: input_boolean.guest_floor_heat
 
-- alias: NuHeat - Guest Turn on at 6:30pm if home
+- id: nuheat_guest_turn_on_in_evening
+  alias: NuHeat - Guest Turn on at 6:30pm if home
   initial_state: True
   trigger:
     - platform: time
@@ -316,7 +325,8 @@
     data:
       entity_id: input_boolean.guest_floor_heat
 
-- alias: NuHeat - Guest Turn on when arrive home if 6:30pm < now < 10:30pm
+- id: nuheat_guest_turn_on_when_come_home
+  alias: NuHeat - Guest Turn on when arrive home if 6:30pm < now < 10:30pm
   initial_state: True
   trigger:
     platform: state
@@ -338,7 +348,8 @@
       entity_id: input_boolean.guest_floor_heat
 
 # turn off at 11:30pm
-- alias: NuHeat - Guest Turn off at 10:30pm
+- id: nuheat_guest_turn_off_in_evening
+  alias: NuHeat - Guest Turn off at 10:30pm
   initial_state: True
   trigger:
     - platform: time
@@ -348,7 +359,8 @@
     data:
       entity_id: input_boolean.guest_floor_heat
 
-- alias: NuHeat - Eric, turn on at 11am if home
+- id: nuheat_eric_turn_on
+  alias: NuHeat - Eric, turn on at 11am if home
   initial_state: False
   trigger:
     - platform: time
@@ -365,7 +377,8 @@
     data:
       entity_id: input_boolean.guest_floor_heat
 
-- alias: NuHeat - Eric, turn off at 2am
+- id: nuheat_eric_turn off
+  alias: NuHeat - Eric, turn off at 2am
   initial_state: False
   trigger:
     - platform: time
@@ -375,7 +388,8 @@
     data:
       entity_id: input_boolean.guest_floor_heat
 
-- alias: NuHeat - Eric, turn on when arrive home if 6:30pm < now < 2am
+- id: nuheat_eric_turn_on_when_come_home
+  alias: NuHeat - Eric, turn on when arrive home if 6:30pm < now < 2am
   initial_state: False
   trigger:
     platform: state
@@ -396,7 +410,8 @@
     data:
       entity_id: input_boolean.guest_floor_heat
 
-- alias: NuHeat - Kids turn on at 6:30am and 5:45pm if home
+- id: nuheat_kids_turn_on
+  alias: NuHeat - Kids turn on at 6:30am and 5:45pm if home
   initial_state: True
   trigger:
     - platform: time
@@ -420,7 +435,8 @@
     data:
       entity_id: input_boolean.kids_floor_heat
 
-- alias: NuHeat - Kids turn off at 7:30am and 6:30pm
+- id: nuheat_kids_turn_off
+  alias: NuHeat - Kids turn off at 7:30am and 6:30pm
   initial_state: True
   trigger:
     - platform: time
