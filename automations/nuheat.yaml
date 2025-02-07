@@ -442,7 +442,7 @@
     - platform: time
       at: "07:30:00"
     - platform: time
-      at: "16:30:00"
+      at: "18:30:00"
   action:
     service: input_boolean.turn_off
     data:
