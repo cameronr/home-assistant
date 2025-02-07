@@ -39,8 +39,8 @@
           after: sunset
           after_offset: "-02:00:00"
         - condition: numeric_state
-          entity_id: sensor.westridge_irradiance
-          below: 150
+          entity_id: sensor.westridge_solar_rad_lx
+          below: 10000
   action:
     - service: light.turn_on
       entity_id:
