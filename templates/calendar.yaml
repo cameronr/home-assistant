@@ -1,0 +1,23 @@
+- trigger:
+    - platform: time
+      at: "00:01:00"
+  action:
+    - service: calendar.get_events
+      data:
+        start_date_time: "{{ today_at() }}"
+        end_date_time: "{{ today_at('23:59:00') }}"
+      target:
+        entity_id: calendar.cornerstone_school_events_calendar
+      response_variable: agenda
+  binary_sensor:
+    - name: School Holiday
+      state: |-
+        {% set events = agenda['calendar.cornerstone_school_events_calendar'].events %}
+        {% if events is not none and events | count > 0 %}
+          {% for event in events %}
+            {% if '(No School)' in event.summary %}
+              {{ true }}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        {{ false }}

@@ -34,3 +34,27 @@
     - service: notify.push_family
       data:
         message: "Garage left open"
+
+- id: garage_open_on_school_day
+  alias: Garage - Open on school day
+  trigger:
+    - platform: time
+      at: "07:25:00"
+  condition:
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+    - condition: state
+      entity_id: group.camsandy
+      state: "home"
+    - condition: state
+      entity_id: binary_sensor.school_holiday
+      state: "off"
+  action:
+    - service: cover.open_cover
+      target:
+        entity_id: cover.ratgdov25i_0b0617_door
