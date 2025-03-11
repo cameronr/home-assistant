@@ -1,8 +1,0 @@
-Switches:
-  entities:
-    - switch.gate
-    - lock.schlage_be469_touchscreen_deadbolt_locked_3
-    - switch.dehumidifier
-    - switch.water_heater_recirc_pump
-    - cover.garage_door_opener
-    - script.goodnight

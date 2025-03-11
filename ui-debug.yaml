@@ -50,62 +50,53 @@ views:
       - type: custom:auto-entities
         card:
           type: entities
-          title: Zwave
-        filter:
-          include:
-            - entity_id: "zwave.*"
-        sort:
-          method: name
-      - type: custom:auto-entities
-        card:
-          type: entities
           title: Tasmota
         filter:
           include:
             - entity_id: "sensor.tasmota.*"
         sort:
           method: name
-      - type: grid
-        square: false
-        columns: 1
-        cards:
-          - type: entities
-            entities:
-              - entity: lock.big_car_charger_door_lock
-                name: Charger door lock
-              - entity: switch.big_car_charger_switch
-                name: Charger switch
-              - entity: lock.big_car_door_lock
-                name: Door lock
-              - entity: button.big_car_flash_lights
-                name: Flash lights
-              - entity: lock.big_car_frunk_lock
-                name: Frunk lock
-              - entity: select.big_car_heated_seat_left
-                name: Heated seat left
-              - entity: select.big_car_heated_seat_rear_center
-                name: Heated seat rear_center
-              - entity: select.big_car_heated_seat_rear_left
-                name: Heated seat rear_left
-              - entity: select.big_car_heated_seat_rear_right
-                name: Heated seat rear_right
-              - entity: select.big_car_heated_seat_right
-                name: Heated seat right
-              - entity: switch.big_car_heated_steering_switch
-                name: Heated steering switch
-              - entity: button.big_car_horn
-                name: Horn
-              - entity: switch.big_car_maxrange_switch
-                name: Maxrange switch
-              - entity: switch.big_car_polling_switch
-                name: Polling switch
-              - entity: switch.big_car_sentry_mode_switch
-                name: Sentry mode switch
-              - entity: lock.big_car_trunk_lock
-                name: Trunk lock
-            title: Big Car
-          - type: thermostat
-            entity: climate.big_car_hvac_climate_system
+      # - type: grid
+      #   square: false
+      #   columns: 1
+      #   cards:
+      #     - type: entities
+      #       entities:
+      #         - entity: lock.big_car_charger_door_lock
+      #           name: Charger door lock
+      #         - entity: switch.big_car_charger_switch
+      #           name: Charger switch
+      #         - entity: lock.big_car_door_lock
+      #           name: Door lock
+      #         - entity: button.big_car_flash_lights
+      #           name: Flash lights
+      #         - entity: lock.big_car_frunk_lock
+      #           name: Frunk lock
+      #         - entity: select.big_car_heated_seat_left
+      #           name: Heated seat left
+      #         - entity: select.big_car_heated_seat_rear_center
+      #           name: Heated seat rear_center
+      #         - entity: select.big_car_heated_seat_rear_left
+      #           name: Heated seat rear_left
+      #         - entity: select.big_car_heated_seat_rear_right
+      #           name: Heated seat rear_right
+      #         - entity: select.big_car_heated_seat_right
+      #           name: Heated seat right
+      #         - entity: switch.big_car_heated_steering_switch
+      #           name: Heated steering switch
+      #         - entity: button.big_car_horn
+      #           name: Horn
+      #         - entity: switch.big_car_maxrange_switch
+      #           name: Maxrange switch
+      #         - entity: switch.big_car_polling_switch
+      #           name: Polling switch
+      #         - entity: switch.big_car_sentry_mode_switch
+      #           name: Sentry mode switch
+      #         - entity: lock.big_car_trunk_lock
+      #           name: Trunk lock
+      #       title: Big Car
+      #     - type: thermostat
+      #       entity: climate.big_car_hvac_climate_system
 
   - icon: mdi:home-assistant
     # Title of the view. Will be used as the tooltip for tab icon
