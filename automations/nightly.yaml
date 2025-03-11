@@ -8,7 +8,7 @@
     - condition: or
       conditions:
         - condition: state
-          entity_id: lock.be469
+          entity_id: lock.touchscreen_deadbolt
           state: "unlocked"
         - condition: state
           entity_id: switch.gate
@@ -21,8 +21,8 @@
       data_template:
         message: >
           Left open:
-          {%- if is_state("lock.be469", "unlocked") %}
-            {{ states.lock.be469.attributes.friendly_name }}
+          {%- if is_state("lock.touchscreen_deadbolt", "unlocked") %}
+            {{ states.lock.touchscreen_deadbolt.attributes.friendly_name }}
           {%- endif -%}
           {%- if is_state("switch.gate", "on") %}
             {{ states.switch.gate.attributes.friendly_name }}

@@ -28,11 +28,7 @@ light.great_room_patio_lights:
   friendly_name: Patio
 light.front_door_garage:
   friendly_name: Garage
-lock.schlage_be469_touchscreen_deadbolt_locked:
-  friendly_name: Front Door Lock
-lock.schlage_be469_touchscreen_deadbolt_locked_2:
-  friendly_name: Front Door Lock
-lock.schlage_be469_touchscreen_deadbolt_locked_3:
+lock.touchscreen_deadbolt:
   friendly_name: Front Door Lock
 script.goodnight:
   friendly_name: Goodnight

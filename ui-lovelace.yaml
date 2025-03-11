@@ -37,7 +37,7 @@ views:
         entities:
           - script.open_gate_temporarily
           - switch.gate
-          - lock.be469
+          - lock.touchscreen_deadbolt
           - switch.water_heater_recirc_pump
           - switch.kep_lights
           - switch.meimei_lights

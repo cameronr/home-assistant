@@ -3,13 +3,13 @@
   trigger:
     platform: state
     entity_id: group.people
-    from: 'not_home'
-    to: 'home'
+    from: "not_home"
+    to: "home"
   action:
     - service: input_select.select_option
       data:
         entity_id: input_select.occupants
-        option: 'auto'
+        option: "auto"
 
 - alias: People - Set guests mode from notification
   initial_state: True
@@ -22,7 +22,7 @@
     - service: input_select.select_option
       data:
         entity_id: input_select.occupants
-        option: 'guests'
+        option: "guests"
 
 - alias: People - Set dog mode from notification
   initial_state: True
@@ -35,26 +35,26 @@
     - service: input_select.select_option
       data:
         entity_id: input_select.occupants
-        option: 'dogs'
+        option: "dogs"
 
 - alias: People - Notify on away
   initial_state: True
   trigger:
     platform: state
     entity_id: group.people
-    from: 'home'
-    to: 'not_home'
+    from: "home"
+    to: "not_home"
   condition:
     - condition: state
       entity_id: input_select.occupants
-      state: 'auto'
+      state: "auto"
   action:
     - service: notify.push_family
       data:
         message: "Setting to away mode"
         data:
           push:
-            category: 'away'
+            category: "away"
             # badge: 1
 
 - alias: People - Unlock whenever cam comes home
@@ -62,12 +62,12 @@
   trigger:
     - platform: state
       entity_id: person.cam
-      from: 'not_home'
-      to: 'home'
+      from: "not_home"
+      to: "home"
   action:
     - service: lock.unlock
       data:
-        entity_id: lock.be469
+        entity_id: lock.touchscreen_deadbolt
     - service: notify.push_cam
       data:
         message: "Welcome home, cam"
@@ -77,12 +77,12 @@
   trigger:
     - platform: state
       entity_id: person.sandy
-      from: 'not_home'
-      to: 'home'
+      from: "not_home"
+      to: "home"
   action:
     - service: lock.unlock
       data:
-        entity_id: lock.be469
+        entity_id: lock.touchscreen_deadbolt
     - service: notify.push_sandy
       data:
         message: "Welcome home, sandy"
@@ -92,26 +92,25 @@
   trigger:
     - platform: state
       entity_id: person.tif
-      from: 'not_home'
-      to: 'home'
+      from: "not_home"
+      to: "home"
   action:
     - service: lock.unlock
       data:
-        entity_id: lock.be469
+        entity_id: lock.touchscreen_deadbolt
 
 - alias: People - Notify when not home and door is opened
   initial_state: True
   trigger:
     - platform: state
-      entity_id: lock.be469
-      from: 'locked'
-      to: 'unlocked'
+      entity_id: lock.touchscreen_deadbolt
+      from: "locked"
+      to: "unlocked"
   condition:
     - condition: state
       entity_id: group.people
-      state: 'not_home'
+      state: "not_home"
   action:
     - service: notify.push_family
       data:
         message: "Door opened while not home"
-
