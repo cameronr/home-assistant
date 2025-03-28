@@ -114,3 +114,14 @@
     - service: notify.push_family
       data:
         message: "Door opened while not home"
+
+- id: lock_warn_if_lock_fails
+  alias: Lock - Warn if locking fails
+  trigger:
+    - platform: state
+      entity_id: lock.touchscreen_deadbolt
+      to: "unknown"
+  action:
+    - service: notify.push_family
+      data:
+        message: "Locking/unlocking failed"
