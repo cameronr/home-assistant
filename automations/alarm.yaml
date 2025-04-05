@@ -3,21 +3,21 @@
   trigger:
     platform: state
     entity_id: group.people
-    from: 'home'
-    to: 'not_home'
+    from: "home"
+    to: "not_home"
   condition:
     - condition: or
       conditions:
         - condition: state
           entity_id: input_select.occupants
-          state: 'auto'
+          state: "auto"
         - condition: state
           entity_id: input_select.occupants
-          state: 'dogs'
+          state: "dogs"
     - condition: or
       conditions:
         - condition: time
-          after: '00:00:00'
+          after: "00:00:00"
           weekday:
             - mon
             - tue
@@ -26,8 +26,8 @@
             - sat
             - sun
         - condition: time
-          before: '07:00:00'
-          after: '11:00:00'
+          before: "07:00:00"
+          after: "11:00:00"
           weekday:
             - fri
   action:
@@ -39,32 +39,49 @@
   trigger:
     - platform: state
       entity_id: group.people
-      from: 'not_home'
-      to: 'home'
+      from: "not_home"
+      to: "home"
     - platform: state
       entity_id: input_select.occupants
-      from: 'auto'
-      to: 'guests'
+      from: "auto"
+      to: "guests"
   condition:
     condition: or
     conditions:
       - condition: state
         entity_id: alarm_control_panel.home_alarm
-        state: 'armed_away'
+        state: "armed_away"
       - condition: state
         entity_id: alarm_control_panel.home_alarm
-        state: 'armed_home'
+        state: "armed_home"
   action:
     service: alarm_control_panel.alarm_disarm
     entity_id: alarm_control_panel.home_alarm
 
-# unfinished: create a text string of zones that are on
-# - alias: Text alarm string
-#   initial_state: True
-#   trigger:
-#     platform: state
-#     entity_id: group.alarm_sensors
-#   action:
-#     service: alarm_control_panel.alarm_disarm
-#     entity_id: alarm_control_panel.home_alarm
-#
+- id: alarm_notify_when_zone_opened
+  alias: Alarm - notify when zone opened
+  description: Sends a push notification when a zone is opened
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.elara_bedroom
+        - binary_sensor.front_windows
+        - binary_sensor.guest_bedroom
+        - binary_sensor.hall_bath
+        - binary_sensor.kep_bedroom
+        - binary_sensor.kitchen
+        - binary_sensor.laundry
+        - binary_sensor.lift_slide
+        - binary_sensor.master
+        - binary_sensor.master_bath
+        - binary_sensor.mudroom_powder
+        - binary_sensor.pantry
+      from: "off"
+      to: "on"
+  action:
+    - service: notify.push_family
+      data:
+        title: "Door/Window Opened"
+        message: >-
+          Opened: {{ trigger.to_state.attributes.friendly_name }}
+  mode: single
