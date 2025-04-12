@@ -1,9 +1,9 @@
-- alias: Water heater - Recirc off at 1am
+- alias: Water heater - Recirc off at midnight
   id: water_heater_recirc_off_at_night
   initial_state: True
   trigger:
     platform: time
-    at: "01:00:00"
+    at: "00:00:00"
   action:
     entity_id: switch.water_heater_recirc_pump
     service: switch.turn_off
