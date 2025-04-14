@@ -216,6 +216,9 @@
     - condition: numeric_state
       entity_id: sensor.westridge_inside_temperature
       below: "72"
+    - condition: numeric_state
+      entity_id: sensor.pirateweather_daytime_high_temperature_0d
+      below: 72
     - condition: template
       value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
