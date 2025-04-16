@@ -93,7 +93,7 @@ views:
         entity: media_player.lg_webos_tv_b36b
 
       - type: custom:mini-media-player
-        entity: media_player.marantz_sr5012_2
+        entity: media_player.denon_avr_x3800h
 
   - icon: mdi:weather-partly-snowy-rainy
     title: Climate
