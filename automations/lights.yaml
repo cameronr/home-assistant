@@ -76,6 +76,9 @@
         - light.front_hallway_great_room
         - light.front_hallway_kitchen
         - light.dining_room_dining_room
+    - action: switch.turn_off
+      entity_id:
+        - switch.tasmota_sofa
 
 - alias: Lights - Xmas lights on at 4:30pm
   initial_state: True
