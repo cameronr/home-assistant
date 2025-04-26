@@ -87,6 +87,7 @@
   condition:
     - condition: time
       weekday:
+        - sat
         - sun
     - condition: state
       entity_id: group.camsandy

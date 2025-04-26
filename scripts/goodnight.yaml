@@ -4,7 +4,7 @@ goodnight:
       data:
         entity_id: group.lights
     - service: switch.turn_off
-      entity_id: switch.wemo_switch
+      entity_id: switch.tasmota_sofa
     - service: switch.turn_off
       entity_id: switch.water_heater_recirc_pump
     - service: input_boolean.turn_off
