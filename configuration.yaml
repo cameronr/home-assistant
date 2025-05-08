@@ -6,7 +6,7 @@ homeassistant:
   elevation: !secret elevation
   customize: !include customize.yaml
   internal_url: !secret internal_url
-  unit_system: imperial
+  unit_system: us_customary
   country: US
   time_zone: America/Los_Angeles
   currency: USD
