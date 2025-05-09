@@ -12,6 +12,8 @@ homeassistant:
   currency: USD
 # Enables the frontend
 frontend:
+  extra_module_url:
+    - /hacsfiles/lovelace-card-mod/card-mod.js
 # Put Lovelace in yaml mode
 lovelace:
   mode: yaml

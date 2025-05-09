@@ -52,8 +52,6 @@ views:
         entities:
           - entity: cover.ratgdov25i_0b0617_door
             name: door
-          - entity: button.ratgdov25i_0b0617_toggle_door
-            name: toggle door
         title: Garage Door
 
       - type: entities
@@ -83,15 +81,31 @@ views:
           - group.guests
           - input_select.occupants
 
-      - type: alarm-panel
-        entity: alarm_control_panel.home_alarm
-        show_keypad: false
-        title: Alarm
-        states:
-          - arm_away
-
-      # - type: custom:mini-media-player
-      #   entity: media_player.lg_webos_tv_b36b
+      - type: vertical-stack
+        cards:
+          - type: alarm-panel
+            entity: alarm_control_panel.home_alarm
+            show_keypad: false
+            title: Alarm
+            states:
+              - arm_away
+          - type: entity
+            entity: sensor.home_alarm_keypad
+            name: false
+            icon: none
+            card_mod:
+              style: |
+                ha-card .header {
+                  display: none;
+                }
+                ha-card .info {
+                  width: 100%;
+                  padding-top: 16px;
+                  margin-top: 0px;
+                }
+                ha-card .value {
+                  font-size: 18px !important;
+                }
 
       - type: custom:mini-media-player
         entity: media_player.denon_avr_x3800h
