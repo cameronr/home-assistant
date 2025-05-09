@@ -77,7 +77,6 @@ views:
         entities:
           - person.cam
           - person.sandy
-          - group.camsandy
           - group.guests
           - input_select.occupants
 
