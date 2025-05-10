@@ -10,7 +10,7 @@
       state: "home"
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
-      below: 80
+      below: 76
   action:
     service: script.open_master_shades_half
 
