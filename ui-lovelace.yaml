@@ -89,7 +89,7 @@ views:
             states:
               - arm_away
           - type: entity
-            entity: sensor.home_alarm_keypad
+            entity: sensor.alarm_status_with_zone_name
             name: false
             icon: none
             card_mod:

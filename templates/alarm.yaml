@@ -1,0 +1,22 @@
+- sensor:
+    - name: "Alarm Status With Zone Name"
+      state: >
+        {% set keypad_state = states('sensor.home_alarm_keypad') %}
+        {% if 'FAULT' in keypad_state %}
+          {% set zone_number = keypad_state.split(' ')[1] | int %}
+          {% set matching_zone = namespace(found=false, name='Unknown') %}
+          {% for entity in states.binary_sensor | selectattr('attributes.zone', 'defined') | list %}
+            {% if entity.attributes.zone == zone_number %}
+              {% set matching_zone.found = true %}
+              {% set matching_zone.name = entity.name %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          {% if matching_zone.found %}
+            FAULT: {{ matching_zone.name }} ({{ zone_number }})
+          {% else %}
+            {{ keypad_state }}
+          {% endif %}
+        {% else %}
+          {{ keypad_state }}
+        {% endif %}
