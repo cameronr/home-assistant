@@ -104,6 +104,10 @@ recorder:
 logbook:
 # Track the sun
 sun:
+
+# Enable My HomeAssistant
+my:
+
 # Text to speech
 # tts:
 #   - platform: google
