@@ -50,6 +50,15 @@ views:
       - type: custom:auto-entities
         card:
           type: entities
+          title: Weather Station (local)
+        filter:
+          include:
+            - entity_id: "sensor.weather_local_*"
+        sort:
+          method: name
+      - type: custom:auto-entities
+        card:
+          type: entities
           title: Tasmota
         filter:
           include:

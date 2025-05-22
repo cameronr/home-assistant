@@ -125,8 +125,8 @@ views:
           - input_number.climate_temp
           - climate.front
           - climate.back
-          - sensor.westridge_inside_temperature
-          - sensor.westridge_temperature
+          - sensor.weather_local_inside_temperature
+          - sensor.weather_local_outside_temperature
           - switch.great_room_fan
           - input_boolean.master_floor_heat
           - input_boolean.kids_floor_heat
