@@ -1,10 +1,11 @@
 Lights:
   entities:
-    - light.front_door_lights
-    - light.front_hallway_hallway
     - light.front_hallway_kitchen
     - light.front_hallway_great_room
+    - switch.tasmota_sofa
+    - light.back_hallway_lights
     - light.dining_room_dining_room
-    - light.great_room_patio_lights
+    - light.front_hallway_hallway
+    - light.front_door_lights
     - light.front_door_garage
-    - light.great_room_fan
+    - light.great_room_patio_lights

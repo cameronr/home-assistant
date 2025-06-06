@@ -9,6 +9,7 @@ views:
         title: Climate Other
         show_header_toggle: false
         entities:
+          - switch.great_room_fan
           - climate.master_nuheat
           - climate.kids_nuheat
           - climate.guest_nuheat

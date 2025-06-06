@@ -38,14 +38,14 @@ views:
           - script.open_gate_temporarily
           - switch.gate
           - lock.touchscreen_deadbolt
-          - switch.water_heater_recirc_pump
-          - switch.kep_lights
-          - switch.meimei_lights
-          - switch.great_room_fan
+          # - switch.great_room_fan
+          - fan.great_room_fan
           - switch.ecm
-          - switch.wemo_dehumidifier
           - switch.mediabox
           - remote.harmony_hub
+          - switch.water_heater_recirc_pump
+          - switch.wemo_dehumidifier
+          - fan.master_fan
           - script.goodnight
 
       - type: entities
@@ -67,6 +67,8 @@ views:
           - light.front_door_lights
           - light.front_door_garage
           - light.great_room_patio_lights
+          - switch.kep_lights
+          - switch.meimei_lights
           # - switch.front_door_xmas_lights
           # - switch.front_door_figures
           # - switch.garage_xmas_lights
@@ -127,7 +129,10 @@ views:
           - climate.back
           - sensor.weather_local_inside_temperature
           - sensor.weather_local_outside_temperature
-          - switch.great_room_fan
+          - fan.great_room_fan
+          - fan.master_fan
+          # - switch.great_room_fan
+          # - switch.great_room_fan
           - input_boolean.master_floor_heat
           - input_boolean.kids_floor_heat
           - input_boolean.guest_floor_heat
