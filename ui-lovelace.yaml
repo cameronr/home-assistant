@@ -27,32 +27,41 @@ views:
           entities:
             - sensor.latest_version
 
-      - type: entities
-        # Title of the entities card
-        title: Switches
-        # The entities here will be shown in the same order as specified.
-        # Each entry is an entity ID or a map with extra options.
-        show_header_toggle: false
-        state_color: true
-        entities:
-          - script.open_gate_temporarily
-          - switch.gate
-          - lock.touchscreen_deadbolt
-          # - switch.great_room_fan
-          - fan.great_room_fan
-          - switch.ecm
-          - switch.mediabox
-          - remote.harmony_hub
-          - switch.water_heater_recirc_pump
-          - switch.wemo_dehumidifier
-          - fan.master_fan
-          - script.goodnight
+      - type: vertical-stack
+        cards:
+          - type: entities
+            # Title of the entities card
+            title: Switches
+            # The entities here will be shown in the same order as specified.
+            # Each entry is an entity ID or a map with extra options.
+            show_header_toggle: false
+            state_color: true
+            entities:
+              - script.open_gate_temporarily
+              - switch.gate
+              - cover.ratgdov25i_0b0617_door
+              - lock.touchscreen_deadbolt
+              # - switch.great_room_fan
+              - switch.ecm
+              - switch.water_heater_recirc_pump
+              - switch.wemo_dehumidifier
+              - fan.great_room_fan
+              - fan.master_fan
+              - script.goodnight
 
-      - type: entities
-        entities:
-          - entity: cover.ratgdov25i_0b0617_door
-            name: door
-        title: Garage Door
+          - type: entities
+            # Title of the entities card
+            title: Media
+            # The entities here will be shown in the same order as specified.
+            # Each entry is an entity ID or a map with extra options.
+            show_header_toggle: false
+            state_color: true
+            entities:
+              - switch.mediabox
+              - remote.harmony_hub
+
+      - type: custom:mini-media-player
+        entity: media_player.denon_avr_x3800h
 
       - type: entities
         title: Lights
@@ -107,9 +116,6 @@ views:
                 ha-card .value {
                   font-size: 18px !important;
                 }
-
-      - type: custom:mini-media-player
-        entity: media_player.denon_avr_x3800h
 
   - icon: mdi:weather-partly-snowy-rainy
     title: Climate
