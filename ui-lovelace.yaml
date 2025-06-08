@@ -54,7 +54,7 @@ views:
             title: Media
             # The entities here will be shown in the same order as specified.
             # Each entry is an entity ID or a map with extra options.
-            show_header_toggle: false
+            show_header_toggle: true
             state_color: true
             entities:
               - switch.mediabox
