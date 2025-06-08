@@ -87,6 +87,7 @@ recorder:
       - sensor.date
       - sensor.date_time
       - sensor.home_alarm_keypad
+      - sensor.alarm_status_with_zone_name
       - sun.sun
       - group.alarm
       - group.alarm_sensors
