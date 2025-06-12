@@ -8,12 +8,12 @@
     entity_id: switch.tasmota_3
     service: switch.turn_off
 
-- id: kitchen_clock_turn_on_at_3pm
-  alias: Kitchen clock turn on at 3pm
+- id: kitchen_clock_turn_on_at_1pm
+  alias: Kitchen clock turn on at 1pm
   initial_state: True
   trigger:
     - platform: time
-      at: "15:00:00"
+      at: "13:00:00"
   action:
     entity_id: switch.tasmota_3
     service: switch.turn_on

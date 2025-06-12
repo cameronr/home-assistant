@@ -134,7 +134,7 @@
       below: "45"
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
-      below: 76
+      below: 75
   action:
     service: input_boolean.turn_on
     data:
