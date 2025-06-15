@@ -1,4 +1,3 @@
----
 homeassistant:
   name: !secret name
   latitude: !secret latitude
@@ -24,7 +23,15 @@ lovelace:
       icon: mdi:information-variant-box-outline
       show_in_sidebar: true
       filename: ui-debug.yaml
+    # bubble-dashboard:
+    #   mode: yaml
+    #   title: Bubble
+    #   icon: mdi:information-variant-box-outline
+    #   show_in_sidebar: true
+    #   filename: ui-bubble.yaml
   resources:
+    - url: /hacsfiles/Bubble-Card/bubble-card.js
+      type: module
     - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
       type: module
     - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js

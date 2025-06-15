@@ -60,8 +60,27 @@ views:
               - switch.mediabox
               - remote.harmony_hub
 
-      - type: custom:mini-media-player
-        entity: media_player.denon_avr_x3800h
+      - type: vertical-stack
+        cards:
+          - type: custom:mini-media-player
+            entity: media_player.denon_avr_x3800h
+            hide:
+              controls: true
+              volume: true
+          # - type: custom:bubble-card
+          #   card_type: media-player
+          #   name: AV
+          #   entity: media_player.denon_avr_x3800h
+          #   hide:
+          #     play_pause_button: true
+          #     previous_button: true
+          #     next_button: true
+          - type: custom:bubble-card
+            card_type: button
+            button_type: slider
+            entity: media_player.denon_avr_x3800h
+            tap_action:
+              action: none
 
       - type: entities
         title: Lights
