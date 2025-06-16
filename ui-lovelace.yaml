@@ -41,46 +41,50 @@ views:
               - switch.gate
               - cover.ratgdov25i_0b0617_door
               - lock.touchscreen_deadbolt
-              # - switch.great_room_fan
               - switch.ecm
               - switch.water_heater_recirc_pump
               - switch.wemo_dehumidifier
-              - fan.great_room_fan
-              - fan.master_fan
               - script.goodnight
 
-          - type: entities
-            # Title of the entities card
-            title: Media
-            # The entities here will be shown in the same order as specified.
-            # Each entry is an entity ID or a map with extra options.
-            # show_header_toggle: true
-            state_color: true
-            entities:
-              - switch.mediabox
-              - remote.harmony_hub
+          - type: tile
+            entity: fan.great_room_fan
+            features_position: bottom
+            features:
+              - type: fan-speed
+
+          - type: tile
+            entity: fan.master_fan
+            features_position: bottom
+            features:
+              - type: fan-speed
 
       - type: vertical-stack
         cards:
-          - type: custom:mini-media-player
+          - type: tile
+            entity: switch.mediabox
+            features_position: bottom
+            vertical: false
+
+          - type: tile
+            entity: remote.harmony_hub
+            features_position: bottom
+            vertical: false
+
+          # - type: entities
+          #   title: Media
+          #   state_color: true
+          #   entities:
+          #     - switch.mediabox
+          #     - remote.harmony_hub
+
+          - type: tile
             entity: media_player.denon_avr_x3800h
-            hide:
-              controls: true
-              volume: true
-          # - type: custom:bubble-card
-          #   card_type: media-player
-          #   name: AV
-          #   entity: media_player.denon_avr_x3800h
-          #   hide:
-          #     play_pause_button: true
-          #     previous_button: true
-          #     next_button: true
-          - type: custom:bubble-card
-            card_type: button
-            button_type: slider
-            entity: media_player.denon_avr_x3800h
-            tap_action:
-              action: none
+            features_position: bottom
+            vertical: false
+            icon_tap_action:
+              action: toggle
+            features:
+              - type: media-player-volume-slider
 
       - type: entities
         title: Lights
@@ -101,23 +105,27 @@ views:
           # - switch.front_door_figures
           # - switch.garage_xmas_lights
 
-      - type: entities
-        title: People
-        show_header_toggle: false
-        entities:
-          - person.cam
-          - person.sandy
-          - group.guests
-          - input_select.occupants
-
       - type: vertical-stack
         cards:
-          - type: alarm-panel
+          - type: entities
+            title: People
+            show_header_toggle: false
+            entities:
+              - person.cam
+              - person.sandy
+              - group.guests
+              - input_select.occupants
+
+          - type: tile
             entity: alarm_control_panel.home_alarm
-            show_keypad: false
-            title: Alarm
-            states:
-              - arm_away
+            features_position: inline
+            features:
+              - type: alarm-modes
+                modes:
+                  - armed_home
+                  - armed_away
+                  - disarmed
+
           - type: entity
             entity: sensor.alarm_status_with_zone_name
             name: false
@@ -154,13 +162,23 @@ views:
           - climate.back
           - sensor.weather_local_inside_temperature
           - sensor.weather_local_outside_temperature
-          - fan.great_room_fan
-          - fan.master_fan
           # - switch.great_room_fan
           # - switch.great_room_fan
           - input_boolean.master_floor_heat
           - input_boolean.kids_floor_heat
           - input_boolean.guest_floor_heat
+
+      - type: tile
+        entity: fan.great_room_fan
+        features_position: bottom
+        features:
+          - type: fan-speed
+
+      - type: tile
+        entity: fan.master_fan
+        features_position: bottom
+        features:
+          - type: fan-speed
 
       - type: entities
         title: Dining Shades
