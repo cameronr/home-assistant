@@ -69,6 +69,8 @@ views:
             entity: remote.harmony_hub
             features_position: bottom
             vertical: false
+            icon_tap_action:
+              action: toggle
 
           # - type: entities
           #   title: Media
