@@ -57,13 +57,18 @@
             category: "away"
             # badge: 1
 
-- alias: People - Unlock whenever cam comes home
+- id: people_unlock_when_cam_comes_home
+  alias: People - Unlock when cam comes home
   initial_state: True
   trigger:
     - platform: state
       entity_id: person.cam
       from: "not_home"
       to: "home"
+  condition:
+    - condition: time
+      after: "7:00:00"
+      before: "20:00:00"
   action:
     - service: lock.unlock
       data:
@@ -72,13 +77,18 @@
       data:
         message: "Welcome home, cam"
 
-- alias: People - Unlock whenever sandy comes home
+- id: people_unlock_when_sandy_comes_home
+  alias: People - Unlock when sandy comes home
   initial_state: True
   trigger:
     - platform: state
       entity_id: person.sandy
       from: "not_home"
       to: "home"
+  condition:
+    - condition: time
+      after: "7:00:00"
+      before: "20:00:00"
   action:
     - service: lock.unlock
       data:
@@ -87,13 +97,18 @@
       data:
         message: "Welcome home, sandy"
 
-- alias: People - Unlock whenever Tif comes back
+- id: people_unlock_when_tif_comes_home
+  alias: People - Unlock when Tif comes back
   initial_state: True
   trigger:
     - platform: state
       entity_id: person.tif
       from: "not_home"
       to: "home"
+  condition:
+    - condition: time
+      after: "7:00:00"
+      before: "20:00:00"
   action:
     - service: lock.unlock
       data:
