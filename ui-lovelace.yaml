@@ -64,6 +64,8 @@ views:
             entity: switch.mediabox
             features_position: bottom
             vertical: false
+            icon_tap_action:
+              action: toggle
 
           - type: tile
             entity: remote.harmony_hub
