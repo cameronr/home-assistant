@@ -54,6 +54,9 @@
     - condition: state
       entity_id: binary_sensor.school_holiday
       state: "off"
+    - condition: state
+      entity_id: binary_sensor.school_year
+      state: "on"
   action:
     - service: cover.open_cover
       target:
