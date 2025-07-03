@@ -47,20 +47,6 @@ views:
               - script.goodnight
 
           - type: tile
-            entity: fan.great_room_fan
-            features_position: bottom
-            features:
-              - type: fan-speed
-
-          - type: tile
-            entity: fan.master_fan
-            features_position: bottom
-            features:
-              - type: fan-speed
-
-      - type: vertical-stack
-        cards:
-          - type: tile
             entity: switch.mediabox
             features_position: bottom
             vertical: false
@@ -89,6 +75,18 @@ views:
               action: toggle
             features:
               - type: media-player-volume-slider
+
+      - type: tile
+        entity: fan.great_room_fan
+        features_position: bottom
+        features:
+          - type: fan-speed
+
+      - type: tile
+        entity: fan.master_fan
+        features_position: bottom
+        features:
+          - type: fan-speed
 
       - type: entities
         title: Lights
