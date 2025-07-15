@@ -43,7 +43,7 @@ views:
               - lock.touchscreen_deadbolt
               - switch.ecm
               - switch.water_heater_recirc_pump
-              - switch.wemo_dehumidifier
+              - switch.dehumidifier
               - script.goodnight
 
           - type: tile

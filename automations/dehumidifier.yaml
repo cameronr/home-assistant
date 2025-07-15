@@ -29,7 +29,7 @@
     - platform: time
       at: "03:00:00"
   action:
-    entity_id: switch.wemo_dehumidifier
+    entity_id: switch.dehumidifier
     service: switch.turn_off
 
 - id: dehumidifier_on_at_1am
@@ -46,5 +46,5 @@
       entity_id: sensor.weather_local_inside_temperature
       above: "65"
   action:
-    entity_id: switch.wemo_dehumidifier
+    entity_id: switch.dehumidifier
     service: switch.turn_on
