@@ -57,6 +57,23 @@
             category: "away"
             # badge: 1
 
+- id: people_lock_door_when_we_leave
+  alias: People - Lock door when we leave
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: group.people
+    from: "home"
+    to: "not_home"
+  condition:
+    - condition: state
+      entity_id: lock.touchscreen_deadbolt
+      state: "unlocked"
+  action:
+    - service: lock.lock
+      data:
+        entity_id: lock.touchscreen_deadbolt
+
 - id: people_unlock_when_cam_comes_home
   alias: People - Unlock when cam comes home
   initial_state: True
