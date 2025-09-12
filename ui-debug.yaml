@@ -39,6 +39,11 @@ views:
             name: Fire
         title: Home Alarm
 
+      - type: entities
+        entities:
+          - switch.tasmota_3
+          - switch.tasmota_4
+
       - type: custom:auto-entities
         card:
           type: entities
