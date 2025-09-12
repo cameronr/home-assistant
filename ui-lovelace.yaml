@@ -161,12 +161,11 @@ views:
         entities:
           - input_select.climate_mode
           - input_number.climate_temp
-          - climate.front
-          - climate.back
+          # - climate.front
+          - climate.mitp_heat_pump_3b2a04_front_climate
+          - climate.mitp_heat_pump_3b2a10_back_climate
           - sensor.weather_local_inside_temperature
           - sensor.weather_local_outside_temperature
-          # - switch.great_room_fan
-          # - switch.great_room_fan
           - input_boolean.master_floor_heat
           - input_boolean.kids_floor_heat
           - input_boolean.guest_floor_heat
