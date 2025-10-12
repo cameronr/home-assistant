@@ -80,6 +80,17 @@
       entity_id:
         - switch.tasmota_sofa
 
+- id: lights_turn_off_outside_at_midnight
+  alias: Lights - Turn off outside at midnight
+  trigger:
+    - platform: time
+      at: "00:00:00"
+  action:
+    - service: light.turn_off
+      entity_id:
+        - light.front_door_lights
+        - light.front_door_garage
+
 - alias: Lights - Xmas lights on at 4:30pm
   initial_state: True
   trigger:
