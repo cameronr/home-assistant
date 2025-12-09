@@ -24,22 +24,22 @@
   action:
     service: script.close_master_shades
 
-- alias: Shades - open dining in the morning
-  id: shades_open_dining_in_morning
-  initial_state: True
-  trigger:
-    platform: time
-    at: "6:50:00"
-  condition:
-    condition: state
-    entity_id: group.camsandy
-    state: "home"
-  action:
-    - service: cover.set_cover_position
-      target:
-        entity_id: cover.dining_room_front
-      data:
-        position: 50
+# - alias: Shades - open dining in the morning
+#   id: shades_open_dining_in_morning
+#   initial_state: True
+#   trigger:
+#     platform: time
+#     at: "6:50:00"
+#   condition:
+#     condition: state
+#     entity_id: group.camsandy
+#     state: "home"
+#   action:
+#     - service: cover.set_cover_position
+#       target:
+#         entity_id: cover.dining_room_front
+#       data:
+#         position: 50
 
 - alias: Shades - close dining after breakfast if hot
   id: shades_close_dining_after_breakfast

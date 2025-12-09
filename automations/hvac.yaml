@@ -27,6 +27,45 @@
       hvac_mode: "heat"
       temperature: 68
 
+- alias: HVAC - Turn up front heat in the morning more when cold
+  id: hvac_morning_front_heat_up_cold
+  initial_state: True
+  trigger:
+    - platform: time
+      at: "05:01:00"
+  condition:
+    - condition: state
+      entity_id: climate.mitp_heat_pump_3b2a04_front_climate
+      state: "heat"
+    - condition: numeric_state
+      entity_id: sensor.weather_local_outside_temperature
+      below: "46"
+    - condition: numeric_state
+      entity_id: sensor.pirateweather_daytime_high_temperature_0d
+      below: "66"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: group.people
+          state: "home"
+        - condition: state
+          entity_id: input_select.occupants
+          state: "dogs"
+        - condition: state
+          entity_id: input_select.occupants
+          state: "guests"
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.mitp_heat_pump_3b2a04_front_climate
+        hvac_mode: "heat"
+        temperature: 74
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.mitp_heat_pump_3b2a10_back_climate
+        hvac_mode: "heat"
+        temperature: 70
+
 # Turn up heat in the bedrooms later
 - alias: HVAC - Turn up back heat in the morning
   id: hvac_morning_back_heat_up
