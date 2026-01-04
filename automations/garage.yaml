@@ -62,25 +62,25 @@
       target:
         entity_id: cover.ratgdov25i_0b0617_door
 
-- id: garage_open_on_piano_lessons
-  alias: Garage - Open on piano lessons day
-  trigger:
-    - platform: time
-      at: "08:30:00"
-  condition:
-    - condition: time
-      weekday:
-        - sun
-    - condition: state
-      entity_id: group.camsandy
-      state: "home"
-    - condition: state
-      entity_id: binary_sensor.piano_lessons
-      state: "on"
-  action:
-    - service: cover.open_cover
-      target:
-        entity_id: cover.ratgdov25i_0b0617_door
+# - id: garage_open_on_piano_lessons
+#   alias: Garage - Open on piano lessons day
+#   trigger:
+#     - platform: time
+#       at: "08:30:00"
+#   condition:
+#     - condition: time
+#       weekday:
+#         - sun
+#     - condition: state
+#       entity_id: group.camsandy
+#       state: "home"
+#     - condition: state
+#       entity_id: binary_sensor.piano_lessons
+#       state: "on"
+#   action:
+#     - service: cover.open_cover
+#       target:
+#         entity_id: cover.ratgdov25i_0b0617_door
 
 - id: garage_open_on_art_class_day
   alias: Garage - Open on art class day

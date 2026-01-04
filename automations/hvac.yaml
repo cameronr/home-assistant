@@ -60,11 +60,6 @@
         entity_id: climate.mitp_heat_pump_3b2a04_front_climate
         hvac_mode: "heat"
         temperature: 74
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.mitp_heat_pump_3b2a10_back_climate
-        hvac_mode: "heat"
-        temperature: 70
 
 # Turn up heat in the bedrooms later
 - alias: HVAC - Turn up back heat in the morning

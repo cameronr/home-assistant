@@ -45,14 +45,14 @@
     #       Events count: {{ agenda['calendar.family'].events | count }}
     #       Events: {{ agenda['calendar.family'].events | to_json }}
   binary_sensor:
-    - name: Piano Lessons
-      state: |-
-        {% set events = agenda['calendar.family'].events %}
-        {% if events is not none and events | count > 0 %}
-          {{ 'piano lessons' in events | map(attribute='summary') | join(' ') | lower }}
-        {% else %}
-          {{ false }}
-        {% endif %}
+    # - name: Piano Lessons
+    #   state: |-
+    #     {% set events = agenda['calendar.family'].events %}
+    #     {% if events is not none and events | count > 0 %}
+    #       {{ 'piano lessons' in events | map(attribute='summary') | join(' ') | lower }}
+    #     {% else %}
+    #       {{ false }}
+    #     {% endif %}
     - name: Art Class
       state: |-
         {% set events = agenda['calendar.family'].events %}

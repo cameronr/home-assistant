@@ -47,8 +47,7 @@
   action:
     entity_id: switch.ecm
     service: switch.turn_on
-#
-# - alias: ECM on 0500 saturday
+# - alias: ECM on one off
 #   initial_state: True
 #   trigger:
 #     - platform: time
@@ -57,10 +56,6 @@
 #     - condition: state
 #       entity_id: group.camsandy
 #       state: "home"
-#     - condition: time
-#       weekday:
-#         - sat
-#         - sun
 #   action:
 #     entity_id: switch.ecm
 #     service: switch.turn_on
