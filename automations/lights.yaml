@@ -116,3 +116,57 @@
         - switch.front_door_figures
         - switch.garage_xmas_lights
         # - switch.front_door_xmas_lights
+
+- id: lights_sofa_and_piano_on_in_morning
+  alias: Lights - sofa and piano on in morning
+  trigger:
+    - platform: time
+      at: "6:00:00"
+  condition:
+    - condition: state
+      entity_id: group.people
+      state: "home"
+  action:
+    service: switch.turn_on
+    data:
+      entity_id:
+        - switch.tasmota_sofa
+        - switch.tasmota_4
+
+- id: lights_sofa_and_piano_off_in_morning
+  alias: Lights - sofa and piano off in morning
+  trigger:
+    - platform: time
+      at: "8:00:00"
+  action:
+    service: switch.turn_off
+    data:
+      entity_id:
+        - switch.tasmota_sofa
+        - switch.tasmota_4
+
+- id: lights_piano_on_in_afternoon
+  alias: Lights - piano on in afternoon
+  trigger:
+    - platform: time
+      at: "15:00:00"
+  condition:
+    - condition: state
+      entity_id: group.people
+      state: "home"
+  action:
+    service: switch.turn_on
+    data:
+      entity_id:
+        - switch.tasmota_4
+
+- id: lights_piano_off_at_night
+  alias: Lights - piano off at night
+  trigger:
+    - platform: time
+      at: "20:00:00"
+  action:
+    service: switch.turn_off
+    data:
+      entity_id:
+        - switch.tasmota_4
