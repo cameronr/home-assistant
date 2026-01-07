@@ -94,13 +94,14 @@ views:
         entities:
           - light.front_hallway_kitchen
           - light.front_hallway_great_room
-          - switch.tasmota_sofa
           - light.back_hallway_lights
           - light.dining_room_dining_room
           - light.front_hallway_hallway
           - light.front_door_lights
           - light.front_door_garage
           - light.great_room_patio_lights
+          - switch.tasmota_sofa
+          - switch.tasmota_4
           - switch.kep_lights
           - switch.meimei_lights
           # - switch.front_door_xmas_lights
