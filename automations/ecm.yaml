@@ -15,7 +15,7 @@
   initial_state: True
   trigger:
     - platform: time
-      at: "06:50:00"
+      at: "06:40:00"
   condition:
     - condition: state
       entity_id: group.camsandy
