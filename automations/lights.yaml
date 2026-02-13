@@ -19,7 +19,7 @@
     - service: light.turn_off
       entity_id: light.great_room_patio_lights
 
-- alias: Lights - If we arrived home, turn on garage / front door lights
+- alias: Lights - If we arrived home late, turn on garage / front door lights
   id: lights_turn_on_arrive_home
   initial_state: True
   trigger:
@@ -38,14 +38,36 @@
         - condition: sun
           after: sunset
           after_offset: "-02:00:00"
-        - condition: numeric_state
-          entity_id: sensor.weather_local_solar_rad_lx
-          below: 20000
   action:
     - service: light.turn_on
       entity_id:
         - light.front_door_lights
         - light.front_door_garage
+        - light.front_hallway_hallway
+        - light.front_hallway_great_room
+        - light.front_hallway_kitchen
+        - light.dining_room_dining_room
+
+- alias: Lights - If we arrived home during day and it is dark, turn on lights
+  id: lights_turn_on_arrive_home
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: group.people
+      to: "home"
+    - platform: state
+      entity_id: person.cam
+      to: "home"
+    - platform: state
+      entity_id: person.sandy
+      to: "home"
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.weather_local_solar_rad_lx
+      below: 20000
+  action:
+    - service: light.turn_on
+      entity_id:
         - light.front_hallway_hallway
         - light.front_hallway_great_room
         - light.front_hallway_kitchen
