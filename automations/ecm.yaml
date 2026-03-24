@@ -47,15 +47,16 @@
   action:
     entity_id: switch.ecm
     service: switch.turn_on
-# - alias: ECM on one off
-#   initial_state: True
-#   trigger:
-#     - platform: time
-#       at: "06:15:00"
-#   condition:
-#     - condition: state
-#       entity_id: group.camsandy
-#       state: "home"
-#   action:
-#     entity_id: switch.ecm
-#     service: switch.turn_on
+
+- alias: ECM on one off
+  initial_state: False
+  trigger:
+    - platform: time
+      at: "06:00:00"
+  condition:
+    - condition: state
+      entity_id: group.camsandy
+      state: "home"
+  action:
+    entity_id: switch.ecm
+    service: switch.turn_on
