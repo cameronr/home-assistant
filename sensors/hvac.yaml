@@ -3,20 +3,13 @@
   sensors:
     front_thermostat_operation_mode:
       friendly_name: "Front Operation Mode"
-      value_template: "{{ states.climate.front.state }}"
+      value_template: "{{ states.climate.mitp_heat_pump_3b2a04_front_climate }}"
     front_thermostat_target:
       friendly_name: "Front Target Temperature"
-      value_template: "{{ state_attr('climate.front', 'temperature') }}"
-    front_thermostat_relative_humidity:
-      friendly_name: "Front Relative Humidity"
-      value_template: "{{ state_attr('climate.front', 'current_humidity') }}"
+      value_template: "{{ state_attr('climate.mitp_heat_pump_3b2a04_front_climate', 'temperature') }}"
     back_thermostat_operation_mode:
       friendly_name: "Back Operation Mode"
-      value_template: "{{ states.climate.back.state }}"
+      value_template: "{{ states.climate.mitp_heat_pump_3b2a10_back_climate.state }}"
     back_thermostat_target:
       friendly_name: "Back Target Temperature"
-      value_template: "{{ state_attr('climate.back', 'temperature') }}"
-    back_thermostat_relative_humidity:
-      friendly_name: "Front Relative Humidity"
-      value_template: "{{ state_attr('climate.back', 'current_humidity') }}"
-
+      value_template: "{{ state_attr('climate.mitp_heat_pump_3b2a10_back_climate', 'temperature') }}"
