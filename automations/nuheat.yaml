@@ -108,7 +108,7 @@
       below: "71"
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
-      below: 72
+      below: 71
   action:
     service: input_boolean.turn_on
     data:
@@ -190,10 +190,10 @@
       state: "home"
     - condition: numeric_state
       entity_id: sensor.weather_local_inside_temperature
-      below: "72"
+      below: "71"
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
-      below: 72
+      below: 71
     - condition: template
       value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
@@ -215,10 +215,10 @@
       before: "23:45:00"
     - condition: numeric_state
       entity_id: sensor.weather_local_inside_temperature
-      below: "72"
+      below: "71"
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
-      below: 72
+      below: 71
     - condition: template
       value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
@@ -277,10 +277,10 @@
       state: "home"
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
-      below: 72
+      below: 71
     - condition: numeric_state
       entity_id: sensor.weather_local_inside_temperature
-      below: "72"
+      below: "71"
   action:
     service: input_boolean.turn_on
     data:
@@ -335,7 +335,7 @@
       state: "home"
     - condition: numeric_state
       entity_id: sensor.weather_local_inside_temperature
-      below: "72"
+      below: "71"
     - condition: template
       value_template: '{{ states.sensor.back_thermostat_operation_mode.state == "heat" }}'
   action:
@@ -357,7 +357,7 @@
       before: "22:30:00"
     - condition: numeric_state
       entity_id: sensor.weather_local_inside_temperature
-      below: "72"
+      below: "71"
     - condition: template
       value_template: '{{ states.sensor.back_thermostat_operation_mode.state == "heat" }}'
   action:
@@ -389,7 +389,7 @@
       state: "home"
     - condition: numeric_state
       entity_id: sensor.weather_local_inside_temperature
-      below: "72"
+      below: "71"
   action:
     service: input_boolean.turn_on
     data:
@@ -420,7 +420,7 @@
       before: "02:00:00"
     - condition: numeric_state
       entity_id: sensor.weather_local_inside_temperature
-      below: "72"
+      below: "71"
     - condition: template
       value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
@@ -442,10 +442,10 @@
       state: "home"
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
-      below: 72
+      below: 71
     - condition: numeric_state
       entity_id: sensor.weather_local_inside_temperature
-      below: "72"
+      below: "71"
     - condition: template
       value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
   action:
