@@ -101,7 +101,6 @@ views:
           - light.front_door_garage
           - light.great_room_patio_lights
           - switch.tasmota_sofa
-          - switch.tasmota_4
           - switch.kep_lights
           - switch.meimei_lights
           # - switch.front_door_xmas_lights
@@ -167,9 +166,30 @@ views:
           - climate.mitp_heat_pump_3b2a10_back_climate
           - sensor.weather_local_inside_temperature
           - sensor.weather_local_outside_temperature
-          - input_boolean.master_floor_heat
-          - input_boolean.kids_floor_heat
-          - input_boolean.guest_floor_heat
+          # - input_boolean.master_floor_heat
+          # - input_boolean.kids_floor_heat
+          # - input_boolean.guest_floor_heat
+
+      - type: tile
+        entity: input_boolean.master_floor_heat
+        features_position: bottom
+        vertical: false
+        icon_tap_action:
+          action: toggle
+
+      - type: tile
+        entity: input_boolean.kids_floor_heat
+        features_position: bottom
+        vertical: false
+        icon_tap_action:
+          action: toggle
+
+      - type: tile
+        entity: input_boolean.guest_floor_heat
+        features_position: bottom
+        vertical: false
+        icon_tap_action:
+          action: toggle
 
       - type: tile
         entity: fan.great_room_fan
