@@ -46,28 +46,23 @@ views:
               - switch.dehumidifier
               - script.goodnight
 
-          - type: tile
-            entity: remote.harmony_hub
-            features_position: bottom
-            vertical: false
-            icon_tap_action:
-              action: toggle
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: remote.harmony_hub
+                features_position: bottom
+                vertical: false
+                icon_tap_action:
+                  action: toggle
 
-          # - type: entities
-          #   title: Media
-          #   state_color: true
-          #   entities:
-          #     - switch.mediabox
-          #     - remote.harmony_hub
-
-          - type: tile
-            entity: media_player.denon_avr_x3800h
-            features_position: bottom
-            vertical: false
-            icon_tap_action:
-              action: toggle
-            features:
-              - type: media-player-volume-slider
+              - type: tile
+                entity: media_player.denon_avr_x3800h
+                features_position: bottom
+                vertical: false
+                icon_tap_action:
+                  action: toggle
+                features:
+                  - type: media-player-volume-slider
 
           - type: tile
             entity: switch.mediabox
@@ -76,36 +71,41 @@ views:
             icon_tap_action:
               action: toggle
 
-      - type: tile
-        entity: fan.great_room_fan
-        features_position: bottom
-        features:
-          - type: fan-speed
-
-      - type: tile
-        entity: fan.master_fan
-        features_position: bottom
-        features:
-          - type: fan-speed
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: fan.great_room_fan
+                features_position: bottom
+                features:
+                  - type: fan-speed
+              - type: tile
+                entity: fan.master_fan
+                features_position: bottom
+                features:
+                  - type: fan-speed
 
       - type: entities
         title: Lights
         state_color: true
         entities:
+          - type: section
+            label: Interior
           - light.front_hallway_kitchen
           - light.front_hallway_great_room
           - light.back_hallway_lights
           - light.dining_room_dining_room
           - light.front_hallway_hallway
+          - switch.tasmota_sofa
+          - light.great_room_patio_lights
+          - type: section
+            label: Exterior
           - light.front_door_lights
           - light.front_door_garage
-          - light.great_room_patio_lights
-          - switch.tasmota_sofa
+          - switch.garage_xmas_lights
+          - type: section
+            label: Other
           - switch.kep_lights
           - switch.meimei_lights
-          # - switch.front_door_xmas_lights
-          # - switch.front_door_figures
-          - switch.garage_xmas_lights
 
       - type: vertical-stack
         cards:
@@ -191,17 +191,18 @@ views:
         icon_tap_action:
           action: toggle
 
-      - type: tile
-        entity: fan.great_room_fan
-        features_position: bottom
-        features:
-          - type: fan-speed
-
-      - type: tile
-        entity: fan.master_fan
-        features_position: bottom
-        features:
-          - type: fan-speed
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            entity: fan.great_room_fan
+            features_position: bottom
+            features:
+              - type: fan-speed
+          - type: tile
+            entity: fan.master_fan
+            features_position: bottom
+            features:
+              - type: fan-speed
 
       - type: entities
         title: Dining Shades
