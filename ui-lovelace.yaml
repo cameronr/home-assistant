@@ -88,8 +88,6 @@ views:
         title: Lights
         state_color: true
         entities:
-          - type: section
-            label: Interior
           - light.front_hallway_kitchen
           - light.front_hallway_great_room
           - light.back_hallway_lights
