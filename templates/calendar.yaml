@@ -66,6 +66,6 @@
     - name: "School Year"
       state: >
         {% set today = now().date() %}
-        {% set start = today.replace(year=2025, month=8, day=14) %}
-        {% set end = today.replace(year=2026, month=6, day=4) %}
+        {% set start = today.replace(year=2026, month=8, day=14) %}
+        {% set end = today.replace(year=2027, month=6, day=3) %}
         {{ today > start and today < end }}
