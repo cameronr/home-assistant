@@ -6,24 +6,29 @@ title: Westridge
 # Exclude entities from "Unused entities" view
 excluded_entities:
 views:
-  - path: home
-    type: sections
-    icon: mdi:home
+  # View tab title.
+  - icon: mdi:home
     title: Home
-    max_columns: 3
-    sections:
-      - cards:
-          # Show update card if there are updates
-          - type: conditional
-            conditions:
-              - entity: binary_sensor.updater
-                state: "on"
-            card:
-              type: entities
-              entities:
-                - sensor.latest_version
-            grid_options:
-              columns: 12
+    # Optional unique path for direct access /lovelace/${path}
+    path: home
+    # Optional background (overwrites the global background).
+    # background: radial-gradient(crimson, skyblue)
+    # Each view can have a different theme applied. Theme should be defined in the frontend.
+    # theme: dark-mode
+    # The cards to show on this view.
+    cards:
+      # Show update card if there are updates
+      - type: conditional
+        conditions:
+          - entity: binary_sensor.updater
+            state: "on"
+        card:
+          type: entities
+          entities:
+            - sensor.latest_version
+
+      - type: vertical-stack
+        cards:
           - type: entities
             # Title of the entities card
             title: Switches
@@ -40,78 +45,68 @@ views:
               - switch.water_heater_recirc_pump
               - switch.dehumidifier
               - script.goodnight
-            grid_options:
-              columns: 12
 
-      - cards:
-          - type: tile
-            entity: remote.harmony_hub
-            features_position: bottom
-            vertical: false
-            tap_action:
-              action: toggle
-            grid_options:
-              columns: 6
-          - type: tile
-            entity: media_player.denon_avr_x3800h
-            features_position: bottom
-            vertical: false
-            tap_action:
-              action: toggle
-            features:
-              - type: media-player-volume-slider
-            grid_options:
-              columns: 6
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: remote.harmony_hub
+                features_position: bottom
+                vertical: false
+                tap_action:
+                  action: toggle
+
+              - type: tile
+                entity: media_player.denon_avr_x3800h
+                features_position: bottom
+                vertical: false
+                tap_action:
+                  action: toggle
+                features:
+                  - type: media-player-volume-slider
+
           - type: tile
             entity: switch.mediabox
             features_position: bottom
             vertical: false
             tap_action:
               action: toggle
-            grid_options:
-              columns: 12
 
-      - cards:
-          - type: tile
-            entity: fan.great_room_fan
-            features_position: bottom
-            features:
-              - type: fan-speed
-            grid_options:
-              columns: 6
-          - type: tile
-            entity: fan.master_fan
-            features_position: bottom
-            features:
-              - type: fan-speed
-            grid_options:
-              columns: 6
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: fan.great_room_fan
+                features_position: bottom
+                features:
+                  - type: fan-speed
+              - type: tile
+                entity: fan.master_fan
+                features_position: bottom
+                features:
+                  - type: fan-speed
 
-      - cards:
-          - type: entities
-            title: Lights
-            state_color: true
-            entities:
-              - light.front_hallway_kitchen
-              - light.front_hallway_great_room
-              - light.back_hallway_lights
-              - light.dining_room_dining_room
-              - light.front_hallway_hallway
-              - switch.tasmota_sofa
-              - light.great_room_patio_lights
-              - type: section
-                label: Exterior
-              - light.front_door_lights
-              - light.front_door_garage
-              - switch.garage_xmas_lights
-              - type: section
-                label: Other
-              - switch.kep_lights
-              - switch.meimei_lights
-            grid_options:
-              columns: 12
+      - type: entities
+        title: Lights
+        state_color: true
+        entities:
+          - light.front_hallway_kitchen
+          - light.front_hallway_great_room
+          - light.back_hallway_lights
+          - light.dining_room_dining_room
+          - light.front_hallway_hallway
+          - switch.tasmota_sofa
+          - light.great_room_patio_lights
+          - type: section
+            label: Exterior
+          - light.front_door_lights
+          - light.front_door_garage
+          - switch.garage_xmas_lights
+          - type: section
+            label: Other
+          - switch.kep_lights
+          - switch.meimei_lights
 
-      - cards:
+      - type: vertical-stack
+        cards:
           - type: entities
             title: People
             show_header_toggle: false
@@ -120,8 +115,7 @@ views:
               - person.sandy
               - group.guests
               - input_select.occupants
-            grid_options:
-              columns: 12
+
           - type: tile
             entity: alarm_control_panel.home_alarm
             features_position: inline
@@ -132,140 +126,110 @@ views:
                   - armed_away
                   - disarmed
             name: !secret alarm_name
-            grid_options:
-              columns: 12
+
+          # card-mod is gone, so the status line is a plain markdown card:
+          # text only, no icon or header (same look as the old styled entity card)
           - type: markdown
             entity_id:
               - sensor.alarm_status_with_zone_name
             text_only: true
             content: >
               {{ states('sensor.alarm_status_with_zone_name') }}
-            grid_options:
-              columns: 12
 
-  - path: climate
-    type: sections
-    icon: mdi:weather-partly-snowy-rainy
+  - icon: mdi:weather-partly-snowy-rainy
     title: Climate
-    max_columns: 3
-    sections:
-      - cards:
-          - type: weather-forecast
-            entity: weather.pirateweather
-            forecast_type: daily
-            grid_options:
-              columns: 12
+    path: climate
+    cards:
+      - type: weather-forecast
+        entity: weather.pirateweather
+        forecast_type: daily
+      - type: entities
+        title: Climate
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - input_select.climate_mode
+          - input_number.climate_temp
+          - climate.mitp_heat_pump_3b2a04_front_climate
+          - climate.mitp_heat_pump_3b2a10_back_climate
+          - sensor.weather_local_inside_temperature
+          - sensor.weather_local_outside_temperature
 
-      - cards:
-          - type: entities
-            title: Climate
-            show_header_toggle: false
-            state_color: true
-            entities:
-              - input_select.climate_mode
-              - input_number.climate_temp
-              - climate.mitp_heat_pump_3b2a04_front_climate
-              - climate.mitp_heat_pump_3b2a10_back_climate
-              - sensor.weather_local_inside_temperature
-              - sensor.weather_local_outside_temperature
-            grid_options:
-              columns: 12
+      - type: tile
+        entity: input_boolean.master_floor_heat
+        features_position: bottom
+        vertical: false
+        tap_action:
+          action: toggle
 
-      - cards:
-          - type: tile
-            entity: input_boolean.master_floor_heat
-            features_position: bottom
-            vertical: false
-            tap_action:
-              action: toggle
-            grid_options:
-              columns: 12
-          - type: tile
-            entity: input_boolean.kids_floor_heat
-            features_position: bottom
-            vertical: false
-            tap_action:
-              action: toggle
-            grid_options:
-              columns: 12
-          - type: tile
-            entity: input_boolean.guest_floor_heat
-            features_position: bottom
-            vertical: false
-            tap_action:
-              action: toggle
-            grid_options:
-              columns: 12
+      - type: tile
+        entity: input_boolean.kids_floor_heat
+        features_position: bottom
+        vertical: false
+        tap_action:
+          action: toggle
 
-      - cards:
+      - type: tile
+        entity: input_boolean.guest_floor_heat
+        features_position: bottom
+        vertical: false
+        tap_action:
+          action: toggle
+
+      - type: horizontal-stack
+        cards:
           - type: tile
             entity: fan.great_room_fan
             features_position: bottom
             features:
               - type: fan-speed
-            grid_options:
-              columns: 6
           - type: tile
             entity: fan.master_fan
             features_position: bottom
             features:
               - type: fan-speed
-            grid_options:
-              columns: 6
 
-      - cards:
-          - type: entities
-            title: Dining Shades
-            show_header_toggle: false
-            entities:
-              - cover.dining_room_front
-              - cover.dining_room_side
-              - script.open_dining_shades_full
-              - script.open_dining_shades_half
-              - script.close_dining_shades
-            grid_options:
-              columns: 12
+      - type: entities
+        title: Dining Shades
+        show_header_toggle: false
+        entities:
+          - cover.dining_room_front
+          - cover.dining_room_side
+          - script.open_dining_shades_full
+          - script.open_dining_shades_half
+          - script.close_dining_shades
 
-      - cards:
-          - type: entities
-            title: Master Shades
-            show_header_toggle: false
-            entities:
-              - cover.master_back_left
-              - cover.master_back_right
-              - cover.master_big_window
-              - script.open_master_shades_full
-              - script.open_master_shades_half
-              - script.close_master_shades
-            grid_options:
-              columns: 12
+      - type: entities
+        title: Master Shades
+        show_header_toggle: false
+        entities:
+          - cover.master_back_left
+          - cover.master_back_right
+          - cover.master_big_window
+          - script.open_master_shades_full
+          - script.open_master_shades_half
+          - script.close_master_shades
 
-  - path: solar
-    type: sections
-    icon: mdi:solar-power
+  # Specify a tab icon if you want the view tab to be an icon.
+  - icon: mdi:solar-power
     title: Solar
-    max_columns: 3
-    sections:
-      - cards:
-          - type: custom:auto-entities
-            card:
-              type: entities
-              title: Solar
-            filter:
-              include:
-                - entity_id: "sensor.solar*"
-            sort:
-              method: name
-            grid_options:
-              columns: 12
-          - type: custom:auto-entities
-            card:
-              type: entities
-              title: Gateways
-            filter:
-              include:
-                - entity_id: "sensor.envoy*"
-            sort:
-              method: name
-            grid_options:
-              columns: 12
+    path: solar
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Solar
+        filter:
+          include:
+            - entity_id: "sensor.solar*"
+        sort:
+          method: name
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Gateways
+        filter:
+          include:
+            - entity_id: "sensor.envoy*"
+        sort:
+          method: name

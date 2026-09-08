@@ -2,103 +2,86 @@ title: Westridge Debug
 
 excluded_entities:
 views:
-  - path: sensors
-    type: sections
-    title: Sensors
-    sections:
-      - type: grid
-        cards:
-          - type: entities
-            title: Climate Other
-            show_header_toggle: false
-            entities:
-              - switch.great_room_fan
-              - climate.master_nuheat
-              - climate.kids_nuheat
-              - climate.guest_nuheat
-            grid_options:
-              columns: 12
-          - type: entities
-            title: Home Alarm
-            show_header_toggle: false
-            entities:
-              - binary_sensor.elara_bedroom
-              - binary_sensor.front_door
-              - binary_sensor.front_windows
-              - binary_sensor.guest_bedroom
-              - binary_sensor.hall_bath
-              - binary_sensor.kep_bedroom
-              - binary_sensor.kitchen
-              - binary_sensor.laundry
-              - binary_sensor.lift_slide
-              - binary_sensor.master
-              - binary_sensor.master_bath
-              - binary_sensor.mudroom_powder
-              - binary_sensor.pantry
-              - binary_sensor.fire_sprinklers
-              - entity: binary_sensor.home_alarm_ready
-                name: Ready
-              - entity: sensor.home_alarm_keypad
-                name: Keypad
-              - entity: binary_sensor.home_alarm_alarm
-                name: Alarm
-              - entity: binary_sensor.home_alarm_fire
-                name: Fire
-            grid_options:
-              columns: 12
-          - type: entities
-            entities:
-              - switch.tasmota_3
-              - switch.tasmota_4
-            grid_options:
-              columns: 12
-          - type: custom:auto-entities
-            card:
-              type: entities
-              title: Weather Station
-            filter:
-              include:
-                - entity_id: "sensor.westridge*"
-            sort:
-              method: name
-            grid_options:
-              columns: 12
-          - type: custom:auto-entities
-            card:
-              type: entities
-              title: Weather Station (local)
-            filter:
-              include:
-                - entity_id: "sensor.weather_local_*"
-            sort:
-              method: name
-            grid_options:
-              columns: 12
-          - type: custom:auto-entities
-            card:
-              type: entities
-              title: Tasmota
-            filter:
-              include:
-                - entity_id: "sensor.tasmota.*"
-            sort:
-              method: name
-            grid_options:
-              columns: 12
+  - title: Sensors
+    path: sensors
+    cards:
+      - type: entities
+        title: Climate Other
+        show_header_toggle: false
+        entities:
+          - switch.great_room_fan
+          - climate.master_nuheat
+          - climate.kids_nuheat
+          - climate.guest_nuheat
+      - type: entities
+        entities:
+          - binary_sensor.elara_bedroom
+          - binary_sensor.front_door
+          - binary_sensor.front_windows
+          - binary_sensor.guest_bedroom
+          - binary_sensor.hall_bath
+          - binary_sensor.kep_bedroom
+          - binary_sensor.kitchen
+          - binary_sensor.laundry
+          - binary_sensor.lift_slide
+          - binary_sensor.master
+          - binary_sensor.master_bath
+          - binary_sensor.mudroom_powder
+          - binary_sensor.pantry
+          - binary_sensor.fire_sprinklers
+          - entity: binary_sensor.home_alarm_ready
+            name: Ready
+          - entity: sensor.home_alarm_keypad
+            name: Keypad
+          - entity: binary_sensor.home_alarm_alarm
+            name: Alarm
+          - entity: binary_sensor.home_alarm_fire
+            name: Fire
+        title: Home Alarm
 
-  - path: automations
-    type: sections
-    icon: mdi:home-assistant
+      - type: entities
+        entities:
+          - switch.tasmota_3
+          - switch.tasmota_4
+
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Weather Station
+        filter:
+          include:
+            - entity_id: "sensor.westridge*"
+        sort:
+          method: name
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Weather Station (local)
+        filter:
+          include:
+            - entity_id: "sensor.weather_local_*"
+        sort:
+          method: name
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Tasmota
+        filter:
+          include:
+            - entity_id: "sensor.tasmota.*"
+        sort:
+          method: name
+
+  - icon: mdi:home-assistant
+    # Title of the view. Will be used as the tooltip for tab icon
     title: Automations
-    sections:
-      - type: grid
-        cards:
-          - type: custom:auto-entities
-            card:
-              type: entities
-              title: Automations
-            filter:
-              include:
-                - entity_id: "automation.*"
-            grid_options:
-              columns: 12
+    path: automations
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Automations
+        filter:
+          include:
+            - entity_id: "automation.*"
+  # Specify a tab icon if you want the view tab to be an icon.
