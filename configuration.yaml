@@ -70,6 +70,8 @@ recorder:
       - group.solar
       - group.switches
       - group.zwave
+# View all events in a logbook
+logbook:
 notify: !include notifier.yaml
 automation: !include_dir_merge_list automations/
 script: !include_dir_merge_named scripts/

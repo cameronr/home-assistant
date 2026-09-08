@@ -14,6 +14,8 @@ views:
     sections:
       - type: grid
         cards:
+          - type: heading
+            heading: Switches
           # Show update card if there are updates
           - type: conditional
             conditions:
@@ -27,7 +29,7 @@ views:
               columns: 12
 
           - type: grid
-            columns: 4
+            columns: 2
             cards:
               - type: button
                 entity: script.open_gate_temporarily
@@ -69,7 +71,7 @@ views:
             heading: Media
             icon: mdi:home-automation
           - type: grid
-            columns: 3
+            columns: 2
             cards:
               - type: tile
                 entity: remote.harmony_hub
@@ -112,7 +114,7 @@ views:
             heading: Lights
             icon: mdi:lightbulb
           - type: grid
-            columns: 4
+            columns: 2
             cards:
               - type: tile
                 entity: light.front_hallway_kitchen
@@ -149,7 +151,7 @@ views:
             heading: Exterior
             icon: mdi:door
           - type: grid
-            columns: 3
+            columns: 2
             cards:
               - type: tile
                 entity: light.front_door_lights
@@ -170,7 +172,7 @@ views:
             heading: Other
             icon: mdi:lightbulb
           - type: grid
-            columns: 3
+            columns: 2
             cards:
               - type: tile
                 entity: switch.kep_lights
@@ -187,7 +189,7 @@ views:
             heading: People
             icon: mdi:account-group
           - type: grid
-            columns: 4
+            columns: 2
             cards:
               - type: tile
                 entity: person.cam
@@ -205,29 +207,26 @@ views:
           - type: heading
             heading: Alarm
             icon: mdi:shield-home
-          - type: grid
-            columns: 12
-            cards:
-              - type: tile
-                entity: alarm_control_panel.home_alarm
-                features_position: inline
-                features:
-                  - type: alarm-modes
-                    modes:
-                      - armed_home
-                      - armed_away
-                      - disarmed
-                name: !secret alarm_name
-                grid_options:
-                  columns: 12
-              - type: markdown
-                entity_id:
-                  - sensor.alarm_status_with_zone_name
-                text_only: true
-                content: >
-                  {{ states('sensor.alarm_status_with_zone_name') }}
-                grid_options:
-                  columns: 12
+          - type: tile
+            entity: alarm_control_panel.home_alarm
+            features_position: inline
+            features:
+              - type: alarm-modes
+                modes:
+                  - armed_home
+                  - armed_away
+                  - disarmed
+            name: !secret alarm_name
+            grid_options:
+              columns: 12
+          - type: markdown
+            entity_id:
+              - sensor.alarm_status_with_zone_name
+            text_only: true
+            content: >
+              {{ states('sensor.alarm_status_with_zone_name') }}
+            grid_options:
+              columns: 12
 
   - path: climate
     type: sections
@@ -249,7 +248,7 @@ views:
             heading: Climate
             icon: mdi:thermometer
           - type: grid
-            columns: 4
+            columns: 2
             cards:
               - type: tile
                 entity: input_select.climate_mode
@@ -281,7 +280,7 @@ views:
             heading: Floor Heat
             icon: mdi:radiator
           - type: grid
-            columns: 3
+            columns: 2
             cards:
               - type: tile
                 entity: input_boolean.master_floor_heat
@@ -319,7 +318,7 @@ views:
             heading: Dining Shades
             icon: mdi:blinds
           - type: grid
-            columns: 3
+            columns: 2
             cards:
               - type: tile
                 entity: cover.dining_room_front
@@ -350,7 +349,7 @@ views:
             heading: Master Shades
             icon: mdi:blinds
           - type: grid
-            columns: 3
+            columns: 2
             cards:
               - type: tile
                 entity: cover.master_back_left
