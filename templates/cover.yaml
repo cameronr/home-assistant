@@ -1,0 +1,8 @@
+- sensor:
+    - name: "Big Window Position"
+      unique_id: master_big_window_position_tracker
+      unit_of_measurement: "%"
+      state: >
+        {{ state_attr('cover.master_big_window', 'current_position') | int(0) }}
+      attributes:
+        last_updated: "{{ now().replace(microsecond=0) }}"

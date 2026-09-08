@@ -209,7 +209,7 @@
       - condition: and
         conditions:
           - condition: state
-            entity_id: sensor.front_thermostat_operation_mode
+            entity_id: climate.mitp_heat_pump_3b2a04_front_climate
             state: "heat"
           - condition: numeric_state
             entity_id: input_number.climate_temp
@@ -217,7 +217,7 @@
       - condition: and
         conditions:
           - condition: state
-            entity_id: sensor.front_thermostat_operation_mode
+            entity_id: climate.mitp_heat_pump_3b2a04_front_climate
             state: "cool"
           - condition: numeric_state
             entity_id: input_number.climate_temp
@@ -227,31 +227,4 @@
       data_template:
         temperature: "{{ states.input_number.climate_temp.state | float }}"
         message: "Setting HVAC to {{ states.input_number.climate_temp.state }} (mode: {{ states.input_select.climate_mode.state }})"
-# - id: hvac_set_mode_on_startup
-#   alias: HVAC - Set hvac mode on startup
-#   initial_state: True
-#   trigger:
-#     platform: homeassistant
-#     event: start
-#   action:
-#     - service: input_select.select_option
-#       entity_id: input_select.climate_mode
-#       data_template:
-#         option: '{{ states.sensor.front_thermostat_operation_mode.state }}'
-#
-# - id: hvac_set_temp_on_startup
-#   alias: HVAC - Set hvac temp on startup
-#   initial_state: false
-#   trigger:
-#     platform: homeassistant
-#     event: start
-#   condition:
-#   not:
-#     - condition: state
-#       entity_id: states.sensor.front_thermostat_operation_mode
-#       state: "off"
-#   action:
-#     - service: input_number.set_value
-#       entity_id: input_number.climate_temp
-#       data_template:
-#         value: "{{ states.sensor.back_thermostat_target.state }}"
+

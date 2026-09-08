@@ -101,8 +101,11 @@
     - condition: state
       entity_id: group.camsandy
       state: "home"
-    - condition: template
-      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: climate.mitp_heat_pump_3b2a10_back_climate
+          state: "cool"
     - condition: numeric_state
       entity_id: sensor.weather_local_inside_temperature
       below: "71"
@@ -124,8 +127,11 @@
     - condition: state
       entity_id: group.camsandy
       state: "home"
-    - condition: template
-      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: climate.mitp_heat_pump_3b2a10_back_climate
+          state: "cool"
     - condition: numeric_state
       entity_id: sensor.weather_local_inside_temperature
       below: "71"
@@ -194,8 +200,11 @@
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
       below: 71
-    - condition: template
-      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: climate.mitp_heat_pump_3b2a10_back_climate
+          state: "cool"
   action:
     service: input_boolean.turn_on
     data:
@@ -219,8 +228,11 @@
     - condition: numeric_state
       entity_id: sensor.pirateweather_daytime_high_temperature_0d
       below: 71
-    - condition: template
-      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: climate.mitp_heat_pump_3b2a10_back_climate
+          state: "cool"
   action:
     service: input_boolean.turn_on
     data:
@@ -336,8 +348,9 @@
     - condition: numeric_state
       entity_id: sensor.weather_local_inside_temperature
       below: "71"
-    - condition: template
-      value_template: '{{ states.sensor.back_thermostat_operation_mode.state == "heat" }}'
+    - condition: state
+      entity_id: climate.mitp_heat_pump_3b2a10_back_climate
+      state: "heat"
   action:
     service: input_boolean.turn_on
     data:
@@ -358,8 +371,9 @@
     - condition: numeric_state
       entity_id: sensor.weather_local_inside_temperature
       below: "71"
-    - condition: template
-      value_template: '{{ states.sensor.back_thermostat_operation_mode.state == "heat" }}'
+    - condition: state
+      entity_id: climate.mitp_heat_pump_3b2a10_back_climate
+      state: "heat"
   action:
     service: input_boolean.turn_on
     data:
@@ -421,8 +435,11 @@
     - condition: numeric_state
       entity_id: sensor.weather_local_inside_temperature
       below: "71"
-    - condition: template
-      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: climate.mitp_heat_pump_3b2a10_back_climate
+          state: "cool"
   action:
     service: input_boolean.turn_on
     data:
@@ -446,8 +463,11 @@
     - condition: numeric_state
       entity_id: sensor.weather_local_inside_temperature
       below: "71"
-    - condition: template
-      value_template: '{{ states.sensor.back_thermostat_operation_mode.state != "cool" }}'
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: climate.mitp_heat_pump_3b2a10_back_climate
+          state: "cool"
   action:
     service: input_boolean.turn_on
     data:
