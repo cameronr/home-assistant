@@ -13,28 +13,28 @@ homeassistant:
 frontend:
   extra_module_url:
     - /hacsfiles/lovelace-card-mod/card-mod.js
+
 # Put Lovelace in yaml mode
 lovelace:
-  mode: yaml
+  resource_mode: yaml
   dashboards:
+    lovelace:
+      mode: yaml
+      filename: ui-lovelace.yaml
+      title: Overview
+      icon: mdi:view-dashboard
+      show_in_sidebar: true
     debug-dashboard:
       mode: yaml
+      filename: ui-debug.yaml
       title: Debug
       icon: mdi:information-variant-box-outline
       show_in_sidebar: true
-      filename: ui-debug.yaml
+
   resources:
     - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
       type: module
 
-# Enables configuration UI
-config:
-http:
-  server_host: !secret server_host
-  server_port: !secret server_port
-  use_x_forwarded_for: true
-  trusted_proxies:
-    - !secret proxy_ip
 # Checks for available updates
 # Note: This component will send some information about your system to
 # the developers to assist with development of Home Assistant.

@@ -1,0 +1,23 @@
+template:
+  - sensor:
+      - name: "Front Operation Mode"
+        unique_id: front_thermostat_operation_mode
+        state: "{{ states('climate.mitp_heat_pump_3b2a04_front_climate') }}"
+
+      - name: "Front Target Temperature"
+        unique_id: front_thermostat_target
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: "°F"
+        state: "{{ state_attr('climate.mitp_heat_pump_3b2a04_front_climate', 'temperature') }}"
+
+      - name: "Back Operation Mode"
+        unique_id: back_thermostat_operation_mode
+        state: "{{ states('climate.mitp_heat_pump_3b2a10_back_climate') }}"
+
+      - name: "Back Target Temperature"
+        unique_id: back_thermostat_target
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: "°F"
+        state: "{{ state_attr('climate.mitp_heat_pump_3b2a10_back_climate', 'temperature') }}"

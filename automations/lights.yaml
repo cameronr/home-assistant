@@ -20,7 +20,7 @@
       entity_id: light.great_room_patio_lights
 
 - alias: Lights - If we arrived home late, turn on garage / front door lights
-  id: lights_turn_on_arrive_home
+  id: lights_turn_on_arrive_home_late
   initial_state: True
   trigger:
     - platform: state
