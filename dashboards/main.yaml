@@ -52,14 +52,14 @@ views:
                 entity: remote.harmony_hub
                 features_position: bottom
                 vertical: false
-                tap_action:
+                icon_tap_action:
                   action: toggle
 
               - type: tile
                 entity: media_player.denon_avr_x3800h
                 features_position: bottom
                 vertical: false
-                tap_action:
+                icon_tap_action:
                   action: toggle
                 features:
                   - type: media-player-volume-slider
@@ -68,7 +68,7 @@ views:
             entity: switch.mediabox
             features_position: bottom
             vertical: false
-            tap_action:
+            icon_tap_action:
               action: toggle
 
           - type: horizontal-stack
@@ -159,21 +159,21 @@ views:
         entity: input_boolean.master_floor_heat
         features_position: bottom
         vertical: false
-        tap_action:
+        icon_tap_action:
           action: toggle
 
       - type: tile
         entity: input_boolean.kids_floor_heat
         features_position: bottom
         vertical: false
-        tap_action:
+        icon_tap_action:
           action: toggle
 
       - type: tile
         entity: input_boolean.guest_floor_heat
         features_position: bottom
         vertical: false
-        tap_action:
+        icon_tap_action:
           action: toggle
 
       - type: horizontal-stack
