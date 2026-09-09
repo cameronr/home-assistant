@@ -15,7 +15,7 @@ lovelace:
     lovelace:
       mode: yaml
       filename: dashboards/main.yaml
-      title: Overview
+      title: Westridge
       icon: mdi:view-dashboard
       show_in_sidebar: true
     debug-dashboard:
