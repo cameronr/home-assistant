@@ -56,20 +56,20 @@ views:
                   action: toggle
 
               - type: tile
-                entity: media_player.denon_avr_x3800h
+                entity: switch.mediabox
                 features_position: bottom
                 vertical: false
                 icon_tap_action:
                   action: toggle
-                features:
-                  - type: media-player-volume-slider
 
           - type: tile
-            entity: switch.mediabox
+            entity: media_player.denon_avr_x3800h
             features_position: bottom
             vertical: false
             icon_tap_action:
               action: toggle
+            features:
+              - type: media-player-volume-slider
 
           - type: horizontal-stack
             cards:
@@ -90,9 +90,9 @@ views:
         entities:
           - light.front_hallway_kitchen
           - light.front_hallway_great_room
-          - light.back_hallway_lights
-          - light.dining_room_dining_room
           - light.front_hallway_hallway
+          - light.dining_room_dining_room
+          - light.back_hallway_lights
           - switch.tasmota_sofa
           - light.great_room_patio_lights
           - type: section
