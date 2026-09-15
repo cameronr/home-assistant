@@ -1,1 +1,9 @@
+# Power off (web endpoint). Used by switch.mediabox, see switches/computers.yaml.
 mediabox_off: !secret mediabox_shutdown_cmd
+
+# GPU mode control through the restricted `homeassistant` ssh account.
+# The remote command is the full program invocation; the `homeassistant`
+# account's restricted login shell (see mediabox/) is what enforces it.
+mediabox_mode_inference: 'ssh -F /config/.ssh/config mediabox mediabox-ctl set-mode inference'
+mediabox_mode_linux_gaming: 'ssh -F /config/.ssh/config mediabox mediabox-ctl set-mode linux-gaming'
+mediabox_mode_windows_vm: 'ssh -F /config/.ssh/config mediabox mediabox-ctl set-mode windows-vm'

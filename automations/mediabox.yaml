@@ -1,0 +1,98 @@
+# Mode control for mediabox (see mediabox/ in this repo for the server side).
+#
+# input_select.mediabox_mode is the user-facing control; sensor.mediabox_mode
+# is the actual mode read from mediabox every 10s. The two automations keep
+# the pair in sync:
+#   - mediabox_apply_mode: the select changes -> run the mode on mediabox,
+#     confirm via the sensor, notify and roll back on failure
+#   - mediabox_sync_mode: the sensor changes -> update the select (the mode
+#     changed outside HA, e.g. someone did it on the server)
+
+- id: mediabox_apply_mode
+  alias: Mediabox - Apply selected mode
+  description: >
+    Runs the selected GPU mode on mediabox over the restricted homeassistant
+    ssh account, then waits up to 3 minutes for sensor.mediabox_mode to
+    confirm the transition. On timeout it notifies and rolls the select back
+    to the actual mode.
+  mode: queued
+  max: 3
+  triggers:
+    - trigger: state
+      entity_id: input_select.mediabox_mode
+      to: inference
+      id: mode_inference
+    - trigger: state
+      entity_id: input_select.mediabox_mode
+      to: linux-gaming
+      id: mode_linux_gaming
+    - trigger: state
+      entity_id: input_select.mediabox_mode
+      to: windows-vm
+      id: mode_windows_vm
+  conditions:
+    # Only act when the actual mode is known and differs from the selection;
+    # otherwise this would re-run after sync/rollback updates the select.
+    # No native condition compares two entities, so a template is right here.
+    - "{{ states('sensor.mediabox_mode') in ['inference', 'linux-gaming', 'windows-vm'] and states('input_select.mediabox_mode') != states('sensor.mediabox_mode') }}"
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: mode_inference
+          sequence:
+            - action: shell_command.mediabox_mode_inference
+        - conditions:
+            - condition: trigger
+              id: mode_linux_gaming
+          sequence:
+            - action: shell_command.mediabox_mode_linux_gaming
+        - conditions:
+            - condition: trigger
+              id: mode_windows_vm
+          sequence:
+            - action: shell_command.mediabox_mode_windows_vm
+    # wait_template (not wait_for_trigger) because the sensor may already be
+    # at the target state by the time the wait starts
+    - wait_template: "{{ states('sensor.mediabox_mode') == trigger.to_state.state }}"
+      timeout:
+        minutes: 3
+      continue_on_timeout: true
+    - if:
+        - "{{ not wait.completed }}"
+      then:
+        - action: notify.push_cam
+          data:
+            title: "Mediabox mode change failed"
+            message: >
+              Setting mediabox to {{ trigger.to_state.state }} did not
+              complete within 3 minutes. The select was rolled back to the
+              actual mode; check mediabox if it is not what you expect.
+        - if:
+            - "{{ states('sensor.mediabox_mode') in ['inference', 'linux-gaming', 'windows-vm'] }}"
+          then:
+            - action: input_select.select_option
+              target:
+                entity_id: input_select.mediabox_mode
+              data:
+                option: "{{ states('sensor.mediabox_mode') }}"
+
+- id: mediabox_sync_mode
+  alias: Mediabox - Sync select with actual mode
+  description: >
+    When the actual mode on mediabox changes outside of Home Assistant,
+    update input_select.mediabox_mode to match.
+  mode: single
+  triggers:
+    - trigger: state
+      entity_id: sensor.mediabox_mode
+  actions:
+    - if:
+        - "{{ states('sensor.mediabox_mode') in ['inference', 'linux-gaming', 'windows-vm'] }}"
+        - "{{ states('sensor.mediabox_mode') != states('input_select.mediabox_mode') }}"
+      then:
+        - action: input_select.select_option
+          target:
+            entity_id: input_select.mediabox_mode
+          data:
+            option: "{{ states('sensor.mediabox_mode') }}"

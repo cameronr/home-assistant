@@ -62,6 +62,26 @@ views:
                 icon_tap_action:
                   action: toggle
 
+          # GPU mode, driven to mediabox over SSH; see automations/mediabox.yaml
+          # for the sync logic. input_select has no dedicated card, so this is a
+          # full-width entities row under the two tiles (wide enough for the label
+          # and dropdown - a 3-way horizontal split truncated it).
+          - type: entities
+            show_header_toggle: false
+            state_color: true
+            entities:
+              - entity: input_select.mediabox_mode
+                name: "GPU mode"
+
+          # Actual mode on the server; differs from the select while a
+          # transition is in flight or if the mode changed outside HA
+          - type: markdown
+            entity_id:
+              - sensor.mediabox_mode
+            text_only: true
+            content: >
+              mediabox: {{ states('sensor.mediabox_mode') }}
+
           - type: tile
             entity: media_player.denon_avr_x3800h
             features_position: bottom
