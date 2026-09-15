@@ -81,6 +81,7 @@ switch: !include_dir_merge_list switches/
 cover: !include_dir_merge_list covers/
 group: !include_dir_merge_named groups/
 shell_command: !include_dir_merge_named shell_commands/
+command_line: !include_dir_merge_list command_line/
 template: !include_dir_merge_list templates
 emulated_hue:
   listen_port: 28888

@@ -62,6 +62,18 @@ views:
                 icon_tap_action:
                   action: toggle
 
+          # GPU mode, driven to mediabox over SSH; see automations/mediabox.yaml
+          # for the sync logic. input_select has no dedicated card; the title is
+          # the label and the single row is the picker (row name matches the
+          # helper's friendly name so the frontend hides it).
+          - type: entities
+            # title: "GPU mode"
+            show_header_toggle: false
+            state_color: true
+            entities:
+              - entity: input_select.mediabox_mode
+                name: "GPU mode"
+
           - type: tile
             entity: media_player.denon_avr_x3800h
             features_position: bottom

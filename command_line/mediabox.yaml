@@ -1,0 +1,18 @@
+# Actual GPU mode on mediabox (inference | linux-gaming | windows-vm).
+# Read through the restricted `homeassistant` ssh account; see mediabox/
+# in this repo for the server-side script and setup.
+- sensor:
+    name: Mediabox mode
+    unique_id: mediabox_mode
+    icon: mdi:chip
+    command: 'ssh -F /config/.ssh/config mediabox mediabox-ctl status'
+    scan_interval: 10
+
+# Current llama-swap mode. Stays "unknown" until LLAMA_STATUS_CMD is
+# configured in /etc/mediabox-ctl.conf on mediabox.
+- sensor:
+    name: Mediabox llama swap
+    unique_id: mediabox_llama_swap
+    icon: mdi:chip
+    command: 'ssh -F /config/.ssh/config mediabox mediabox-ctl llama-status'
+    scan_interval: 120

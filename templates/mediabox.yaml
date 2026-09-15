@@ -1,0 +1,8 @@
+# Human-friendly mirror of sensor.mediabox_mode (see automations/mediabox.yaml
+# and the mediabox server scripts). The label is what the Home dashboard shows
+# and what the apply automation waits on and rolls back to.
+- sensor:
+    - name: "Mediabox Mode Label"
+      state: >
+        {% set raw = states('sensor.mediabox_mode') %}
+        {{ {'inference': 'Inference', 'linux-gaming': 'Linux games', 'windows-vm': 'Windows VM'}.get(raw, raw) }}
