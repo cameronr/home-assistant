@@ -72,7 +72,7 @@ views:
             state_color: true
             entities:
               - entity: input_select.mediabox_mode
-                name: "GPU mode"
+                name: "mediabox GPU mode"
 
           - type: tile
             entity: media_player.denon_avr_x3800h
