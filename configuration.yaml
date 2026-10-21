@@ -123,3 +123,4 @@ zone:
     latitude: !secret latitude
     longitude: !secret longitude
 energy:
+my:
