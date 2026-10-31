@@ -166,9 +166,25 @@ views:
     title: Climate
     path: climate
     cards:
-      - type: weather-forecast
+      # - type: weather-forecast
+      #   entity: weather.pirateweather
+      #   forecast_type: daily
+      #   forecast_slots: 6
+      - type: custom:weather-forecast-card
         entity: weather.pirateweather
-        forecast_type: daily
+        show_condition_effects: true
+        forecast:
+          mode: chart
+          show_attribute_selector: true
+          extra_attribute: wind_direction
+        card_mod:
+          style: |
+            ::slotted(wfc-animation-provider) {
+              opacity: 0.3 !important;
+            }
+            wfc-animation-provider {
+              opacity: 0.3 !important;
+            }
       - type: entities
         title: Climate
         show_header_toggle: false
