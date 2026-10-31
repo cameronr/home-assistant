@@ -24,9 +24,26 @@ lovelace:
       title: Debug
       icon: mdi:information-variant-box-outline
       show_in_sidebar: true
+    ui-test-dashboard:
+      mode: yaml
+      filename: dashboards/playground.yaml
+      title: UI Playground
+      icon: mdi:information-variant-box-outline
+      show_in_sidebar: true
   resources:
     - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
       type: module
+    - url: /hacsfiles/lovelace-card-mod/card-mod.js
+      type: module
+
+frontend:
+  extra_module_url:
+    - /hacsfiles/lovelace-card-mod/card-mod.js
+
+    # - url: /hacsfiles/lovelace-mushroom/mushroom.js
+    #   type: module
+    # - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+    #   type: module
 # Checks for available updates
 # Note: This component will send some information about your system to
 # the developers to assist with development of Home Assistant.

@@ -1,0 +1,542 @@
+title: Westridge
+
+#
+# Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
+# background: center / cover no-repeat url("/background.png") fixed
+# Exclude entities from "Unused entities" view
+excluded_entities:
+views:
+  # View tab title.
+  - icon: mdi:home
+    title: Home
+    # Optional unique path for direct access /lovelace/${path}
+    path: home
+    type: sections
+    max_columns: 4
+    cards:
+      # Show update card if there are updates
+      - type: conditional
+        conditions:
+          - entity: binary_sensor.updater
+            state: "on"
+        card:
+          type: entities
+          entities:
+            - sensor.latest_version
+
+    sections:
+      # Status strip: weather, alarm, people, occupancy - always visible at a glance.
+      - type: grid
+        cards:
+          - type: custom:mushroom-chips-card
+            alignment: start
+            chips:
+              - type: weather
+                entity: weather.pirateweather
+                show_temperature: true
+                show_conditions: true
+              - type: template
+                icon: mdi:shield-home
+                icon_color: >-
+                  {% if is_state('alarm_control_panel.home_alarm', 'disarmed') %}green{% else %}red{% endif %}
+                content: "{{ states('sensor.alarm_status_with_zone_name') }}"
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/home#security
+              - type: entity
+                entity: person.cam
+                use_entity_picture: true
+                content_info: name
+              - type: entity
+                entity: person.sandy
+                use_entity_picture: true
+                content_info: name
+              - type: entity
+                entity: input_select.occupants
+                icon: mdi:account-group
+                content_info: state
+        column_span: 4
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Quick actions
+            icon: mdi:flash
+          - type: custom:mushroom-entity-card
+            entity: script.open_gate_temporarily
+            name: Gate Temp Open
+            icon: mdi:gate-open
+            tap_action:
+              action: perform-action
+              perform_action: script.turn_on
+              target:
+                entity_id: script.open_gate_temporarily
+          - type: custom:mushroom-entity-card
+            entity: switch.gate
+            name: Gate Hold
+            icon: mdi:gate
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-cover-card
+            entity: cover.ratgdov25i_0b0617_door
+            show_position_control: false
+            show_buttons_control: true
+          - type: custom:mushroom-lock-card
+            entity: lock.touchscreen_deadbolt
+          - type: custom:mushroom-entity-card
+            entity: switch.ecm
+            icon: mdi:water-pump
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-entity-card
+            entity: switch.water_heater_recirc_pump
+            icon: mdi:pump
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-entity-card
+            entity: switch.dehumidifier
+            icon: mdi:air-humidifier
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-entity-card
+            entity: script.goodnight
+            name: Goodnight
+            icon: mdi:weather-night
+            tap_action:
+              action: perform-action
+              perform_action: script.turn_on
+              target:
+                entity_id: script.goodnight
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Media
+            icon: mdi:cast
+
+          - type: custom:mushroom-entity-card
+            entity: remote.harmony_hub
+            icon: mdi:remote-tv
+            tap_action:
+              action: toggle
+
+          - type: custom:mushroom-entity-card
+            entity: switch.mediabox
+            icon: mdi:desktop-tower
+            tap_action:
+              action: toggle
+
+          # GPU mode, driven to mediabox over SSH; see automations/mediabox.yaml
+          # for the sync logic.
+          - type: custom:mushroom-select-card
+            entity: input_select.mediabox_mode
+            name: GPU mode
+            icon: mdi:expansion-card
+
+          - type: custom:mushroom-media-player-card
+            entity: media_player.denon_avr_x3800h
+            use_media_info: true
+            show_volume_level: true
+            volume_controls:
+              - volume_mute
+              - volume_set
+            grid_options:
+              columns: full
+
+          - type: custom:mushroom-fan-card
+            entity: fan.great_room_fan
+            show_percentage_control: true
+            icon_animation: true
+
+          - type: custom:mushroom-fan-card
+            entity: fan.master_fan
+            show_percentage_control: true
+            icon_animation: true
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Lights
+            icon: mdi:lightbulb-group
+
+          - type: custom:mushroom-light-card
+            entity: light.front_hallway_kitchen
+            show_brightness_control: true
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-light-card
+            entity: light.front_hallway_great_room
+            show_brightness_control: true
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-light-card
+            entity: light.front_hallway_hallway
+            show_brightness_control: true
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-light-card
+            entity: light.dining_room_dining_room
+            show_brightness_control: true
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-light-card
+            entity: light.back_hallway_lights
+            show_brightness_control: true
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-entity-card
+            entity: switch.tasmota_sofa
+            name: Sofa Light
+            icon: mdi:sofa
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-light-card
+            entity: light.great_room_patio_lights
+            show_brightness_control: true
+            tap_action:
+              action: toggle
+
+          - type: heading
+            heading: Exterior
+            heading_style: subtitle
+
+          - type: custom:mushroom-light-card
+            entity: light.front_door_lights
+            show_brightness_control: true
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-light-card
+            entity: light.front_door_garage
+            show_brightness_control: true
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-entity-card
+            entity: switch.garage_xmas_lights
+            icon: mdi:string-lights
+            tap_action:
+              action: toggle
+
+          - type: heading
+            heading: Other
+            heading_style: subtitle
+
+          - type: custom:mushroom-entity-card
+            entity: switch.kep_lights
+            name: "Kep's Lights"
+            icon: mdi:dog-side
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-entity-card
+            entity: switch.meimei_lights
+            name: "Meimei's Lights"
+            icon: mdi:dog-side
+            tap_action:
+              action: toggle
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Security
+            icon: mdi:shield-home
+            heading_style: title
+
+          - type: custom:mushroom-alarm-control-panel-card
+            entity: alarm_control_panel.home_alarm
+            name: !secret alarm_name
+            states:
+              - armed_home
+              - armed_away
+              - disarmed
+            grid_options:
+              columns: full
+
+          - type: custom:mushroom-template-card
+            primary: "{{ states('sensor.alarm_status_with_zone_name') }}"
+            secondary: ""
+            icon: mdi:information-outline
+            entity: sensor.alarm_status_with_zone_name
+            grid_options:
+              columns: full
+
+          - type: custom:mushroom-entity-card
+            entity: group.guests
+            icon: mdi:account-multiple
+
+  - icon: mdi:weather-partly-snowy-rainy
+    title: Climate
+    path: climate
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: weather-forecast
+            entity: weather.pirateweather
+            forecast_type: daily
+            grid_options:
+              columns: full
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Climate
+            icon: mdi:thermostat
+
+          - type: custom:mushroom-select-card
+            entity: input_select.climate_mode
+            name: Mode
+            icon: mdi:tune
+
+          - type: custom:mushroom-number-card
+            entity: input_number.climate_temp
+            name: Target Temp
+            display_mode: slider
+            icon: mdi:thermometer
+
+          - type: custom:mushroom-climate-card
+            entity: climate.mitp_heat_pump_3b2a04_front_climate
+            show_temperature_control: true
+            collapsible_controls: true
+
+          - type: custom:mushroom-climate-card
+            entity: climate.mitp_heat_pump_3b2a10_back_climate
+            show_temperature_control: true
+            collapsible_controls: true
+
+          - type: custom:mushroom-entity-card
+            entity: sensor.weather_local_inside_temperature
+            icon: mdi:home-thermometer
+
+          - type: custom:mushroom-entity-card
+            entity: sensor.weather_local_outside_temperature
+            icon: mdi:thermometer
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Floor Heat
+            icon: mdi:heating-coil
+
+          - type: custom:mushroom-entity-card
+            entity: input_boolean.master_floor_heat
+            name: Master
+            icon: mdi:bed-king
+            tap_action:
+              action: toggle
+
+          - type: custom:mushroom-entity-card
+            entity: input_boolean.kids_floor_heat
+            name: Kids
+            icon: mdi:bunk-bed
+            tap_action:
+              action: toggle
+
+          - type: custom:mushroom-entity-card
+            entity: input_boolean.guest_floor_heat
+            name: Guest
+            icon: mdi:bed-double
+            tap_action:
+              action: toggle
+
+          - type: heading
+            heading: Fans
+            heading_style: subtitle
+
+          - type: custom:mushroom-fan-card
+            entity: fan.great_room_fan
+            show_percentage_control: true
+            icon_animation: true
+
+          - type: custom:mushroom-fan-card
+            entity: fan.master_fan
+            show_percentage_control: true
+            icon_animation: true
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Dining Shades
+            icon: mdi:blinds
+
+          - type: custom:mushroom-cover-card
+            entity: cover.dining_room_front
+            show_position_control: true
+            show_buttons_control: true
+
+          - type: custom:mushroom-cover-card
+            entity: cover.dining_room_side
+            show_position_control: true
+            show_buttons_control: true
+
+          - type: custom:mushroom-chips-card
+            alignment: start
+            grid_options:
+              columns: full
+            chips:
+              - type: entity
+                entity: script.open_dining_shades_full
+                name: Full
+                icon: mdi:window-shutter-open
+                content_info: name
+                tap_action:
+                  action: perform-action
+                  perform_action: script.turn_on
+                  target:
+                    entity_id: script.open_dining_shades_full
+              - type: entity
+                entity: script.open_dining_shades_half
+                name: Half
+                icon: mdi:window-shutter
+                content_info: name
+                tap_action:
+                  action: perform-action
+                  perform_action: script.turn_on
+                  target:
+                    entity_id: script.open_dining_shades_half
+              - type: entity
+                entity: script.close_dining_shades
+                name: Close
+                icon: mdi:window-shutter-cog
+                content_info: name
+                tap_action:
+                  action: perform-action
+                  perform_action: script.turn_on
+                  target:
+                    entity_id: script.close_dining_shades
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Master Shades
+            icon: mdi:blinds
+
+          - type: custom:mushroom-cover-card
+            entity: cover.master_back_left
+            show_position_control: true
+            show_buttons_control: true
+
+          - type: custom:mushroom-cover-card
+            entity: cover.master_back_right
+            show_position_control: true
+            show_buttons_control: true
+
+          - type: custom:mushroom-cover-card
+            entity: cover.master_big_window
+            show_position_control: true
+            show_buttons_control: true
+
+          - type: custom:mushroom-chips-card
+            alignment: start
+            grid_options:
+              columns: full
+            chips:
+              - type: entity
+                entity: script.open_master_shades_full
+                name: Full
+                icon: mdi:window-shutter-open
+                content_info: name
+                tap_action:
+                  action: perform-action
+                  perform_action: script.turn_on
+                  target:
+                    entity_id: script.open_master_shades_full
+              - type: entity
+                entity: script.open_master_shades_half
+                name: Half
+                icon: mdi:window-shutter
+                content_info: name
+                tap_action:
+                  action: perform-action
+                  perform_action: script.turn_on
+                  target:
+                    entity_id: script.open_master_shades_half
+              - type: entity
+                entity: script.close_master_shades
+                name: Close
+                icon: mdi:window-shutter-cog
+                content_info: name
+                tap_action:
+                  action: perform-action
+                  perform_action: script.turn_on
+                  target:
+                    entity_id: script.close_master_shades
+
+  # Specify a tab icon if you want the view tab to be an icon.
+  - icon: mdi:solar-power
+    title: Solar
+    path: solar
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Today
+            icon: mdi:solar-power-variant
+
+          - type: custom:mushroom-entity-card
+            entity: sensor.solar_power_now
+            name: Now
+            icon: mdi:flash
+            icon_color: amber
+
+          - type: custom:mushroom-entity-card
+            entity: sensor.solar_power_today
+            name: Today
+            icon: mdi:weather-sunny
+            icon_color: amber
+
+          - type: custom:mushroom-entity-card
+            entity: sensor.solar_power_last_seven_days
+            name: Last 7 days
+            icon: mdi:calendar-week
+            icon_color: amber
+
+          - type: custom:mushroom-entity-card
+            entity: sensor.solar_power_produced_total
+            name: Lifetime
+            icon: mdi:infinity
+            icon_color: amber
+
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.solar_power_now
+            name: Production
+            hours_to_show: 24
+            points_per_hour: 4
+            line_color: "#f5a623"
+            show:
+              icon: false
+              extrema: true
+            grid_options:
+              columns: full
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Solar sensors
+            icon: mdi:solar-panel
+
+          - type: custom:auto-entities
+            card:
+              type: entities
+            filter:
+              include:
+                - entity_id: "sensor.solar*"
+            sort:
+              method: name
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Gateways
+            icon: mdi:router-network
+
+          - type: custom:auto-entities
+            card:
+              type: entities
+            filter:
+              include:
+                - entity_id: "sensor.envoy*"
+            sort:
+              method: name
