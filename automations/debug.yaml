@@ -1,0 +1,39 @@
+# TEMPORARY diagnostic for the UniFi device_tracker Home->Unknown->Home flapping.
+#
+# HA reloads the whole UniFi config entry (recreating all 600+ entities, which
+# makes every device_tracker blip ~1s) when a UniFi entity's disabled_by flips
+# back to enabled (integration/device -> None). That re-enable is the trigger.
+# Home Assistant does NOT log which entity re-enables, at any level, so this
+# automation listens on the entity_registry_updated event and records the
+# culprit to input_text.unifi_flap_debug.
+#
+# Remove once diagnosed: delete this file, remove the input_text.unifi_flap_debug
+# helper, then call automation.reload.
+- id: unifi_flap_debug
+  alias: UniFi flap debug (temporary)
+  description: >
+    TEMPORARY. Captures the exact UniFi entity that gets re-enabled
+    (disabled_by integration/device -> None) and triggers the 30s
+    config-entry reload. Delete when the diagnosis is complete.
+  mode: single
+  initial_state: true
+  trigger:
+    - platform: event
+      event_type: entity_registry_updated
+  condition:
+    # Only the update action that actually changed "disabled_by" ...
+    - condition: template
+      value_template: "{{ trigger.event.data.action == 'update' }}"
+    - condition: template
+      value_template: "{{ 'disabled_by' in trigger.event.data.get('changes', {}) }}"
+    # ... and only the re-enable direction: the OLD value was an
+    # integration/device disabler (a disable or a config_entry change does
+    # not schedule the reload, so those are intentionally ignored).
+    - condition: template
+      value_template: "{{ (trigger.event.data.get('changes', {}).get('disabled_by', '') | string) in ['integration', 'device'] }}"
+  action:
+    - service: input_text.set_value
+      entity_id: input_text.unifi_flap_debug
+      data:
+        value: >
+          {{ now().strftime('%Y-%m-%d %H:%M:%S') }} | {{ trigger.event.data.entity_id }} | old={{ trigger.event.data.get('changes', {}).get('disabled_by', '') | string }} | changed=[{{ trigger.event.data.get('changes', {}).keys() | list | join(',') }}]

@@ -55,7 +55,14 @@ logger:
     homeassistant.core: warn
     homeassistant.components.ambient_station: warn
     engineio.client: warn
-    custom_components.doorking_1812ap: debug
+    # custom_components.doorking_1812ap: debug
+    # TEMPORARY - diagnosing the UniFi device_tracker Home->Unknown->Home flapping
+    # (full config-entry reload makes every tracker blip ~1s). Remove once the
+    # root cause is confirmed. aiounifi is intentionally NOT set to debug: it
+    # logs every raw API request/response body, which would flood the log.
+    # homeassistant.components.unifi: debug
+    # homeassistant.helpers.entity_registry: debug
+    # homeassistant.config_entries: debug
 # list most groups to track groups.people to see if it transitions
 # to unknown when there's a network hiccup
 recorder:

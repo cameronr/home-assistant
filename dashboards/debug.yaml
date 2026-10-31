@@ -13,6 +13,38 @@ views:
           - climate.master_nuheat
           - climate.kids_nuheat
           - climate.guest_nuheat
+          - input_text.unifi_flap_debug
+
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Weather Station
+        filter:
+          include:
+            - entity_id: "sensor.westridge*"
+        sort:
+          method: name
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Weather Station (local)
+        filter:
+          include:
+            - entity_id: "sensor.weather_local_*"
+        sort:
+          method: name
+
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Tasmota
+        filter:
+          include:
+            - domain: switch
+              integration: tasmota
+        sort:
+          method: name
+
       - type: entities
         entities:
           - binary_sensor.elara_bedroom
@@ -38,39 +70,6 @@ views:
           - entity: binary_sensor.home_alarm_fire
             name: Fire
         title: Home Alarm
-
-      - type: entities
-        entities:
-          - switch.tasmota_3
-          - switch.tasmota_4
-
-      - type: custom:auto-entities
-        card:
-          type: entities
-          title: Weather Station
-        filter:
-          include:
-            - entity_id: "sensor.westridge*"
-        sort:
-          method: name
-      - type: custom:auto-entities
-        card:
-          type: entities
-          title: Weather Station (local)
-        filter:
-          include:
-            - entity_id: "sensor.weather_local_*"
-        sort:
-          method: name
-      - type: custom:auto-entities
-        card:
-          type: entities
-          title: Tasmota
-        filter:
-          include:
-            - entity_id: "sensor.tasmota.*"
-        sort:
-          method: name
 
   - icon: mdi:home-assistant
     # Title of the view. Will be used as the tooltip for tab icon
