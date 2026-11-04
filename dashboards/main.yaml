@@ -120,6 +120,7 @@ views:
           - light.front_hallway_great_room
           - switch.tasmota_sofa
           - light.back_hallway_lights
+          - switch.tasmota_3
           - type: section
             label: Exterior
           - light.front_door_lights
